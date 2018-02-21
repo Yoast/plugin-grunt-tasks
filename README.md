@@ -14,7 +14,7 @@ npm install grunt-yoast-tasks --save-dev
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-yoast-tasks');
+grunt.loadNpmTasks( "grunt-yoast-tasks" );
 ```
 
 ## The "set-version" task
@@ -24,14 +24,14 @@ In your project's Gruntfile, add a section named `yoast_tasks` to the data objec
 
 ```js
 grunt.initConfig({
-  yoast_tasks: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+    yoast_tasks: {
+        options: {
+            // Task-specific options go here.
+        },
+           your_target: {
+            // Target-specific file lists and/or options go here.
+        }
+    }
 });
 ```
 
@@ -58,8 +58,8 @@ Default value: `''`
 ```js
 packageJSON: {
 	options: {
-	base: "someOrganisation",
-	target: "pluginVersion",
+	    base: "someOrganisation",
+	    target: "pluginVersion",
 	},
 	src: "tmp/testPackage.json",
 }
@@ -116,10 +116,10 @@ The part that has to come after the version.
 ```js
 readme: {
 	options: {
-	version: "1.1",
-	regEx: /(Stable tag: )(\d+(\.\d+){0,3})([^\n^\.\d]?.*?)(\n)/,
-	preVersionMatch: "$1",
-	postVersionMatch: "$5",
+	    version: "1.1",
+	    regEx: /(Stable tag: )(\d+(\.\d+){0,3})([^\n^\.\d]?.*?)(\n)/,
+	    preVersionMatch: "$1",
+	    postVersionMatch: "$5",
 	},
     src: "tmp/README.md",
 },
