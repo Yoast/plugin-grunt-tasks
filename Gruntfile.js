@@ -35,7 +35,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-clean" );
 	grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
 
-	// Whenever the "test" task is run, first clean the "tmp" dir, then run the test
+	// Whenever the "test" task is run, first clean the "tmp" dir, then run the test.
 	grunt.registerTask( "test", [ "clean", "nodeunit" ] );
 
 	// By default, lint and run all tests.
