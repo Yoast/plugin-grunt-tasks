@@ -18,10 +18,13 @@ module.exports = function( grunt ) {
 					postVersionMatch: "postVersionMatch"
 				}
 			);
+
 			// foreach file in this.files
-			for ( let i = 0, n = this.files.length; i < n; i++ ){
+			let noOfFiles = this.files.length;
+			for (let i = 0; i < noOfFiles; i++ ){
 				// foreach src in file
-				for ( let p = 0, n = this.files[ i ].src.length; p < n; p++ ){
+				let numberOfSrcFiles = this.files[ i ].src.length;
+				for ( let p = 0; p < numberOfSrcFiles; p++ ){
 					let path = this.files[ i ].src[ p ];
 					let contents = grunt.file.read( path ).replace(
 						options.regEx,

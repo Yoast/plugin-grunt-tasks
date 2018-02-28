@@ -1,6 +1,6 @@
-# grunt-yoast-tasks
+# Grunt-Yoast-tasks
 
-> the plugin that contains all custom yoast tasks
+> The plugin that contains all custom Yoast tasks
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks( "grunt-yoast-tasks" );
 ```
 
-## The "set-version" task
+## The 'set-version' task
 
 ### Overview
 In your project's Gruntfile, add a section named `yoast_tasks` to the data object passed into `grunt.initConfig()`.
@@ -41,17 +41,19 @@ grunt.initConfig({
 Type: `String`
 Default value: `''`
 
-The json file base object for the target to be in.
+The JSON file base object for the target to be in.
 
 #### options.target
 Type: `String`
 Default value: `''`
 
-The target to replace the version string in.
+The child of the options.base object to replace the version string in.
 
-#### options.target
+#### src
 Type: `String`
 Default value: `''`
+
+The source JSON file to set the version in.
 
 ### Usage Examples
 
@@ -63,12 +65,10 @@ packageJSON: {
 	},
 	src: "tmp/testPackage.json",
 }
-
-
 ```
 
 
-## The "update-version" task
+## The 'update-version' task
 
 ### Overview
 In your project's Gruntfile, add a section named `yoast_tasks` to the data object passed into `grunt.initConfig()`.
@@ -92,25 +92,24 @@ grunt.initConfig({
 Type: `String`
 Default value: `''`
 
-The string value that is used to set the new version with
+The string value that will be the new version string.
 
-#### options.regEx
+#### options.regex
 Type: `String`
 Default value: `''`
 
-A regEx string that is used to find the line to be updated in the file.
+A regex string that is used to find the line to be updated in the file.
 
 #### options.preVersionMatch
 Type: `String`
 Default value: `''`
 
-The part that has to come before the version.
-
-#### options.preVersionMatch
+A prefix to the version string, for example a regex capture group.
+#### options.postVersionMatch
 Type: `String`
 Default value: `''`
 
-The part that has to come after the version.
+A postfix to the version string, for example a regex capture group.
 
 ### Usage Example
 ```js
@@ -119,12 +118,13 @@ readme: {
 	    version: "1.1",
 	    regEx: /(Stable tag: )(\d+(\.\d+){0,3})([^\n^\.\d]?.*?)(\n)/,
 	    preVersionMatch: "$1",
-	    postVersionMatch: "$5",
+	    postVersionMatch: "$5"
 	},
-    src: "tmp/README.md",
-},
-
+    src: "tmp/README.md"
+}
 ```
 
 ## Release History
-_(Nothing yet)_
+### 0.1.0
+- initial creation of the plugin
+- added unit tests

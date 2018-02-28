@@ -8,12 +8,12 @@
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"set-version",
-		"Configures a new version number.",
+		"Sets a new version number.",
 		function() {
 			let options = this.options(
 				{
-					base: "Option to use as a base",
-					target: "Target value to set"
+					base: "The JSON file base object for the target to be in.",
+					target: "The child of the base object to replace the version string in"
 				}
 			);
 
@@ -23,10 +23,12 @@ module.exports = function( grunt ) {
 			}
 
 			// foreach file in this.files
-			for (let i = 0, n = this.files.length; i < n; i++ ){
+			let numberOfFiles = this.files.length;
+			for (let i = 0; i < numberOfFiles; i++ ){
 				// foreach src in file
-				for (let p = 0, n = this.files[ i ].src.length; p < n; p++ ) {
-					let path = this.files[ i ].src[ p ];
+				let numberOfSrcFiles = this.files[ i ].src.length;
+				for (let j = 0; j < numberOfSrcFiles; j++ ) {
+					let path = this.files[ i ].src[ j ];
 					let contents = grunt.file.readJSON( path );
 					contents[ options.base ][ options.target ] = version.toString();
 					grunt.file.write( path, JSON.stringify( contents, null, "  " ) + "\n" );
@@ -34,4 +36,4 @@ module.exports = function( grunt ) {
 			}
 		}
 	);
-}
+};
