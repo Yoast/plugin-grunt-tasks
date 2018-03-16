@@ -1,5 +1,5 @@
 /**
- * A task that updates version numbers in project files in accordance with
+ * A task that sets the version number in project files in accordance with
  * build config.
  *
  * @param {Object} grunt The grunt helper object.
@@ -37,3 +37,4 @@ module.exports = function( grunt ) {
 		}
 	);
 };
+

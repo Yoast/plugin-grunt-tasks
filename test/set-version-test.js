@@ -1,3 +1,13 @@
+/**
+ * Set-version-test.js
+ *
+ * A unit test for set-version.js
+ *
+ * Copies the fixtures to the temp folder and runs set-version
+ * After that the ( fixture ) files in the temp folder get compared with the expected folder
+ *
+ */
+
 "use strict";
 
 const grunt = require( "grunt" );
@@ -66,3 +76,4 @@ exports.testSetVersionCommand = {
 		test.done();
 	}
 };
+

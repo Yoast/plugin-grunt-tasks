@@ -1,3 +1,13 @@
+/**
+ * update-version-readme-test.js
+ *
+ * A unit test for update-version.js
+ *
+ * Copies the fixtures to the temp folder and runs update-version
+ * After that the ( fixture ) files in the temp folder get compared with the expected folder
+ *
+ */
+
 "use strict";
 
 const grunt = require( "grunt" );
@@ -64,3 +74,4 @@ exports.testUpdateVersionCommand = {
 		}
 	}
 };
+

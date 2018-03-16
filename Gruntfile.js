@@ -4,15 +4,12 @@ module.exports = function ( grunt ) {
 
 	// Project configuration.
 	grunt.initConfig({
-		jshint: {
-			all: [
-				"Gruntfile.js",
-				"tasks/*.js",
-				"<%= nodeunit.tests %>"
-			],
+
+		eslint: {
 			options: {
-				jshintrc: ".jshintrc"
-			}
+				configFile: '.eslintrc',
+			},
+			target: ['*.js']
 		},
 
 		// Before generating any new files, remove any previously-created files.
@@ -31,13 +28,16 @@ module.exports = function ( grunt ) {
 	grunt.loadTasks( "tasks" );
 
 	// These plugins provide necessary tasks
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-eslint" );
 	grunt.loadNpmTasks( "grunt-contrib-clean" );
 	grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
 
-	// Whenever the "test" task is run, first clean the "tmp" dir, then run the test.
+	// Whenever the "test" task is run,
+	// first clean the "tmp" dir, then run the test.
 	grunt.registerTask( "test", [ "clean", "nodeunit" ] );
 
 	// By default, lint and run all tests.
-	grunt.registerTask( "default", [ "jshint", "test" ] );
+	grunt.registerTask( "default", [ "eslint", "test" ] );
 };
+
+
