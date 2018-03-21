@@ -1,11 +1,8 @@
 /**
- * update-version-pluginFile-test.js
+ * A unit test for 'update-version.js'.
  *
- * A unit test for update-version.js
- *
- * Copies the fixtures to the temp folder and runs update-version
- * After that the ( fixture ) files in the temp folder get compared with the expected folder
- *
+ * Copies the fixtures to the temp folder and runs update-version.
+ * After that the (fixture) files in the temp folder get compared with the expected folder.
  */
 
 "use strict";
@@ -75,4 +72,3 @@ exports.testUpdateVersionCommand = {
 		}
 	}
 };
-

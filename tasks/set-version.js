@@ -1,6 +1,5 @@
 /**
- * A task that sets the version number in project files in accordance with
- * build config.
+ * A task that sets the version number in project files in accordance with the build config.
  *
  * @param {Object} grunt The grunt helper object.
  * @returns {void}
