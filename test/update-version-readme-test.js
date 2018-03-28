@@ -46,10 +46,10 @@ exports.testUpdateVersionCommand = {
 		/**
 		 * Runs the test assertions to verify the 2 files are identical if the files given as parameters exist.
 		 *
-		 * @param {string} file1 The file path to compare to file2
-		 * @param {string} file2 The file path to compare to file1
+		 * @param {string} file1 The file path to compare to file2.
+		 * @param {string} file2 The file path to compare to file1.
 		 *
-		 * @returns {void}
+		 * @returns {void}.
 		 */
 		function runTest ( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {

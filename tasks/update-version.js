@@ -1,5 +1,5 @@
 /**
- * A task that updates version numbers in project files in accordance with the build config.
+ * A task that updates version numbers in json files in accordance with the build config.
  *
  * @param {Object} grunt The grunt helper object.
  * @returns {void}

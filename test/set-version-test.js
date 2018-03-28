@@ -2,7 +2,7 @@
  * A unit test for 'set-version.js'.
  *
  * Copies the fixtures to the temp folder and runs set-version.
- * After that the ( fixture ) files in the temp folder get compared with the expected folder.
+ * After that the (fixture) files in the temp folder get compared with the expected folder.
  */
 
 "use strict";
@@ -46,10 +46,10 @@ exports.testSetVersionCommand = {
 		/**
 		 * Runs the test assertions to verify the 2 files are identical if the files given as parameters exist.
 		 *
-		 * @param {string} file1 The file path to compare to file2
-		 * @param {string} file2 The file path to compare to file1
+		 * @param {string} file1 The file path to compare to file2.
+		 * @param {string} file2 The file path to compare to file1.
 		 *
-		 * @returns {void}
+		 * @returns {void}.
 		 */
 		function compareFiles( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {

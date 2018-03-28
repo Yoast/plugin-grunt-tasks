@@ -12,7 +12,7 @@ module.exports = function( grunt ) {
 			let options = this.options(
 				{
 					base: "The JSON file base object for the target to be in.",
-					target: "The child of the base object to replace the version string in"
+					target: "The child of the base object to replace the version string in."
 				}
 			);
 
