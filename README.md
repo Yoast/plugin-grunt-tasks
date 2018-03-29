@@ -125,6 +125,6 @@ readme: {
 ```
 
 ## Release History
-### 0.1.0
+### 1.0.0
 - initial creation of the plugin
 - added unit tests
