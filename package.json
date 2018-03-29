@@ -1,0 +1,34 @@
+{
+	"name": "grunt-yoast-tasks",
+	"description": "the plugin that contains all custom Yoast tasks",
+	"version": "0.1.0",
+	"homepage": "https://github.com/gruntjs/grunt-init-gruntplugin",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/gruntjs/grunt-init-gruntplugin.git"
+	},
+	"bugs": {
+		"url": "https://github.com/gruntjs/grunt-init-gruntplugin/issues"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"engines": {
+		"node": ">= 0.8.0"
+	},
+	"scripts": {
+		"test": "grunt test"
+	},
+	"devDependencies": {
+		"babel-eslint": "^8.2.2",
+		"eslint-config-yoast": "^3.0.1",
+		"eslint-plugin-react": "^7.7.0",
+		"eslint-plugin-yoast": "^1.0.1",
+		"grunt": "~1.0.2",
+		"grunt-contrib-clean": "^1.1.0",
+		"grunt-contrib-nodeunit": "^1.0.0",
+		"grunt-eslint": "^20.1.0",
+		"grunt-run-task": "^1.0.0"
+	},
+	"keywords": [
+		"gruntplugin"
+	]
+}
