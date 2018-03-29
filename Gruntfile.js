@@ -6,7 +6,7 @@ module.exports = function( grunt ) {
 			options: {
 				configFile: ".eslintrc",
 			},
-			target: [ "*.js" ],
+			target: [ "tasks/**/*.js", "test/**/*.js", "Gruntfile.js" ],
 		},
 
 		// Before generating any new files, remove any previously-created files.

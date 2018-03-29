@@ -5,7 +5,6 @@
  * After that the (fixture) files in the temp folder get compared with the expected folder.
  */
 
-"use strict";
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
@@ -15,15 +14,15 @@ let noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let setVersionTask;
 
 exports.testSetVersionCommand = {
-	setUp: function ( done ) {
+	setUp: function( done ) {
 		// Load the tasks so they can be run
-		runTask.loadTasks( 'tasks' );
+		runTask.loadTasks( "tasks" );
 
-		// setup the file's to run the test on
+		// Setup the file's to run the test on
 		for ( let i = 0; i < noOfFiles; i++ ) {
 			let fixturePath = expectedFilePath[ i ].replace( "expected", "fixtures" );
 			grunt.log.writeln( "\n [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[ i ] + "'" );
-			grunt.file.copy( fixturePath, tempFilePath[i] );
+			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
 		grunt.log.writeln( "setup is done!" );
 
@@ -32,17 +31,17 @@ exports.testSetVersionCommand = {
 			packageJSON: {
 				options: {
 					base: "someOrganisation",
-					target: "pluginVersion"
+					target: "pluginVersion",
 				},
-				src: "tmp/testPackage.json"
-			}
-		});
+				src: "tmp/testPackage.json",
+			},
+		} );
 
-		setVersionTask.run( function () {
+		setVersionTask.run( function() {
 			done();
-		});
+		} );
 	},
-	testSetVersion: function ( test ) {
+	testSetVersion: function( test ) {
 		/**
 		 * Runs the test assertions to verify the 2 files are identical if the files given as parameters exist.
 		 *
@@ -66,11 +65,10 @@ exports.testSetVersionCommand = {
 			for ( let i = 0; i < noOfFiles; i++ ) {
 				compareFiles( tempFilePath[ i ], expectedFilePath[ i ] );
 			}
-		}
-		else {
+		} else {
 			grunt.fail.warn( "The task " + task + "does not exist" );
 		}
 		test.done();
-	}
+	},
 };
 

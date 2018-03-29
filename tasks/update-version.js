@@ -14,24 +14,19 @@ module.exports = function( grunt ) {
 					version: "version",
 					regEx: "regEx",
 					preVersionMatch: "preVersionMatch",
-					postVersionMatch: "postVersionMatch"
+					postVersionMatch: "postVersionMatch",
 				}
 			);
 
-			// foreach file in this.files
-			let noOfFiles = this.files.length;
-			for (let i = 0; i < noOfFiles; i++ ){
-				// foreach src in file
-				let numberOfSrcFiles = this.files[ i ].src.length;
-				for ( let p = 0; p < numberOfSrcFiles; p++ ){
-					let path = this.files[ i ].src[ p ];
+			this.files.forEach( ( file ) => {
+				file.src.forEach( ( path ) => {
 					let contents = grunt.file.read( path ).replace(
 						options.regEx,
 						options.preVersionMatch + options.version + options.postVersionMatch
 					);
 					grunt.file.write( path, contents );
-				}
-			}
+				} );
+			} );
 		}
 	);
 };

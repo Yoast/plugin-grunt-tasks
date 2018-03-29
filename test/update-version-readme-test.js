@@ -5,7 +5,6 @@
  * After that the (fixture) files in the temp folder get compared with the expected folder.
  */
 
-"use strict";
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
@@ -15,13 +14,13 @@ let noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let pluginFileUpdateTask;
 
 exports.testUpdateVersionCommand = {
-	setUp: function ( done ) {
+	setUp: function( done ) {
 		// Load the tasks so they can be run
 		runTask.loadTasks( "tasks" );
-		// setup the file's to run the test on
+		// Setup the file's to run the test on
 		for ( let i = 0; i < noOfFiles; i++ ) {
 			let fixturePath = expectedFilePath[ i ].replace( "expected", "fixtures" );
-			grunt.log.writeln( " [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[i] + "'" );
+			grunt.log.writeln( " [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[ i ] + "'" );
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
 		grunt.log.writeln( "setup is done!" );
@@ -32,17 +31,17 @@ exports.testUpdateVersionCommand = {
 					version: "1.1",
 					regEx: /(Stable tag: )(\d+(\.\d+){0,3})([^\n^\.\d]?.*?)(\n)/,
 					preVersionMatch: "$1",
-					postVersionMatch: "$5"
+					postVersionMatch: "$5",
 				},
-				src: tempFilePath[ 1 ]
-			}
-		});
+				src: tempFilePath[ 1 ],
+			},
+		} );
 
 		pluginFileUpdateTask.run( function() {
 			done();
-		});
+		} );
 	},
-	testUpdateVersion: function ( test ) {
+	testUpdateVersion: function( test ) {
 		/**
 		 * Runs the test assertions to verify the 2 files are identical if the files given as parameters exist.
 		 *
@@ -51,10 +50,10 @@ exports.testUpdateVersionCommand = {
 		 *
 		 * @returns {void}.
 		 */
-		function runTest ( file1, file2 ) {
+		function runTest( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {
-				let actual = grunt.file.read(file1);
-				let expected = grunt.file.read(file2);
+				let actual = grunt.file.read( file1 );
+				let expected = grunt.file.read( file2 );
 				test.deepEqual( actual, expected, "Compare the file '" + file1 + "' with '" + file2 + "'" );
 				return;
 			}
@@ -65,9 +64,8 @@ exports.testUpdateVersionCommand = {
 		if ( grunt.task.exists( task ) ) {
 			runTest( tempFilePath[ 1 ], expectedFilePath[ 1 ] );
 			test.done();
-		}
-		else {
+		} else {
 			grunt.fail.fatal( "The task " + task + "does not exist" );
 		}
-	}
+	},
 };
