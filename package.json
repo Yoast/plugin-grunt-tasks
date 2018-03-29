@@ -1,6 +1,6 @@
 {
 	"name": "grunt-yoast-tasks",
-	"description": "the plugin that contains all custom yoast tasks",
+	"description": "the plugin that contains all custom Yoast tasks",
 	"version": "0.1.0",
 	"homepage": "https://github.com/gruntjs/grunt-init-gruntplugin",
 	"repository": {
