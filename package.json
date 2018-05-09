@@ -1,14 +1,14 @@
 {
-	"name": "grunt-yoast-tasks",
-	"description": "the plugin that contains all custom Yoast tasks",
-	"version": "0.1.0",
-	"homepage": "https://github.com/gruntjs/grunt-init-gruntplugin",
+	"name": "@yoast/grunt-yoast-tasks",
+	"description": "Custom Yoast grunt tasks",
+	"version": "1.0.0",
+	"homepage": "https://github.com/Yoast/",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/gruntjs/grunt-init-gruntplugin.git"
+		"url": "git://github.com/Yoast/plugin-grunt-tasks.git"
 	},
 	"bugs": {
-		"url": "https://github.com/gruntjs/grunt-init-gruntplugin/issues"
+		"url": "https://github.com/Yoast/plugin-grunt-tasks/issues"
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"engines": {
