@@ -17,6 +17,9 @@
 	"scripts": {
 		"test": "grunt test"
 	},
+	"dependencies": {
+		"grunt-contrib-cssmin": "^3.0.0"
+	},
 	"devDependencies": {
 		"babel-eslint": "^8.2.2",
 		"eslint-config-yoast": "^3.0.1",
