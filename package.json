@@ -33,6 +33,7 @@
 		"grunt-postcss": "^0.8.0",
 		"grunt-replace": "^0.8.0",
 		"grunt-rtlcss": "^2.0.1",
+		"grunt-sass": "^2.0.0",
 		"grunt-shell": "^1.1.2",
 		"grunt-wp-deploy": "^2.0.0",
 		"grunt-wp-i18n": "^1.0.3",
