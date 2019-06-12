@@ -1,7 +1,7 @@
 {
 	"name": "@yoast/grunt-plugin-tasks",
 	"description": "Custom Yoast grunt tasks",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"homepage": "https://github.com/Yoast/",
 	"repository": {
 		"type": "git",
