@@ -29,7 +29,7 @@
 		"grunt-contrib-imagemin": "^3.1.0",
 		"grunt-contrib-watch": "^1.0.0",
 		"grunt-eslint": "^21.0.0",
-		"grunt-glotpress": "^0.2.2",
+		"grunt-glotpress": "https://github.com/Yoast/grunt-glotpress.git#master",
 		"grunt-phpcs": "^0.4.0",
 		"grunt-postcss": "^0.8.0",
 		"grunt-replace": "^1.0.1",
