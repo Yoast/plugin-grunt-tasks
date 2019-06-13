@@ -5,7 +5,7 @@ module.exports = {
 	},
 	plugin: {
 		options: {
-			bin: '<%= paths.vendor %>squizlabs/php_codesniffer/bin/phpcs',
+			bin: '<%= paths.vendor %>bin/phpcs',
 			standard: 'phpcs.xml',
 			extensions: 'php'
 		},
