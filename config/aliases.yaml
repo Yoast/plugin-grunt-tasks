@@ -1,0 +1,6 @@
+## We've moved this to composer.
+phpcs:
+  - 'shell:phpcs'
+
+phplint:
+  - 'shell:php-lint'
