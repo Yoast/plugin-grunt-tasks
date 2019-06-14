@@ -3,7 +3,7 @@
 > The plugin that contains all custom Yoast tasks
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `^1.0.4`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -11,15 +11,53 @@ If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out th
 npm install grunt-yoast-tasks --save-dev
 ```
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this bit of JavaScript:
 
 ```js
-grunt.loadNpmTasks( "grunt-yoast-tasks" );
+	// Load Grunt configurations and tasks
+	loadGruntConfig( grunt, {
+		configPath: path.join( process.cwd(), "node_modules/@yoast/grunt-plugin-tasks/config/" ),
+		overridePath: path.join( process.cwd(), project.paths.config ),
+		data: project,
+		jitGrunt: {
+			staticMappings: {
+				addtextdomain: "grunt-wp-i18n",
+				makepot: "grunt-wp-i18n",
+				glotpress_download: "grunt-glotpress",
+				"update-version": "@yoast/grunt-plugin-tasks",
+				"set-version": "@yoast/grunt-plugin-tasks",
+			},
+		},
+	} );
 ```
 
-## The 'set-version' task
+You can override individual task configs by adding them to your plugin's local grunt config directory.
 
-### Overview
+## Tasks this adds
+
+This adds the following tasks to your plugin's repo:
+
+* addtextdomain
+* checktextdomain
+* clean
+* compress
+* eslint
+* glotpress_download
+* imagemin
+* makepot
+* postcss
+* rtlcss
+* sass
+* set-version (see below for usage)
+* shell
+* uglify
+* update-version (see below for usage)
+* watch
+* wp_deploy
+
+### The 'set-version' task
+
+#### Overview
 In your project's Gruntfile, add a section named `yoast_tasks` to the data object passed into `grunt.initConfig()`.
 
 ```js

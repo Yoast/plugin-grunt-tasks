@@ -1,0 +1,52 @@
+# Build the project
+build:
+  - 'build:css'
+  - 'build:js'
+  - 'build:images'
+  - 'build:i18n'
+
+# Build CSS from SCSS to production
+'build:css':
+  - 'clean:build-assets-css'
+  - 'sass:build'
+  - 'postcss:build'
+  - 'rtlcss:build'
+
+# Build JavaScript from assets to production
+'build:js':
+  - 'clean:build-assets-js'
+  - 'uglify'
+
+# Optimise images from source to production
+'build:images':
+  - 'imagemin'
+
+# Build internationalisation features
+'build:i18n':
+  - 'addtextdomain'
+  - 'makepot'
+  - 'glotpress_download'
+
+# Check health of the project
+check:
+  - 'check:js'
+  - 'check:php'
+  - 'check:i18n'
+
+'check:js':
+  - 'eslint'
+
+'check:php':
+  - 'shell:php-lint'
+  - 'shell:phpcs'
+
+'check:i18n':
+  - 'checktextdomain'
+
+## We've moved phpcs and phplint checks to composer.
+phpcs:
+  - 'shell:phpcs'
+
+phplint:
+  - 'shell:php-lint'
+
