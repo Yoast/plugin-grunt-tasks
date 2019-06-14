@@ -6,6 +6,6 @@ module.exports = {
 			implementation: require('node-sass'),
 			sourceMap: global.developmentBuild
 		},
-		files: "<%= files.sass %>"
+		files: "<%= sassFiles %>"
 	}
 };
