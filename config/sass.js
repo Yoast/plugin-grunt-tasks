@@ -1,10 +1,10 @@
 // https://github.com/sindresorhus/grunt-sass
-/* global developmentBuild */
+/* global global */
 module.exports = {
 	build: {
 		options: {
 			implementation: require('node-sass'),
-			sourceMap: developmentBuild
+			sourceMap: global.developmentBuild
 		},
 		files: "<%= files.sass %>"
 	}

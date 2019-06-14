@@ -1,9 +1,9 @@
 // https://github.com/nDmitry/grunt-postcss
-/* global developmentBuild */
+/* global global */
 module.exports = {
 	build: {
 		options: {
-			map: developmentBuild,
+			map: global.developmentBuild,
 			processors: [
 				require( "autoprefixer" )( { browsers: "last 2 versions, IE >= 9" } ),
 				require( "cssnano" )(),

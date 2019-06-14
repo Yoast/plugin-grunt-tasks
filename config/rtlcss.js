@@ -1,9 +1,9 @@
 // https://github.com/MohammadYounes/grunt-rtlcss
-/* global developmentBuild */
+/* global global */
 module.exports = {
 	build: {
 		options: {
-			map: developmentBuild,
+			map: global.developmentBuild,
 			clean: true,
 			plugins: [
 				{
