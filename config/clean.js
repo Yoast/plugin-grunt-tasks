@@ -15,6 +15,10 @@ module.exports = {
 		"<%= paths.css %>*.css",
 		"<%= paths.css %>*.map",
 	],
+	"build-assets-js": [
+		"<%= paths.js %>*.min.js",
+		"<%= paths.js %>*.map",
+	],
 	artifact: [
 		"<%= files.artifact %>",
 	],

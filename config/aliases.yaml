@@ -14,6 +14,7 @@ build:
 
 # Build JavaScript from assets to production
 'build:js':
+  - 'clean:build-assets-js'
   - 'uglify'
 
 # Optimise images from source to production
