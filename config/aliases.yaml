@@ -25,7 +25,6 @@ build:
 'build:i18n':
   - 'addtextdomain'
   - 'makepot'
-  - 'glotpress_download'
 
 # Check health of the project
 check:
