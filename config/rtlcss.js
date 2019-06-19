@@ -43,15 +43,13 @@ module.exports = {
 				},
 			],
 		},
-		plugin: {
-			expand: true,
-			cwd: "<%= paths.css %>",
-			src: [
-				"**/*.css",
-				"!**/*-rtl.css",
-			],
-			dest: "<%= paths.css %>",
-			ext: "-rtl.css",
-		},
+		expand: true,
+		cwd: "<%= paths.css %>",
+		src: [
+			"**/*.css",
+			"!**/*-rtl.css",
+		],
+		dest: "<%= paths.css %>",
+		ext: "-rtl.css",
 	}
 };
