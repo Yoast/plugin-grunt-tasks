@@ -163,6 +163,27 @@ readme: {
 ```
 
 ## Release History
+### 1.3.1
+- Fixes the RTL configuration.
+
+### 1.3.0
+- Adds task configurations.
+- Switches to Yoast `grunt-glotpress` variant.
+- Updates `grunt-sass`.
+- Adds dependency: `node-sass`.
+
+### 1.2.0
+- Updates `grunt-replace`.
+- Adds dependency: `cssnano`.
+
+### 1.1.0
+- Adds grunt dependencies: `grunt`, `grunt-shell`, `grunt-replace`, `load-grunt-config`.
+- Adds grunt contrib dependencies: `grunt-contrib-clean`, `grunt-contrib-compress`, `grunt-contrib-copy`, `grunt-contrib-cssmin`, `grunt-contrib-imagemin`, `grunt-contrib-watch`.
+- Adds linting dependencies: `grunt-phpcs`, `grunt-eslint`.
+- Adds css dependencies: `grunt-postcss`, `autoprefixer`, `grunt-sass`, `grunt-rtlcss`.
+- Adds translations dependencies: `grunt-glotpress`, `grunt-wp-i18n`, `grunt-checktextdomain`.
+- Adds deploy dependencies: `grunt-wp-deploy`, `time-grunt`.
+
 ### 1.0.0
-- initial creation of the plugin
-- added unit tests
+- Initial creation of the plugin.
+- Adds unit tests.
