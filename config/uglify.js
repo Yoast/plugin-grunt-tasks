@@ -1,18 +1,17 @@
 // https://github.com/gruntjs/grunt-contrib-uglify
-/* global global */
 module.exports = {
 	js: {
 		options: {
-			preserveComments: 'some',
-			report: 'gzip',
-			sourceMap: global.developmentBuild,
+			preserveComments: "some",
+			report: "gzip",
+			sourceMap: "<%= developmentBuild %>",
 		},
-		files: [{
+		files: [ {
 			expand: true,
-			src: '<%= files.js %>',
-			ext: '.min.js',
-			extDot: 'first',
-			isFile: true
-		}]
-	}
+			src: "<%= files.js %>",
+			ext: ".min.js",
+			extDot: "first",
+			isFile: true,
+		} ],
+	},
 };
