@@ -1,7 +1,6 @@
 module.exports = function( grunt ) {
 	// Project configuration.
 	grunt.initConfig( {
-
 		eslint: {
 			options: {
 				configFile: ".eslintrc",
@@ -35,5 +34,3 @@ module.exports = function( grunt ) {
 	// By default, lint and run all tests.
 	grunt.registerTask( "default", [ "eslint", "test" ] );
 };
-
-
