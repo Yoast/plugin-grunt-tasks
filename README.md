@@ -163,6 +163,10 @@ readme: {
 ```
 
 ## Release History
+### 1.4.0
+- Add .min as possible extension in rtlcss.
+- Move developmentBuild to grunt configuration.
+
 ### 1.3.1
 - Fixes the RTL configuration.
 
