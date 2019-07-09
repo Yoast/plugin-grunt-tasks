@@ -19,9 +19,12 @@ module.exports = function( grunt ) {
 			);
 
 			this.files.forEach( ( file ) => {
+				// If options.regEx is a string, create a regex from it. If it's already a regex, use it as is.
+				const regex = ( typeof options.regEx === 'string' ) ? new RegExp ( options.regEx ) : options.regEx;
+
 				file.src.forEach( ( path ) => {
 					let contents = grunt.file.read( path ).replace(
-						options.regEx,
+						regex,
 						options.preVersionMatch + options.version + options.postVersionMatch
 					);
 					grunt.file.write( path, contents );
