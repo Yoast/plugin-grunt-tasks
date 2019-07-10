@@ -165,7 +165,7 @@ readme: {
 ## Release History
 ### 1.4.1
 - Fixes a bug where the initializer regex in the update version config would never match.
-- The update-version tasks now accepts both strings and regexes in `options.regEx`.
+- The update-version task now accepts both strings and regexes in `options.regEx`.
 
 ### 1.4.0
 - Add .min as possible extension in rtlcss.
