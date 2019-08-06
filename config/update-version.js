@@ -12,6 +12,14 @@ module.exports = {
 		},
 		src: "readme.txt",
 	},
+	readmeMd: {
+		options: {
+			regEx: /(Stable tag:\s+)(\d+(\.\d+){0,3})([^\n^\.\d]?.*?)(\n)/,
+			preVersionMatch: "$1",
+			postVersionMatch: "$5",
+		},
+		src: "README.md",
+	},
 
 	// When changing or adding entries, make sure to update `aliases.yml` for "update-version-trunk".
 	pluginFile: {
