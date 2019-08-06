@@ -163,6 +163,9 @@ readme: {
 ```
 
 ## Release History
+### 1.4.2
+- Fixes a bug where the stable version would not be updated in README.md when running the update-version task.
+
 ### 1.4.1
 - Fixes a bug where the initializer regex in the update version config would never match.
 - The update-version task now accepts both strings and regexes in `options.regEx`.
