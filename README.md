@@ -36,23 +36,23 @@ You can override individual task configs by adding them to your plugin's local g
 ## Tasks this adds
 This adds the following tasks to your plugin's repo (see below for usage):
 
-* addtextdomain
-* checktextdomain
-* clean
-* compress
-* eslint
-* glotpress_download
-* imagemin
-* makepot
-* postcss
-* rtlcss
-* sass
-* set-version (see below for usage)
-* shell
-* uglify
-* update-version (see below for usage)
-* watch
-* wp_deploy
+* [addtextdomain](https://github.com/Yoast/plugin-grunt-tasks#the-addtextdomain-task)
+* [checktextdomain](https://github.com/Yoast/plugin-grunt-tasks#the-checktextdomain-task)
+* [clean](https://github.com/Yoast/plugin-grunt-tasks#the-clean-task)
+* [compress](https://github.com/Yoast/plugin-grunt-tasks#the-compress-task)
+* [eslint](https://github.com/Yoast/plugin-grunt-tasks#the-eslint-task)
+* [glotpress_download](https://github.com/Yoast/plugin-grunt-tasks#the-glotpress_download-task)
+* [imagemin](https://github.com/Yoast/plugin-grunt-tasks#the-imagemin-task)
+* [makepot](https://github.com/Yoast/plugin-grunt-tasks#the-makepot-task)
+* [postcss](https://github.com/Yoast/plugin-grunt-tasks#the-postcss-task)
+* [rtlcss](https://github.com/Yoast/plugin-grunt-tasks#the-rtlcss-task)
+* [sass](https://github.com/Yoast/plugin-grunt-tasks#the-sass-task)
+* [set-version](https://github.com/Yoast/plugin-grunt-tasks#the-set-version-task)
+* [shell](https://github.com/Yoast/plugin-grunt-tasks#the-shell-task)
+* [uglify](https://github.com/Yoast/plugin-grunt-tasks#the-uglify-task)
+* [update-version](https://github.com/Yoast/plugin-grunt-tasks#the-update-version-task)
+* [watch](https://github.com/Yoast/plugin-grunt-tasks#the-watch-task)
+* [wp_deploy](https://github.com/Yoast/plugin-grunt-tasks#the-wp_deploy-task)
 
 
 ### The `addtextdomain` task
