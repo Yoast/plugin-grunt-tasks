@@ -1,3 +1,4 @@
+// See: https://github.com/gruntjs/grunt-contrib-compress for details.
 module.exports = {
 	artifact: {
 		options: {
