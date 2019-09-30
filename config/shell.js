@@ -33,7 +33,10 @@ module.exports = function( grunt ) {
 		},
 
 		"phpcs": {
-			command: "php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+			command: "if [[ -f \"./vendor/squizlabs/php_codesniffer/bin/phpcs\"]]; " +
+					 "then php ./vendor/squizlabs/php_codesniffer/bin/phpcs" +
+					 "else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs " +
+					 "fi",
 		}
 	};
 };
