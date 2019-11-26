@@ -1,6 +1,6 @@
 {
     "browserslist": [
-      "last 1 Samsung versions",
+    	"last 1 Samsung versions",
     	"last 1 Android versions",
     	"last 1 ChromeAndroid versions",
     	"last 2 Chrome versions",
