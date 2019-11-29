@@ -48,10 +48,15 @@
 		"time-grunt": "^1.0.0"
 	},
 	"devDependencies": {
+		"@yoast/browserslist-config": "^1.0.0",
+		"browserslist": "^4.7.3",
 		"grunt-contrib-nodeunit": "^1.0.0",
 		"grunt-run-task": "^1.0.0"
 	},
 	"keywords": [
 		"gruntplugin"
+	],
+	"browserslist": [
+		"extends @yoast/browserslist-config"
 	]
 }
