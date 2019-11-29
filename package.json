@@ -18,8 +18,10 @@
 		"test": "grunt test"
 	},
 	"dependencies": {
+		"@yoast/browserslist-config": "^1.0.0",
 		"autoprefixer": "^6.3.1",
 		"babel-eslint": "^10.0.1",
+		"browserslist": "^4.7.3",
 		"cssnano": "^4.1.10",
 		"eslint-config-yoast": "^5.0.16",
 		"eslint-plugin-jsx-a11y": "^6.1.1",
@@ -48,8 +50,6 @@
 		"time-grunt": "^1.0.0"
 	},
 	"devDependencies": {
-		"@yoast/browserslist-config": "^1.0.0",
-		"browserslist": "^4.7.3",
 		"grunt-contrib-nodeunit": "^1.0.0",
 		"grunt-run-task": "^1.0.0"
 	},
