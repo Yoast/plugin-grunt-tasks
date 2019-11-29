@@ -1939,7 +1939,7 @@ grunt.initConfig( {
 
 
 ## Release History
-### 1.4.3
+### 1.4.4
 - Makes postcss use the new [Yoast browserslist](https://github.com/Yoast/javascript/tree/develop/packages/browserslist-config) package to determine browsers we support.
 - Update autoprefixer to prevent version clashes with browserslist.
 
