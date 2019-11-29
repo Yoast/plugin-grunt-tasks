@@ -18,8 +18,10 @@
 		"test": "grunt test"
 	},
 	"dependencies": {
-		"autoprefixer": "^6.3.1",
+		"@yoast/browserslist-config": "^1.0.0",
+		"autoprefixer": "^9.7.2",
 		"babel-eslint": "^10.0.1",
+		"browserslist": "^4.7.3",
 		"cssnano": "^4.1.10",
 		"eslint-config-yoast": "^5.0.16",
 		"eslint-plugin-jsx-a11y": "^6.1.1",
@@ -53,5 +55,8 @@
 	},
 	"keywords": [
 		"gruntplugin"
+	],
+	"browserslist": [
+		"extends @yoast/browserslist-config"
 	]
 }
