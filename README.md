@@ -955,12 +955,12 @@ grunt.initConfig( {
 See: [nDmitry/grunt-postcss](https://github.com/nDmitry/grunt-postcss)
 
 #### Using our configuration
-We implement a `build` task:
+We implement a `build-default` task:
 - The `options.map` value is read from the Grunt configuration: `developmentBuild`.
 - The `options.processors` value is set to:
 ```js
 [
-    require( "autoprefixer" )( { browsers: "last 2 versions, IE >= 9" } ),
+    require( "autoprefixer" )(),
     require( "cssnano" )(),
 ]
 ```
@@ -1939,6 +1939,11 @@ grunt.initConfig( {
 
 
 ## Release History
+
+### 1.6
+- Fix the call to `phpcs` to be useful.
+- Breaking change: rename `build` to `build-default`.
+
 ### 1.5
 - Makes postcss use the new [Yoast browserslist](https://github.com/Yoast/javascript/tree/develop/packages/browserslist-config) package to determine browsers we support.
 - Update autoprefixer to prevent version clashes with browserslist.

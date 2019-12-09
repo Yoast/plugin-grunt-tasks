@@ -1,5 +1,5 @@
 # Build the project
-build:
+'build-default':
   - 'build:css'
   - 'build:js'
   - 'build:images'
