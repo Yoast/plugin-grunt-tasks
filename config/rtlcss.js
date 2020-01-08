@@ -46,9 +46,9 @@ module.exports = {
 		cwd: "<%= paths.css %>",
 		src: [
 			"**/*.css",
-			"!**/*-rtl<%= developmentBuild ? '' : '.min' %>.css",
+			"!**/*-rtl.css",
 		],
 		dest: "<%= paths.css %>",
-		ext: "-rtl<%= developmentBuild ? '' : '.min' %>.css",
+		ext: "-rtl.css",
 	},
 };
