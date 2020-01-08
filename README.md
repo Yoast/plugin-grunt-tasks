@@ -1940,6 +1940,9 @@ grunt.initConfig( {
 
 ## Release History
 
+### 1.6.1
+- No longer use `.min` when generating RTL CSS files to be consistent with non-RTL files.
+
 ### 1.6
 - Fix the call to `phpcs` to be useful.
 - Breaking change: rename `build` to `build-default`.
