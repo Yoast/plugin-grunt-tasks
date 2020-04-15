@@ -1940,6 +1940,9 @@ grunt.initConfig( {
 
 ## Release History
 
+### 1.6.2
+- Bump version of `grunt-contrib-compress` to add node 12 support.
+
 ### 1.6.1
 - No longer use `.min` when generating RTL CSS files to be consistent with non-RTL files.
 
