@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 		"update-version",
 		"Updates the version tags in all the right places.",
 		function() {
-			let options = this.options(
+			const options = this.options(
 				{
 					version: "version",
 					regEx: "regEx",
@@ -20,10 +20,10 @@ module.exports = function( grunt ) {
 
 			this.files.forEach( ( file ) => {
 				// If options.regEx is a string, create a regex from it. If it's already a regex, use it as is.
-				const regex = ( typeof options.regEx === 'string' ) ? new RegExp ( options.regEx ) : options.regEx;
+				const regex = ( typeof options.regEx === "string" ) ? new RegExp( options.regEx ) : options.regEx;
 
 				file.src.forEach( ( path ) => {
-					let contents = grunt.file.read( path ).replace(
+					const contents = grunt.file.read( path ).replace(
 						regex,
 						options.preVersionMatch + options.version + options.postVersionMatch
 					);
