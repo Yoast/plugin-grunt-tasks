@@ -1,7 +1,7 @@
 {
 	"name": "@yoast/grunt-plugin-tasks",
 	"description": "Custom Yoast grunt tasks",
-	"version": "1.7.0",
+	"version": "1.7.1",
 	"homepage": "https://github.com/Yoast/",
 	"repository": {
 		"type": "git",
@@ -33,6 +33,7 @@
 		"grunt-contrib-compress": "^1.6.0",
 		"grunt-contrib-copy": "^1.0.0",
 		"grunt-contrib-imagemin": "^3.1.0",
+		"grunt-contrib-uglify": "^4.0.1",
 		"grunt-contrib-watch": "^1.0.0",
 		"grunt-eslint": "^21.0.0",
 		"grunt-glotpress": "https://github.com/Yoast/grunt-glotpress.git#master",
