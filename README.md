@@ -46,7 +46,6 @@ This adds the following tasks to your plugin's repo (see below for usage):
 * [makepot](https://github.com/Yoast/plugin-grunt-tasks#the-makepot-task)
 * [postcss](https://github.com/Yoast/plugin-grunt-tasks#the-postcss-task)
 * [rtlcss](https://github.com/Yoast/plugin-grunt-tasks#the-rtlcss-task)
-* [sass](https://github.com/Yoast/plugin-grunt-tasks#the-sass-task)
 * [set-version](https://github.com/Yoast/plugin-grunt-tasks#the-set-version-task)
 * [shell](https://github.com/Yoast/plugin-grunt-tasks#the-shell-task)
 * [uglify](https://github.com/Yoast/plugin-grunt-tasks#the-uglify-task)
@@ -1184,53 +1183,6 @@ rtlcss: {
 }
 ```
 
-
-### The `sass` task
-See: [sindresorhus/grunt-sass](https://github.com/sindresorhus/grunt-sass)
-
-#### Using our configuration
-We implement a `build` task:
-- The `options.implementation` value is set to `require( "node-sass" )`.
-- The `options.sourceMap` value is read from the Grunt configuration: `developmentBuild`.
-- The `files` value is read from the Grunt configuration: `sassFiles`.
-
-#### Overview
-In your project's Gruntfile, add a section named `imagemin` to the data object passed into `grunt.initConfig()`.
-```js
-grunt.initConfig( {
-    sass: {
-        options: {},  // Task-specific options.
-        dist: {
-            files: {} // Target-specific file lists.
-        },
-    },
-} );
-```
-
-#### Options
-See the Node Sass [options](https://github.com/sass/node-sass#options), except for `file`, `outFile`, `success`, `error`.
-
-The default value for the `precision` option is `10`, so you don't have to change it when using Bootstrap.
-
-#### Usage Examples
-```js
-const sass = require('node-sass');
-
-grunt.initConfig( {
-    sass: {
-        options: {
-            implementation: sass,
-            sourceMap: true
-        },
-        dist: {
-            files: {
-                'main.css': 'main.scss'
-            }
-        }
-    }
-} );
-```
-
 ### The 'set-version' task
 #### Using our configuration
 We implement a `packageJSON` task:
@@ -1397,7 +1349,6 @@ grunt.initConfig( {
     }
 } );
 ```
-
 
 ### The `uglify` task
 See: [gruntjs/grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)

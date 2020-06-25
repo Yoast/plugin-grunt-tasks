@@ -8,7 +8,7 @@
 # Build CSS from SCSS to production
 'build:css':
   - 'clean:build-assets-css'
-  - 'sass:build'
+  - 'copy:css-files'
   - 'postcss:build'
   - 'rtlcss:build'
 
