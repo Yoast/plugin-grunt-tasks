@@ -25,18 +25,18 @@ module.exports = function( grunt ) {
 
 		"php-lint": {
 			command: "find -L . " +
-			         "-path ./vendor -prune -o " +
-			         "-path ./vendor_prefixed -prune -o " +
-			         "-path ./node_modules -prune -o " +
-			         "-path ./artifact -prune -o " +
-			         "-name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+				"-path ./vendor -prune -o " +
+				"-path ./vendor_prefixed -prune -o " +
+				"-path ./node_modules -prune -o " +
+				"-path ./artifact -prune -o " +
+				"-name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		},
 
 		"phpcs": {
 			command: "if [[ -f \"./vendor/squizlabs/php_codesniffer/bin/phpcs\"]]; " +
-					 "then php ./vendor/squizlabs/php_codesniffer/bin/phpcs" +
-					 "else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs " +
-					 "fi",
+				"then php ./vendor/squizlabs/php_codesniffer/bin/phpcs " +
+				"else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs " +
+				"fi",
 		}
 	};
 };
