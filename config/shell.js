@@ -1,5 +1,5 @@
 // See https://github.com/sindresorhus/grunt-shell
-module.exports = function( grunt ) {
+module.exports = function() {
 	return {
 		"composer-install-production": {
 			command: "composer install --prefer-dist --optimize-autoloader --no-dev",
@@ -32,11 +32,11 @@ module.exports = function( grunt ) {
 				"-name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		},
 
-		"phpcs": {
+		phpcs: {
 			command: "if [[ -f \"./vendor/squizlabs/php_codesniffer/bin/phpcs\"]]; " +
 				"then php ./vendor/squizlabs/php_codesniffer/bin/phpcs " +
 				"else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs " +
 				"fi",
-		}
+		},
 	};
 };
