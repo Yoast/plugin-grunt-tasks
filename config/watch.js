@@ -15,20 +15,4 @@ module.exports = {
 			"eslint:grunt",
 		],
 	},
-	js: {
-		files: [
-			"<%= files.js %>",
-		],
-		tasks: [
-			"build:js",
-		],
-	},
-	css: {
-		files: [
-			"<%= files.sass %>",
-		],
-		tasks: [
-			"build:css",
-		],
-	},
 };
