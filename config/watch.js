@@ -3,20 +3,16 @@ module.exports = {
 	options: {
 		livereload: true,
 	},
-	js: {
+	grunt: {
+		options: {
+			reload: true,
+		},
 		files: [
-			"<%= files.js %>",
+			"<%= files.grunt %>",
+			"<%= files.config %>",
 		],
 		tasks: [
-			"build:js",
-		],
-	},
-	css: {
-		files: [
-			"<%= files.sass %>",
-		],
-		tasks: [
-			"build:css",
+			"eslint:grunt",
 		],
 	},
 };
