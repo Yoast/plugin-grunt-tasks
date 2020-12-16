@@ -34,8 +34,8 @@ module.exports = function() {
 
 		phpcs: {
 			command: "if [[ -f \"./vendor/squizlabs/php_codesniffer/bin/phpcs\"]]; " +
-				"then php ./vendor/squizlabs/php_codesniffer/bin/phpcs " +
-				"else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs " +
+				"then php ./vendor/squizlabs/php_codesniffer/bin/phpcs; " +
+				"else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs; " +
 				"fi",
 		},
 	};

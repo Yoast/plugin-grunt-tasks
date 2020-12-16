@@ -11,7 +11,10 @@ module.exports = {
 				'last-translator': '<%= pkg.pot.lasttranslator %>'
 			},
 			type: 'wp-plugin',
-			exclude: []
+			exclude: [
+				"<%= files.artifact %>",
+				".wordpress-svn",
+			]
 		}
 	}
 };

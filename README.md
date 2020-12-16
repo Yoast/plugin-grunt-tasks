@@ -1891,6 +1891,12 @@ grunt.initConfig( {
 
 ## Release History
 
+### 2.0.0
+- Removes watch configuration for JS & CSS. From now on plugins need to have their own `watch.js` file.
+- Adds Grunt config file watching.
+- Fixes Config/Shell PHPCS command
+- Excludes Artifact and WordPress SVN checkout from POT file generation to prevent duplicates.
+
 ### 1.6.2
 - Bump version of `grunt-contrib-compress` to add node 12 support.
 
