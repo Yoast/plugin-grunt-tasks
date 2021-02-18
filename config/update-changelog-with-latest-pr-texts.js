@@ -1,8 +1,17 @@
 // Custom task
 module.exports = {
 	options: {
-		version: "<%= pluginVersion %>",
 		useEditDistanceComapair: true,
+	},
+	"wordpress-seo": {
+		options: {
+			readmePath: "readme.txt",
+		},
+	},
+	"wordpress-seo-premium": {
+		options: {
+			readmePath: "changelog.MD",
+		},
 	},
 	default: {
 		options: {
