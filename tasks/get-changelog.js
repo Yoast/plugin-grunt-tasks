@@ -33,7 +33,7 @@ module.exports = function( grunt ) {
 			grunt.task.run( "shell:get-changelog-lines-with-wiki-yoast-cli");
 		
 			//use node clue script do make
-			grunt.config( "shell.makeChangelogFile.command", "node ./config/grunt/lib/get-changelog-using-wiki.js " + grunt.config.data.pluginSlug + " " + newVersion);
+			grunt.config( "shell.makeChangelogFile.command", "node node_modules/@yoast/grunt-plugin-tasks/lib/get-changelog-using-wiki.js " + grunt.config.data.pluginSlug + " " + newVersion);
 			grunt.task.run( "shell:makeChangelogFile" );
 			// move the created file
 			grunt.config( "shell.move-changelog.command", "mv /tmp/Wiki/yoast-cli/changelogs/changelog-Yoast/" + grunt.config.data.pluginSlug + "-" + newVersion + ".md .tmp/" );
