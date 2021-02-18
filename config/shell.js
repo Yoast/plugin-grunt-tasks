@@ -38,5 +38,8 @@ module.exports = function() {
 				"else php ./vendor/squizlabs/php_codesniffer/scripts/phpcs; " +
 				"fi",
 		},
+		"test": {
+			command: "ls",
+		},
 	};
 };
