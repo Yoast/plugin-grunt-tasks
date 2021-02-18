@@ -49,3 +49,7 @@ phpcs:
 phplint:
   - 'shell:php-lint'
 
+'update-changelog':
+  - get-changelog 
+  - update-changelog-with-latest-pr-texts
+
