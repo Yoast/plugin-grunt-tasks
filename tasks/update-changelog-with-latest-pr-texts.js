@@ -221,7 +221,7 @@ module.exports = function( grunt ) {
 
 			
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
-			console.log(allReleasesInChangelog)
+			//console.log(allReleasesInChangelog)
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
@@ -236,7 +236,7 @@ module.exports = function( grunt ) {
 				} )
 			);
 
-			console.log("match:" + containsCurrentVersion);
+			//console.log("match:" + containsCurrentVersion);
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
@@ -278,12 +278,16 @@ module.exports = function( grunt ) {
 			if ( containsCurrentVersion ) {
 				// get the changelog entry's for the current version from the readme.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
-				const currentChangelogEntriesMatches = changelog.match(new RegExp( "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",  ))
+				var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
+				if (options.readmeFile === "changelog.md") {
+					matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
+				}
+				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
 				var currentChangelogEntries = "";
 				if (currentChangelogEntriesMatches) {
 					currentChangelogEntries = `${currentChangelogEntriesMatches[0]}`;
 				};
-				//console.log(currentChangelogEntries);
+				console.log(currentChangelogEntries);
 
 				// get the header from the changelog entry's
 				const currentChangelogEntriesHeaderMatches = changelog.match(new RegExp( "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))",  ))
@@ -291,9 +295,9 @@ module.exports = function( grunt ) {
 				if (currentChangelogEntriesHeaderMatches){
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
 				}
-				//console.log(currentChangelogEntriesHeader)
+				console.log(currentChangelogEntriesHeader)
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
-				//console.log(currentChangelogEntriesLines)
+				console.log(currentChangelogEntriesLines)
 				
 				// create uniyoe linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
