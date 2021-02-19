@@ -48,7 +48,7 @@ module.exports = function( grunt ) {
 					force: true 
 				}
 			});
-			//grunt.task.run("clean:wiki")
+			grunt.task.run("clean:wiki")
 			done();
 			
 		}
