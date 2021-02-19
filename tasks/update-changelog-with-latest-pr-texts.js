@@ -220,7 +220,6 @@ module.exports = function( grunt ) {
 
 			
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
-			console.log("BLA");
 			console.log(allReleasesInChangelog)
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
