@@ -278,9 +278,12 @@ module.exports = function( grunt ) {
 			if ( containsCurrentVersion ) {
 				// get the changelog entry's for the current version from the readme.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
+				var matchCorrectHeader = "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))"
 				var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
+				
 				if (options.readmeFile === "./changelog.md") {
 					matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
+					matchCorrectHeader = "### " + changelogVersionNumber + "(.)*?(?=(\\n))"
 				}
 				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
 				var currentChangelogEntries = "";
@@ -290,7 +293,10 @@ module.exports = function( grunt ) {
 				console.log(currentChangelogEntries);
 
 				// get the header from the changelog entry's
-				const currentChangelogEntriesHeaderMatches = changelog.match(new RegExp( "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))",  ))
+				
+				
+
+				const currentChangelogEntriesHeaderMatches = changelog.match(new RegExp( matchCorrectHeader,  ))
 				var currentChangelogEntriesHeader = "";
 				if (currentChangelogEntriesHeaderMatches){
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
