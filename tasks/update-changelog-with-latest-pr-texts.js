@@ -78,7 +78,7 @@ class ChangelogBuilder {
 		var newlines = ""
 		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
-			newlines = newlines = "\nEnhancements:\n" 
+			newlines = "\nEnhancements:\n" 
 			newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ;
 			newlines = newlines + this.ChangelogMap.get('Enhancements:').items.join("\n");
 		};
