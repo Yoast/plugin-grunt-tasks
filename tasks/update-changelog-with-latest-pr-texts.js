@@ -297,7 +297,7 @@ module.exports = function( grunt ) {
 				}
 				console.log(currentChangelogEntriesHeader)
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
-				console.log(currentChangelogEntriesLines)
+				console.log(currentChangelogEntries)
 				
 				// create uniyoe linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
