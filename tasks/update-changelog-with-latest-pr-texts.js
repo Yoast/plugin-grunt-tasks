@@ -68,6 +68,8 @@ class ChangelogBuilder {
 		changelogIn = changelogIn.replace( new RegExp( "\\W\\[#\\d+\\]\\(https://github.com/Yoast/.+?/pull/\\d+\\)" , "gm" ),
 		""
 		);
+		console.log(changelogIn);
+
 		this.parseChancelogLines(changelogIn)
 	};
 
