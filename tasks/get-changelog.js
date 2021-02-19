@@ -8,10 +8,13 @@
 //const { spawn } = require( "child_process" );
 
 module.exports = function( grunt ) {
-	grunt.registerTask(
+	grunt.registerMultiTask(
 		"get-changelog",
 		"",
 		function() {
+			let options = this.options( { 
+				pluginSlug = ""
+			} );
 			const done = this.async();
 
 			const newVersion = grunt.option( "plugin-version" );
@@ -25,7 +28,7 @@ module.exports = function( grunt ) {
 					"git clone git@github.com:Yoast/Wiki.git ",
 					"cd Wiki/yoast-cli",
 					"mkdir -p ./changelogs/changelog-Yoast",
-					"touch ./changelogs/changelog-Yoast/" + grunt.config.data.pluginSlug + "-" + newVersion+ ".md",
+					"touch ./changelogs/changelog-Yoast/" + options.pluginSlug + "-" + newVersion+ ".md",
 					"composer install",
 					"mv /tmp/.env .",
 					"pwd"].join(' && ')));
@@ -33,10 +36,10 @@ module.exports = function( grunt ) {
 			grunt.task.run( "shell:get-changelog-lines-with-wiki-yoast-cli");
 		
 			//use node clue script do make
-			grunt.config( "shell.makeChangelogFile.command", "node node_modules/@yoast/grunt-plugin-tasks/lib/get-changelog-using-wiki.js " + grunt.config.data.pluginSlug + " " + newVersion);
+			grunt.config( "shell.makeChangelogFile.command", "node node_modules/@yoast/grunt-plugin-tasks/lib/get-changelog-using-wiki.js " + options.pluginSlug + " " + newVersion);
 			grunt.task.run( "shell:makeChangelogFile" );
 			// move the created file
-			grunt.config( "shell.move-changelog.command", "mv /tmp/Wiki/yoast-cli/changelogs/changelog-Yoast/" + grunt.config.data.pluginSlug + "-" + newVersion + ".md .tmp/" );
+			grunt.config( "shell.move-changelog.command", "mv /tmp/Wiki/yoast-cli/changelogs/changelog-Yoast/" + options.pluginSlug + "-" + newVersion + ".md .tmp/" );
 			grunt.task.run( "shell:move-changelog" );
 			//clean up here.
 			grunt.config( "clean", { 

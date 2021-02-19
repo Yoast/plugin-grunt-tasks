@@ -50,6 +50,6 @@ phplint:
   - 'shell:php-lint'
 
 'update-changelog':
-  - get-changelog 
+  - get-changelog:wordpress-seo
   - update-changelog-with-latest-pr-texts:wordpress-seo
 
