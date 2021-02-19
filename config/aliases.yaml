@@ -49,7 +49,10 @@ phpcs:
 phplint:
   - 'shell:php-lint'
 
-'update-changelog':
-  - get-changelog:wordpress-seo
+'update-changelog:wordpress-seo':
+  - get-changelog
   - update-changelog-with-latest-pr-texts:wordpress-seo
 
+'update-changelog:wordpress-seo-premium':
+  - get-changelog
+  - update-changelog-with-latest-pr-texts:wordpress-seo-premium
