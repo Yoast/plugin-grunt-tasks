@@ -217,10 +217,10 @@ module.exports = function( grunt ) {
 			// = 15.7 =
 			// Release Date: January 26th, 2021
 
-			var releaseInChangelog = "/[=] \d+\.\d+(\.\d+)? =/g";
+			//var releaseInChangelog = "/[=] \d+\.\d+(\.\d+)? =/g";
 			
 			
-			const allReleasesInChangelog = changelog.match( releaseInChangelog );
+			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
