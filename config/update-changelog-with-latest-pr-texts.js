@@ -13,9 +13,5 @@ module.exports = {
 			readmePath: "changelog.MD",
 		},
 	},
-	default: {
-		options: {
-			readmePath: "readme.txt",
-		},
-	},
+	
 };
