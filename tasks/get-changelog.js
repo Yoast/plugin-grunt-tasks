@@ -13,7 +13,7 @@ module.exports = function( grunt ) {
 		"",
 		function() {
 			let options = this.options( { 
-				pluginSlug = ""
+				pluginSlug: "",
 			} );
 			const done = this.async();
 
