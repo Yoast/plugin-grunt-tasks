@@ -80,25 +80,19 @@ class ChangelogBuilder {
 		console.log (">" + line + "<" ); 
 		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
-			newlines = "\nEnhancements:\n" 
-			newlines = newlines + line ;
-			newlines = newlines + this.ChangelogMap.get('Enhancements:').items.join("\n");
+			newlines = "\nEnhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n");
 		};
 		if (this.ChangelogMap.has('Bugfixes:')) {
-			newlines = newlines + "\n\nBugfixes:\n" 
-			newlines = newlines + line ;
-			newlines = newlines + this.ChangelogMap.get('Bugfixes:').items.join("\n");
+			newlines = newlines + "\n\nBugfixes:\n" + line + this.ChangelogMap.get('Bugfixes:').items.join("\n");
 		};
 		this.ChangelogMap.forEach(function (value, key, map) {
 			//console.log(`map.get('${key}') = ${value}`);
 			if (!(key === 'Enhancements:' || key === 'Bugfixes:' || key === 'Non user facing:' || key === 'Other:' )) {
-				newlines = newlines + "\n\n" + key + "\n\n" + this.ChangelogMap.get(key).items.join("\n");
+				newlines = newlines + "\n\n" + key + "\n" + line + this.ChangelogMap.get(key).items.join("\n");
 			};
 		}, this);
 		if (this.ChangelogMap.has('Other:')) {
-			newlines = newlines + "\n\nOther:\n" 
-			newlines = newlines + line ;
-			newlines = newlines + this.ChangelogMap.get('Other:').items.join("\n");
+			newlines = newlines + "\n\nOther:\n" + line + this.ChangelogMap.get('Other:').items.join("\n");
 		};
 		return newlines
 	};
