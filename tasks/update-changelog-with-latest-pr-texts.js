@@ -209,6 +209,7 @@ module.exports = function( grunt ) {
 			})
 			const format = (number) => `${number}${suffixes[pr.select(number)]}`
 
+
 			let changelog = grunt.file.read( options.readmeFile );
 			// premium header:
 			// ### 15.9: February 23rd, 2021
@@ -216,6 +217,8 @@ module.exports = function( grunt ) {
 			// free header:
 			// = 15.7 =
 			// Release Date: January 26th, 2021
+
+			console.log(changelog);
 
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
 			const changelogVersions = allReleasesInChangelog.map(
