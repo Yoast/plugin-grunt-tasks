@@ -26,11 +26,12 @@ function escapeRegExp(string) {
  * 
  */
 class ChangelogBuilder {
-	constructor(grunt , changelogIn, useEditDistanceComapair = false, useANewLineAfterHeader = true) {
+	constructor(grunt , changelogIn, useEditDistanceComapair = false, useANewLineAfterHeader = true, pluginSlug) {
 		this.ChangelogMap = new Map();
 		this.grunt = grunt;
 		this.useEditDistanceComapair = useEditDistanceComapair;
 		this.useANewLineAfterHeader = useANewLineAfterHeader;
+		this.pluginSlug = pluginSlug
 		if (changelogIn) {
 			this.parseChancelogLines(changelogIn);
 		};
@@ -60,7 +61,7 @@ class ChangelogBuilder {
 	
 	parseYoastCliGeneratedChangelog(changelogIn){
 		//strip header from new file.
-		changelogIn = changelogIn.replace( new RegExp( "# Yoast/wordpress-seo:(.|\\n)*?(?=\n[ a-zA-Z]+:)" ),
+		changelogIn = changelogIn.replace( new RegExp( "# Yoast/" + this.pluginSlug + ":(.|\\n)*?(?=\n[ a-zA-Z]+:)" ),
 		""
 		);
 		// remove [#16525](https://github.com/Yoast/wordpress-seo/pull/16525) from lines
@@ -273,7 +274,7 @@ module.exports = function( grunt ) {
 				}
 			}
 
-			const changelogBuilder = new ChangelogBuilder(grunt, null , options.useEditDistanceComapair);
+			const changelogBuilder = new ChangelogBuilder(grunt, null , options.useEditDistanceComapair,options.useANewLineAfterHeader ,pluginSlug);
 			
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {
@@ -303,9 +304,8 @@ module.exports = function( grunt ) {
 				//console.log(currentChangelogEntriesHeader)
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
 				
-				console.log(currentChangelogEntries)
-				console.log("go")
-
+				//console.log(currentChangelogEntries)
+			
 				// create uniyoe linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + grunt.config.data.pluginSlug + "-" + newVersion+ ".md" ) );
