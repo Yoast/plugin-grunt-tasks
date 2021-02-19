@@ -218,10 +218,10 @@ module.exports = function( grunt ) {
 			// = 15.7 =
 			// Release Date: January 26th, 2021
 
-			console.log(options.releaseInChangelog);
-
+			
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
 			console.log("BLA");
+			console.log(allReleasesInChangelog)
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
