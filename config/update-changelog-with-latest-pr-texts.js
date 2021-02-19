@@ -12,7 +12,7 @@ module.exports = {
 	"wordpress-seo-premium": {
 		options: {
 			readmeFile: "./changelog.md",
-			releaseInChangelog: /\d+\.\d+(\.\d+)?/g,
+			releaseInChangelog: /[#] \d+\.\d+(\.\d+)?/g,
 		},
 	},
 	

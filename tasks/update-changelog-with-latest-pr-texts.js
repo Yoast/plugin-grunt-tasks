@@ -221,7 +221,8 @@ module.exports = function( grunt ) {
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
-
+			console.log("na match");
+			console.log(allReleasesInChangelog);
 			// Check if the current version already exists in the changelog.
 			const containsCurrentVersion = ! _isEmpty(
 				changelogVersions.filter( version => {
