@@ -280,7 +280,7 @@ module.exports = function( grunt ) {
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 				var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
 				if (options.readmeFile === "changelog.md") {
-					matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
+					matchCorrectLines =  changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
 				}
 				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
 				var currentChangelogEntries = "";
