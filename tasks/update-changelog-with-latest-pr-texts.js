@@ -302,8 +302,10 @@ module.exports = function( grunt ) {
 				}
 				//console.log(currentChangelogEntriesHeader)
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
-				//console.log(currentChangelogEntries)
 				
+				console.log(currentChangelogEntries)
+				console.log("go")
+
 				// create uniyoe linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + grunt.config.data.pluginSlug + "-" + newVersion+ ".md" ) );
