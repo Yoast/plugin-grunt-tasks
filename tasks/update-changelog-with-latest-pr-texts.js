@@ -79,12 +79,12 @@ class ChangelogBuilder {
 		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
 			newlines = "\nEnhancements:\n" 
-			newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ;
+			//newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ;
 			newlines = newlines + this.ChangelogMap.get('Enhancements:').items.join("\n");
 		};
 		if (this.ChangelogMap.has('Bugfixes:')) {
 			newlines = newlines + "\n\nBugfixes:\n" 
-			newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ; 
+			//newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ; 
 			newlines = newlines + this.ChangelogMap.get('Bugfixes:').items.join("\n");
 		};
 		this.ChangelogMap.forEach(function (value, key, map) {
@@ -95,7 +95,7 @@ class ChangelogBuilder {
 		}, this);
 		if (this.ChangelogMap.has('Other:')) {
 			newlines = newlines + "\n\nOther:\n" 
-			newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ;
+			//newlines = newlines + this.useANewLineAfterHeader ? "\n" : "" ;
 			newlines = newlines + this.ChangelogMap.get('Other:').items.join("\n");
 		};
 		return newlines
