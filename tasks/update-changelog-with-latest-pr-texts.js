@@ -196,7 +196,6 @@ module.exports = function( grunt ) {
 				useEditDistanceComapair: false,
 			} );
 			const done = this.async();
-
 			const newVersion = grunt.option( "plugin-version" );
 			const versionNumber = parseVersion( newVersion );
 			const suffixes = {
@@ -211,9 +210,16 @@ module.exports = function( grunt ) {
 			const format = (number) => `${number}${suffixes[pr.select(number)]}`
 
 			let changelog = grunt.file.read( options.readmeFile );
-			// let changelogIn = grunt.file.read( "./.tmp/change_in_log.md" );
+			// premium header:
+			// ### 15.9: February 23rd, 2021
+			
+			// free header:
+			// = 15.7 =
+			// Release Date: January 26th, 2021
 
-			const releaseInChangelog = /[=] \d+\.\d+(\.\d+)? =/g;
+			var releaseInChangelog = "/[=] \d+\.\d+(\.\d+)? =/g";
+			
+			
 			const allReleasesInChangelog = changelog.match( releaseInChangelog );
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )

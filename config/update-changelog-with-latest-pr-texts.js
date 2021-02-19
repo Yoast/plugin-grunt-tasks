@@ -10,7 +10,7 @@ module.exports = {
 	},
 	"wordpress-seo-premium": {
 		options: {
-			readmeFile: "./changelog.MD",
+			readmeFile: "./changelog.md",
 		},
 	},
 	
