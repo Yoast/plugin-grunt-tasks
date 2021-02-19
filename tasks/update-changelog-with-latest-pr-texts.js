@@ -52,6 +52,7 @@ class ChangelogBuilder {
 	
 
 	parseChancelogLines(changelogIn){
+		this.grunt.verbose(changelogIn);
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		parts.forEach(this.addLinesPerHeader.bind(this));
 	};
@@ -224,8 +225,6 @@ module.exports = function( grunt ) {
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
-			console.log("na match");
-			console.log(allReleasesInChangelog);
 			// Check if the current version already exists in the changelog.
 			const containsCurrentVersion = ! _isEmpty(
 				changelogVersions.filter( version => {
@@ -274,8 +273,7 @@ module.exports = function( grunt ) {
 			}
 
 			const changelogBuilder = new ChangelogBuilder(grunt, null , options.useEditDistanceComapair);
-			// changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/change_in_log.md" ) );
-
+			
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {
 				// get the changelog entry's for the current version from the readme.
