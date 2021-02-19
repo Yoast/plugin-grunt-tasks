@@ -283,7 +283,7 @@ module.exports = function( grunt ) {
 				
 				if (options.readmeFile === "./changelog.md") {
 					matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
-					matchCorrectHeader = "### " + changelogVersionNumber + "(.)*?(?=(\\n))"
+					matchCorrectHeader = "### " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\w\:\\n))"
 				}
 				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
 				var currentChangelogEntries = "";
