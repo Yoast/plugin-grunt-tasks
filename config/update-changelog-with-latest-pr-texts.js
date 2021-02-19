@@ -5,12 +5,12 @@ module.exports = {
 	},
 	"wordpress-seo": {
 		options: {
-			readmePath: "readme.txt",
+			readmeFile: "./readme.txt",
 		},
 	},
 	"wordpress-seo-premium": {
 		options: {
-			readmePath: "changelog.MD",
+			readmeFile: "./changelog.MD",
 		},
 	},
 	

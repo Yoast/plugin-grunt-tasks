@@ -210,7 +210,7 @@ module.exports = function( grunt ) {
 			})
 			const format = (number) => `${number}${suffixes[pr.select(number)]}`
 
-			let changelog = grunt.file.read( "./readme.txt" );
+			let changelog = grunt.file.read( options.readmeFile );
 			// let changelogIn = grunt.file.read( "./.tmp/change_in_log.md" );
 
 			const releaseInChangelog = /[=] \d+\.\d+(\.\d+)? =/g;
@@ -260,7 +260,7 @@ module.exports = function( grunt ) {
 					grunt.option( "changelog", changelog );
 
 					// Write changes to the file.
-					grunt.file.write( "./readme.txt", changelog );
+					grunt.file.write( options.readmeFile, changelog );
 				}
 			}
 
@@ -298,7 +298,7 @@ module.exports = function( grunt ) {
 
 				
 				// Write changes to the file.
-				grunt.file.write( "./readme.txt", mergedReadme );
+				grunt.file.write( options.readmeFile, mergedReadme );
 				done();
 			
 			} else {
@@ -325,13 +325,13 @@ module.exports = function( grunt ) {
 				// Add the changelog, behind the == Changelog == header.
 				changelog = changelog.replace( /[=]= Changelog ==/ig, "== Changelog ==\n\n" + newChangelog.trim() );
 				// Write changes to the file.
-				grunt.file.write( "./readme.txt", changelog );
+				grunt.file.write( options.readmeFile, changelog );
 				done();
 				
 			}
 
 			// // Stage the changed readme.txt.
-			// grunt.config( "gitadd.addChangelog.files", { src: [ "./readme.txt" ] } );
+			// grunt.config( "gitadd.addChangelog.files", { src: [ options.readmeFile ] } );
 			// grunt.task.run( "gitadd:addChangelog" );
 
 			// // Check if there is something to commit with `git status` first.
