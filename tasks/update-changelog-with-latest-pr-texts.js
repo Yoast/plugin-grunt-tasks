@@ -217,9 +217,6 @@ module.exports = function( grunt ) {
 			// = 15.7 =
 			// Release Date: January 26th, 2021
 
-			//var releaseInChangelog = "/[=] \d+\.\d+(\.\d+)? =/g";
-			
-			
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
@@ -235,6 +232,8 @@ module.exports = function( grunt ) {
 					);
 				} )
 			);
+
+			console.log("match:" + containsCurrentVersion);
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
