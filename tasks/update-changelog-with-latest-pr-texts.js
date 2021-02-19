@@ -52,7 +52,7 @@ class ChangelogBuilder {
 	
 
 	parseChancelogLines(changelogIn){
-		this.grunt.verbose(changelogIn);
+		this.grunt.verbose.writeln(changelogIn);
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		parts.forEach(this.addLinesPerHeader.bind(this));
 	};
