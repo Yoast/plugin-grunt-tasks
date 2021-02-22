@@ -93,6 +93,7 @@ class ChangelogBuilder {
 		if (this.ChangelogMap.has('Other:')) {
 			newlines = newlines + "Other:\n" + line + this.ChangelogMap.get('Other:').items.join("\n") + "\n\n" ;
 		};
+		console.log(".>" + newlines + "<.")
 		return newlines
 	};
 }
