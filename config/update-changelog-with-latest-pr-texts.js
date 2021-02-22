@@ -7,7 +7,7 @@ module.exports = {
 		options: {
 			readmeFile: "./readme.txt",
 			releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
-			matchChangelogHeader:  /[=]= Changelog ==/ig,
+			matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
 			newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
 			matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n))",
 			matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
