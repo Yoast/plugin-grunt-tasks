@@ -241,7 +241,7 @@ module.exports = function( grunt ) {
 				} )
 			);
 
-			console.log("match:" + containsCurrentVersion);
+			//console.log("match:" + containsCurrentVersion);
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
@@ -253,8 +253,8 @@ module.exports = function( grunt ) {
 					// If there are only multiple minor versions of the same major version, remove all entries from the oldest minor version.
 					const lowestMinor = Math.min( ...changelogVersions.map( version => version.minor ) );
 					const lowestVersion = `${lowestMajor}.${lowestMinor}`;
-					const matchCleanedChangelog = options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ));
-					console.log(matchCleanedChangelog);
+					// const matchCleanedChangelog = options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ));
+					// console.log(matchCleanedChangelog);
 					cleanedChangelog = changelog.replace(
 						new RegExp( options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion )) ),
 						options.replaceCleanedChangelog
@@ -342,7 +342,7 @@ module.exports = function( grunt ) {
 				const datestring = `${mo} ${format(da)}, ${ye}`
 				const newChangelog = `= ${changelogVersionNumber} =\nRelease Date: ${datestring}\n${changelogBuilder.cleanChangelog}`
 				// Add the changelog, behind the == Changelog == header.
-				changelog = changelog.replace( /[=]= Changelog ==/ig, "== Changelog ==\n\n" + newChangelog.trim() );
+				changelog = changelog.replace( options.matchChangelogHeader, "== Changelog ==\n\n" + newChangelog.trim() );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );
 				done();
