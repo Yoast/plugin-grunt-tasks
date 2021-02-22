@@ -77,10 +77,9 @@ class ChangelogBuilder {
 	get cleanChangelog(){
 		var newlines = ""
 		const line = this.useANewLineAfterHeader ? "\n" : "";
-		console.log (">" + line + "<" ); 
 		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
-			newlines = "\nEnhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n");
+			newlines = line + "Enhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n");
 		};
 		if (this.ChangelogMap.has('Bugfixes:')) {
 			newlines = newlines + "\n\nBugfixes:\n" + line + this.ChangelogMap.get('Bugfixes:').items.join("\n");
@@ -343,7 +342,7 @@ module.exports = function( grunt ) {
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
-				//const newChangelog = `= ${changelogVersionNumber} =\nRelease Date: ${datestring}\n${changelogBuilder.cleanChangelog}`
+				
 				// Add the changelog, behind the == Changelog == header.
 				console.log(newChangelog );
 				changelog = changelog.replace( options.matchChangelogHeader, newChangelog );
