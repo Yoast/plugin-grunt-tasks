@@ -241,7 +241,7 @@ module.exports = function( grunt ) {
 				} )
 			);
 
-			//console.log("match:" + containsCurrentVersion);
+			console.log("match:" + containsCurrentVersion);
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
