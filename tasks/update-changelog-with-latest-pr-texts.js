@@ -68,8 +68,6 @@ class ChangelogBuilder {
 		changelogIn = changelogIn.replace( new RegExp( "\\W\\[#\\d+\\]\\(https://github.com/Yoast/.+?/pull/\\d+\\)" , "gm" ),
 		""
 		);
-		console.log(changelogIn);
-
 		this.parseChancelogLines(changelogIn)
 	};
 
@@ -77,7 +75,6 @@ class ChangelogBuilder {
 	get cleanChangelog(){
 		var newlines = ""
 		const line = this.useANewLineAfterHeader ? "\n" : "";
-		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
 			newlines = "Enhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n") + "\n\n"  ;
 		};
@@ -85,7 +82,6 @@ class ChangelogBuilder {
 			newlines = newlines + "Bugfixes:\n" + line + this.ChangelogMap.get('Bugfixes:').items.join("\n") + "\n\n" ;
 		};
 		this.ChangelogMap.forEach(function (value, key, map) {
-			//console.log(`map.get('${key}') = ${value}`);
 			if (!(key === 'Enhancements:' || key === 'Bugfixes:' || key === 'Non user facing:' || key === 'Other:' )) {
 				newlines = newlines +  key + "\n" + line + this.ChangelogMap.get(key).items.join("\n") + "\n\n" ;
 			};
@@ -93,7 +89,6 @@ class ChangelogBuilder {
 		if (this.ChangelogMap.has('Other:')) {
 			newlines = newlines + "Other:\n" + line + this.ChangelogMap.get('Other:').items.join("\n") + "\n\n" ;
 		};
-		console.log(".>" + newlines + "<.")
 		return newlines
 	};
 }
@@ -215,18 +210,8 @@ module.exports = function( grunt ) {
 			})
 			const format = (number) => `${number}${suffixes[pr.select(number)]}`
 
-
 			let changelog = grunt.file.read( options.readmeFile );
-			// premium header:
-			// ### 15.9: February 23rd, 2021
-			
-			// free header:
-			// = 15.7 =
-			// Release Date: January 26th, 2021
-
-			
 			const allReleasesInChangelog = changelog.match( options.releaseInChangelog );
-			//console.log(allReleasesInChangelog)
 			const changelogVersions = allReleasesInChangelog.map(
 				element => parseVersion( element.slice( 2, element.length - 2 ) )
 			);
@@ -241,7 +226,7 @@ module.exports = function( grunt ) {
 				} )
 			);
 
-			//console.log("match:" + containsCurrentVersion);
+			
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
@@ -253,8 +238,6 @@ module.exports = function( grunt ) {
 					// If there are only multiple minor versions of the same major version, remove all entries from the oldest minor version.
 					const lowestMinor = Math.min( ...changelogVersions.map( version => version.minor ) );
 					const lowestVersion = `${lowestMajor}.${lowestMinor}`;
-					// const matchCleanedChangelog = options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ));
-					// console.log(matchCleanedChangelog);
 					cleanedChangelog = changelog.replace(
 						new RegExp( options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion )) ),
 						options.replaceCleanedChangelog
@@ -293,8 +276,7 @@ module.exports = function( grunt ) {
 				if (currentChangelogEntriesMatches) {
 					currentChangelogEntries = `${currentChangelogEntriesMatches[0]}`;
 				};
-				//console.log(currentChangelogEntries);
-
+				
 				// get the header from the changelog entry's
 
 				const currentChangelogEntriesHeaderMatches = changelog.match(new RegExp( matchCorrectHeader,  ))
@@ -302,15 +284,13 @@ module.exports = function( grunt ) {
 				if (currentChangelogEntriesHeaderMatches){
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
 				}
-				//console.log(currentChangelogEntriesHeader)
+				
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
 				
-				console.log(":>" + currentChangelogEntries + "<:")
-			
-				// create uniyoe linses using class ChangelogBuilder
+				// create unique linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion+ ".md" ) );
-				//console.log(changelogBuilder.Changelog)
+				
 				
 				// pul all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntries)),  "\n" + changelogBuilder.cleanChangelog )
@@ -345,7 +325,6 @@ module.exports = function( grunt ) {
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
 				
 				// Add the changelog, behind the == Changelog == header.
-				console.log("?>" + newChangelog + "<?" );
 				changelog = changelog.replace( options.matchChangelogHeader, newChangelog );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );

@@ -5,6 +5,9 @@ module.exports = {
 	},
 	"wordpress-seo": {
 		options: {
+			// free header:
+			// = 15.7 =
+			// Release Date: January 26th, 2021
 			readmeFile: "./readme.txt",
 			releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
 			matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
@@ -19,6 +22,8 @@ module.exports = {
 	},
 	"wordpress-seo-premium": {
 		options: {
+			// premium header:
+			// ### 15.9: February 23rd, 2021
 			readmeFile: "./changelog.md",
 			releaseInChangelog: /[#] \d+\.\d+(\.\d+)?\: /g,
 			matchChangelogHeader:  /^/ig,
