@@ -342,6 +342,7 @@ module.exports = function( grunt ) {
 				const datestring = `${mo} ${format(da)}, ${ye}`
 				const newChangelog = `= ${changelogVersionNumber} =\nRelease Date: ${datestring}\n${changelogBuilder.cleanChangelog}`
 				// Add the changelog, behind the == Changelog == header.
+				console.log(newChangelog );
 				changelog = changelog.replace( options.matchChangelogHeader, "== Changelog ==\n\n" + newChangelog.trim() );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );
