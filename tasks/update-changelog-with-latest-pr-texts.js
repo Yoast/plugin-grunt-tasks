@@ -57,7 +57,7 @@ class ChangelogBuilder {
 		this.grunt.verbose.writeln(changelogIn);
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		console.log(parts.length > 2 )
-		if (parts) { 
+		if (parts.length > 2 ) { 
 			parts.forEach(this.addLinesPerHeader.bind(this));
 		}
 	};
