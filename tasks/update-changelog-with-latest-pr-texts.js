@@ -108,11 +108,13 @@ class Unique {
 		};
 	};
 	append(newItems) {
-	  newItems.forEach(function(newItem) {
-		if (!this.items.includes(newItem)) {
-		  this.items.push(newItem);
-		};
-	  }, this);    
+		if (newItems) {
+			newItems.forEach(function(newItem) {
+				if (!this.items.includes(newItem)) {
+				this.items.push(newItem);
+				};
+			}, this);    
+		}
 	};
 	test() {
 		var toBeRemoved = new Array();
