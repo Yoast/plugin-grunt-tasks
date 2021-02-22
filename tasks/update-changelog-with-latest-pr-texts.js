@@ -54,8 +54,8 @@ class ChangelogBuilder {
 	
 
 	parseChancelogLines(changelogIn){
-		this.grunt.verbose.writeln("in: [" +changelogIn "]");
-		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
+		this.grunt.verbose.writeln("in: [" +changelogIn + "]");
+		const parts = changelogIn.match(new RegExp( "(\n|^)[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		// make sure there are foreach items
 		if (parts){
 			if (parts.length > 0 ) { 
