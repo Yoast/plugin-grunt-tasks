@@ -331,6 +331,8 @@ module.exports = function( grunt ) {
 				const da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
 				const datestring = `${mo} ${format(da)}, ${ye}`
 
+				changelogBuilder.parseChancelogLines(options.DefaultOther.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber )));
+
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
 				
