@@ -57,6 +57,7 @@ class ChangelogBuilder {
 		this.grunt.verbose.writeln(changelogIn);
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		console.log(parts.length > 2 )
+		// make sure there are foreach items
 		if (parts.length > 2 ) { 
 			parts.forEach(this.addLinesPerHeader.bind(this));
 		}
@@ -288,6 +289,8 @@ module.exports = function( grunt ) {
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
 				}
 				
+				console.log(">" + currentChangelogEntriesHeader + "<" );
+
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
 				
 				// create unique linses using class ChangelogBuilder
