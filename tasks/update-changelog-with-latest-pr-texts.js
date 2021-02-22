@@ -342,7 +342,7 @@ module.exports = function( grunt ) {
 				const datestring = `${mo} ${format(da)}, ${ye}`
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
-				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring)
+				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
 				//const newChangelog = `= ${changelogVersionNumber} =\nRelease Date: ${datestring}\n${changelogBuilder.cleanChangelog}`
 				// Add the changelog, behind the == Changelog == header.
 				console.log(newChangelog );
