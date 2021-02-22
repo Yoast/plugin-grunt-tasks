@@ -291,17 +291,17 @@ module.exports = function( grunt ) {
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
 				}
 				
-				console.log(">" + currentChangelogEntriesHeader + "<" );
+				//console.log(">" + currentChangelogEntriesHeader + "<" );
 
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
 				
-				console.log("+>" + currentChangelogEntries + "<+" );
+				//console.log("+>" + currentChangelogEntries + "<+" );
 
 				// create unique linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion+ ".md" ) );
 				
-				console.log("?>" + changelogBuilder.cleanChangelog + "<?")
+				//console.log("?>" + changelogBuilder.cleanChangelog + "<?")
 
 				// put all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader  + changelogBuilder.cleanChangelog )
@@ -332,9 +332,9 @@ module.exports = function( grunt ) {
 				const da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
 				const datestring = `${mo} ${format(da)}, ${ye}`
 
-				const defaultChangelogEntrys= options.defaultChangelogEntrys.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ))
+				
 
-				changelogBuilder.parseChancelogLines(defaultChangelogEntrys);
+				changelogBuilder.parseChancelogLines(defaultChangelogEntrys= options.defaultChangelogEntrys.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ));
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
