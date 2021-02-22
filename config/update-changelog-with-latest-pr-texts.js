@@ -20,7 +20,7 @@ module.exports = {
 		options: {
 			readmeFile: "./changelog.md",
 			releaseInChangelog: /[#] \d+\.\d+(\.\d+)?\: /g,
-			matchChangelogHeader:  /^/,
+			matchChangelogHeader:  /^/ig,
 			matchCorrectLines: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))",
 			matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n))",
 			matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
