@@ -283,13 +283,16 @@ module.exports = function( grunt ) {
 			if ( containsCurrentVersion ) {
 				// get the changelog entry's for the current version from the readme.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
-				var matchCorrectHeader = "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))"
-				var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
+				const matchCorrectHeader =  options.matchCorrectHeader.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ));
+				const matchCorrectLines = options.matchCorrectLines.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ));				
+
+				// var matchCorrectHeader = "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))"
+				// var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
 				
-				if (options.readmeFile === "./changelog.md") {
-					matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
-					matchCorrectHeader = "### " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\w\+?:\\n))"
-				}
+				// if (options.readmeFile === "./changelog.md") {
+				// 	matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
+				// 	matchCorrectHeader = "### " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\w\+?:\\n))"
+				// }
 				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
 				var currentChangelogEntries = "";
 				if (currentChangelogEntriesMatches) {
