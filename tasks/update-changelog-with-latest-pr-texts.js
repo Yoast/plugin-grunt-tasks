@@ -61,7 +61,7 @@ class ChangelogBuilder {
 			if (parts.length > 2 ) { 
 				parts.forEach(this.addLinesPerHeader.bind(this));
 			}
-	}
+		}
 	};
 	
 	parseYoastCliGeneratedChangelog(changelogIn){
@@ -302,7 +302,7 @@ module.exports = function( grunt ) {
 				
 				
 				// pul all parts togethor agian
-				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntries)),  "\n" + changelogBuilder.cleanChangelog )
+				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader + "\n" + changelogBuilder.cleanChangelog )
 
 				
 				// Write changes to the file.
