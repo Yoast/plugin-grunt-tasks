@@ -253,16 +253,16 @@ module.exports = function( grunt ) {
 					// If there are only multiple minor versions of the same major version, remove all entries from the oldest minor version.
 					const lowestMinor = Math.min( ...changelogVersions.map( version => version.minor ) );
 					const lowestVersion = `${lowestMajor}.${lowestMinor}`;
-					const matchCleanedChangelog = options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion )));
+					const matchCleanedChangelog = options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ));
 					console.log(matchCleanedChangelog);
 					cleanedChangelog = changelog.replace(
-						new RegExp( options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ))) ),
+						new RegExp( options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion )) ),
 						options.replaceCleanedChangelog
 					);
 				} else {
 					// If there are multiple major versions in the changelog, remove all entries from the oldest major version.
 					cleanedChangelog = changelog.replace(
-						new RegExp( options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp( lowestMajor ))) ),
+						new RegExp( options.matchCleanedChangelog.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp( lowestMajor )) ),
 						options.replaceCleanedChangelog
 					);
 				}
