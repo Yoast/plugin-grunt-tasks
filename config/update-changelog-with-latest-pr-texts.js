@@ -12,7 +12,7 @@ module.exports = {
 			releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
 			matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
 			newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
-			matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n))",
+			matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
 			matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
 			matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
 			replaceCleanedChangelog: "= Earlier versions =",
