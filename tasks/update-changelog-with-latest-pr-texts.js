@@ -79,7 +79,7 @@ class ChangelogBuilder {
 		const line = this.useANewLineAfterHeader ? "\n" : "";
 		//console.log((this.ChangelogMap.has('Enhancements:')))
 		if (this.ChangelogMap.has('Enhancements:')) {
-			newlines = line + "Enhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n");
+			newlines = "Enhancements:\n" + line  + this.ChangelogMap.get('Enhancements:').items.join("\n");
 		};
 		if (this.ChangelogMap.has('Bugfixes:')) {
 			newlines = newlines + "\n\nBugfixes:\n" + line + this.ChangelogMap.get('Bugfixes:').items.join("\n");
