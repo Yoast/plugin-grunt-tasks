@@ -29,7 +29,7 @@ module.exports = {
 			matchChangelogHeader:  /^/ig,
 			newHeadertemplate: "### " + "VERSIONNUMBER" + ": " + "DATESTRING"  + "\n",
 			matchCorrectLines: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))",
-			matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n))",
+			matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(\\n\\w\+?:\\n|\\n### \\d+[\.\\d]+\: |$))",
 			matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
 			replaceCleanedChangelog: "",
 			pluginSlug: "wordpress-seo-premium",
