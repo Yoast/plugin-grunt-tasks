@@ -333,7 +333,7 @@ module.exports = function( grunt ) {
 
 				const defaultChangelogEntrys= options.defaultChangelogEntrys.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ))
 
-				//changelogBuilder.parseChancelogLines(defaultChangelogEntrys);
+				changelogBuilder.parseChancelogLines(defaultChangelogEntrys);
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
