@@ -58,7 +58,7 @@ class ChangelogBuilder {
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		// make sure there are foreach items
 		if (parts){
-			if (parts.length > 1 ) { 
+			if (parts.length > 0 ) { 
 				parts.forEach(this.addLinesPerHeader.bind(this));
 			}
 		}
@@ -331,7 +331,9 @@ module.exports = function( grunt ) {
 				const da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
 				const datestring = `${mo} ${format(da)}, ${ye}`
 
-				changelogBuilder.parseChancelogLines(options.DefaultOther.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber )));
+				const defaultChangelogEntrys= options.defaultChangelogEntrys.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ))
+
+				//changelogBuilder.parseChancelogLines(defaultChangelogEntrys);
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
