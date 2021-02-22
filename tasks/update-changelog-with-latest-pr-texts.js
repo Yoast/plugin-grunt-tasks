@@ -253,15 +253,16 @@ module.exports = function( grunt ) {
 					// If there are only multiple minor versions of the same major version, remove all entries from the oldest minor version.
 					const lowestMinor = Math.min( ...changelogVersions.map( version => version.minor ) );
 					const lowestVersion = `${lowestMajor}.${lowestMinor}`;
+					const matchCleanedChangelog = options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion )))
 					cleanedChangelog = changelog.replace(
-						new RegExp( "= " + lowestVersion + "(.|\\n)*= Earlier versions =" ),
-						"= Earlier versions ="
+						new RegExp( options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp(lowestVersion ))) ),
+						options.replaceCleanedChangelog
 					);
 				} else {
 					// If there are multiple major versions in the changelog, remove all entries from the oldest major version.
 					cleanedChangelog = changelog.replace(
-						new RegExp( "= " + lowestMajor + "(.|\\n)*= Earlier versions =" ),
-						"= Earlier versions ="
+						new RegExp( options.matchCleanedChangelog.replace((new RegExp( "VERSIONNUMBER" ), escapeRegExp( lowestMajor ))) ),
+						options.replaceCleanedChangelog
 					);
 				}
 
@@ -285,15 +286,8 @@ module.exports = function( grunt ) {
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 				const matchCorrectHeader =  options.matchCorrectHeader.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ));
 				const matchCorrectLines = options.matchCorrectLines.replace(new RegExp( "VERSIONNUMBER" ), escapeRegExp(changelogVersionNumber ));				
-
-				// var matchCorrectHeader = "= " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\n))"
-				// var matchCorrectLines = "= " + changelogVersionNumber + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))"
-				
-				// if (options.readmeFile === "./changelog.md") {
-				// 	matchCorrectLines = "### " + changelogVersionNumber + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))"
-				// 	matchCorrectHeader = "### " + changelogVersionNumber + "(.|\\n)*?(?=(\\n\\w\+?:\\n))"
-				// }
 				const currentChangelogEntriesMatches = changelog.match(new RegExp( matchCorrectLines,  ))
+
 				var currentChangelogEntries = "";
 				if (currentChangelogEntriesMatches) {
 					currentChangelogEntries = `${currentChangelogEntriesMatches[0]}`;
