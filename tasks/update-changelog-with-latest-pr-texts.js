@@ -312,7 +312,7 @@ module.exports = function( grunt ) {
 				//console.log(changelogBuilder.Changelog)
 				
 				// pul all parts togethor agian
-				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntries)),  "\n" + changelogBuilder.cleanChangelog + "\n\n")
+				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntries)),  "\n" + changelogBuilder.cleanChangelog )
 
 				
 				// Write changes to the file.
