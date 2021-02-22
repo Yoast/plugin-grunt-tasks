@@ -300,7 +300,8 @@ module.exports = function( grunt ) {
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion+ ".md" ) );
 				
-				
+				console.log("?>" + changelogBuilder.cleanChangelog + "<?")
+
 				// pul all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader + "\n" + changelogBuilder.cleanChangelog )
 
