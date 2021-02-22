@@ -345,7 +345,7 @@ module.exports = function( grunt ) {
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
 				
 				// Add the changelog, behind the == Changelog == header.
-				console.log(newChangelog );
+				console.log("?>" + newChangelog + "<?" );
 				changelog = changelog.replace( options.matchChangelogHeader, newChangelog );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );
