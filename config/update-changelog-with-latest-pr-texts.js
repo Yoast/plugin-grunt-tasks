@@ -34,7 +34,7 @@ module.exports = {
 			matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
 			replaceCleanedChangelog: "",
 			pluginSlug: "wordpress-seo-premium",
-			defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).",
+			defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 			useANewLineAfterHeader: false,
 		},
 	},
