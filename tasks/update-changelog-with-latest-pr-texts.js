@@ -58,7 +58,7 @@ class ChangelogBuilder {
 		const parts = changelogIn.match(new RegExp( "\n[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
 		// make sure there are foreach items
 		if (parts){
-			if (parts.length > 2 ) { 
+			if (parts.length > 1 ) { 
 				parts.forEach(this.addLinesPerHeader.bind(this));
 			}
 		}
@@ -302,7 +302,7 @@ module.exports = function( grunt ) {
 				
 				console.log("?>" + changelogBuilder.cleanChangelog + "<?")
 
-				// pul all parts togethor agian
+				// put all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader + "\n" + changelogBuilder.cleanChangelog )
 
 				
