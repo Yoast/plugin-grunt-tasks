@@ -3,4 +3,4 @@ npm-debug.log
 tmp
 package-lock.json
 yarn-error.log
-
+.tmp/

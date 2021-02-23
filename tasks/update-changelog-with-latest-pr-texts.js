@@ -56,7 +56,7 @@ class ChangelogBuilder {
 	parseChancelogLines(changelogIn){
 		this.grunt.verbose.writeln("in: [" +changelogIn + "]");
 		const parts = changelogIn.match(new RegExp( "(\n|^)[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ));
-		console.log(parts)
+		//console.log(parts)
 		// make sure there are foreach items
 		if (parts){
 			if (parts.length > 0 ) { 
@@ -293,17 +293,13 @@ module.exports = function( grunt ) {
 					currentChangelogEntriesHeader = `${currentChangelogEntriesHeaderMatches[0]}`
 				}
 				
-				//console.log(">" + currentChangelogEntriesHeader + "<" );
+				
 
 				currentChangelogEntries = currentChangelogEntries.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader)), "")
 				
-				//console.log("+>" + currentChangelogEntries + "<+" );
-
 				// create unique linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines(currentChangelogEntries)
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion+ ".md" ) );
-				
-				//console.log("?>" + changelogBuilder.cleanChangelog + "<?")
 
 				// put all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader  + changelogBuilder.cleanChangelog )
