@@ -203,6 +203,7 @@ module.exports = function( grunt ) {
 		function() {
 			let options = this.options( {
 				useEditDistanceComapair: false,
+				commitChangelog: false,
 			} );
 			const done = this.async();
 			const newVersion = grunt.option( "plugin-version" );
@@ -345,25 +346,28 @@ module.exports = function( grunt ) {
 				
 			}
 
-			// // Stage the changed readme.txt.
-			// grunt.config( "gitadd.addChangelog.files", { src: [ options.readmeFile ] } );
-			// grunt.task.run( "gitadd:addChangelog" );
+			if (options.commitChangelog) { 
 
-			// // Check if there is something to commit with `git status` first.
-			// grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
-			// 	// First character of the code checks the status in the index.
-			// 	const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === "readme.txt" );
+				// Stage the changed readme.txt.
+				grunt.config( "gitadd.addChangelog.files", { src: [ options.readmeFile ] } );
+				grunt.task.run( "gitadd:addChangelog" );
 
-			// 	if ( hasStagedChangelog ) {
-			// 		// Commit the changed readme.txt.
-			// 		grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog" );
-			// 		grunt.task.run( "gitcommit:commitChangelog" );
-			// 	} else {
-			// 		grunt.log.writeln( "Changelog is unchanged. Nothing to commit." );
-			// 	}
-			// } );
+				// Check if there is something to commit with `git status` first.
+				grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
+					// First character of the code checks the status in the index.
+					const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === "readme.txt" );
 
-			// grunt.task.run( "gitstatus:checkChangelog" );
+					if ( hasStagedChangelog ) {
+						// Commit the changed readme.txt.
+						grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog" );
+						grunt.task.run( "gitcommit:commitChangelog" );
+					} else {
+						grunt.log.writeln( "Changelog is unchanged. Nothing to commit." );
+					}
+				} );
+
+				grunt.task.run( "gitstatus:checkChangelog" );
+			}
 		}
 	);
 };

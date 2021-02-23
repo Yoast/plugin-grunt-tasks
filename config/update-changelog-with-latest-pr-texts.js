@@ -19,6 +19,7 @@ module.exports = {
 			pluginSlug: "wordpress-seo",
 			defaultChangelogEntrys: "",
 			useANewLineAfterHeader: true,
+			commitChangelog: true,
 		},
 	},
 	"wordpress-seo-premium": {
@@ -36,6 +37,7 @@ module.exports = {
 			pluginSlug: "wordpress-seo-premium",
 			defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 			useANewLineAfterHeader: false,
+			commitChangelog: true,
 		},
 	},
 	
