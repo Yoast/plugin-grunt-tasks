@@ -1946,7 +1946,7 @@ Default value: null
 
 Regexp to match the correct changelog section
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### matchChangelogHeader
 Type: `String`  
@@ -1954,7 +1954,7 @@ Default value: null
 
 Regexp to match the correct the header 
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### newHeadertemplate
 Type: `String`  
@@ -1962,7 +1962,7 @@ Default value: null
 
 Template used to create a new changelog header
 
-_Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values
+_Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values_
 
 ##### matchCorrectHeader
 Type: `String`  
@@ -1970,7 +1970,7 @@ Default value: null
 
 Regexp to match the correct Header in the  changelog section
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### matchCorrectLines
 Type: `String`  
@@ -1978,7 +1978,7 @@ Default value: null
 
 Regexp to match the correct lines in the changelog section
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### matchCleanedChangelog
 Type: `String`  
@@ -1986,7 +1986,7 @@ Default value: null
 
 Regexp to match the correct section a the cleaned (removed older entrys) changlog section
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### replaceCleanedChangelog
 Type: `String`  
@@ -2000,7 +2000,7 @@ Default value: '""'
 
 Optional value to add default entrys to a new created section.
 
-_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
 ##### useANewLineAfterHeader
 Type: `Boolean`  
