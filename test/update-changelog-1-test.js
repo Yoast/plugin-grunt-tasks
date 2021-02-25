@@ -51,6 +51,8 @@ exports.testChangeLog1Command = {
 					pluginSlug: "wordpress-seo",
 					defaultChangelogEntrys: "",
 					useANewLineAfterHeader: true,
+					useEditDistanceComapair: true,
+					commitChangelog: true,
 				},
 			},
 		} );
