@@ -52,7 +52,7 @@ exports.testChangeLog1Command = {
 					defaultChangelogEntrys: "",
 					useANewLineAfterHeader: true,
 					useEditDistanceComapair: true,
-					commitChangelog: true,
+					commitChangelog: false,
 				},
 			},
 		} );
