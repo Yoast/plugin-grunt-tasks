@@ -1890,6 +1890,92 @@ grunt.initConfig( {
 ```
 
 
+
+
+
+### The `update-changelog-with-latest-pr-texts` task
+#### Using our configuration
+We implement the following tasks:
+- `options`
+    - The `useEditDistanceComapair` value is set to `true`.
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+- `wordpress-seo`
+    - The `options.readmeFile` value is set to  `"./readme.txt"`.
+	- The `options.releaseInChangelog` value is set to `/[=] \d+\.\d+(\.\d+)? =/g`.
+    - The `options.matchChangelogHeader` value is set to `/[=]= Changelog ==\n\n/ig`.
+	- The `options.newHeadertemplate` value is set to `"== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n"`
+    - The `options.matchCorrectHeader`: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
+    - The `options.matchCorrectLines`: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
+    - The `options.matchCleanedChangelog`: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
+    - The `options.replaceCleanedChangelog`: "= Earlier versions =",
+    - The `options.pluginSlug`: "wordpress-seo",
+    - The `options.defaultChangelogEntrys`: "",
+    - The `options.useANewLineAfterHeader`: true,
+    - The `options.commitChangelog`: true,
+
+
+
+We add the following update-changelog-with-latest-pr-texts tasks:
+- `wordpress-seo`
+- `wordpress-seo-premium`
+
+#### Overview
+In your project's Gruntfile, add a section named `clean` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    clean: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+            src: {},     // Files to target.
+        }
+    }
+} )
+```
+
+#### Options
+##### force
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` allows the deletion of folders outside the current working dir (CWD). Use with caution.
+
+##### no-write
+Type: `Boolean`  
+Default: `false`
+
+Will not actually delete any files or directories.
+If the task is run with the `--verbose` flag, the task will log messages of what files would have be deleted.
+
+_Note: As this task property contains a hyphen, you will need to surround it with quotes._
+
+#### Usage Examples
+There are three formats you can use to run this task.
+
+##### Short
+```js
+clean: [ "path/to/dir/one", "path/to/dir/two" ]
+```
+
+##### Medium (specific targets with global options)
+```js
+clean: {
+    build: [ "path/to/dir/one", "path/to/dir/two" ],
+    release: [ "path/to/another/dir/one", "path/to/another/dir/two" ]
+},
+```
+
+##### Long (specific targets with per target options)
+```js
+clean: {
+    build: {
+        src: [ "path/to/dir/one", "path/to/dir/two" ]
+    }
+}
+```
+
+
+
 ## Release History
 
 ### 2.0.0

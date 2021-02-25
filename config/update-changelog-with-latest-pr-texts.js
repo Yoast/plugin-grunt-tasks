@@ -2,6 +2,7 @@
 module.exports = {
 	options: {
 		useEditDistanceComapair: true,
+		pluginSlug: "<%= pluginSlug %>",
 	},
 	"wordpress-seo": {
 		options: {
@@ -16,7 +17,6 @@ module.exports = {
 			matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
 			matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
 			replaceCleanedChangelog: "= Earlier versions =",
-			pluginSlug: "wordpress-seo",
 			defaultChangelogEntrys: "",
 			useANewLineAfterHeader: true,
 			commitChangelog: true,
@@ -34,7 +34,6 @@ module.exports = {
 			matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|### \\d+[\.\\d]+\: |$))",
 			matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
 			replaceCleanedChangelog: "",
-			pluginSlug: "wordpress-seo-premium",
 			defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 			useANewLineAfterHeader: false,
 			commitChangelog: true,
