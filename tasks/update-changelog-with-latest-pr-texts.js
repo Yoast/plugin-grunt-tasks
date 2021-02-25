@@ -355,7 +355,7 @@ module.exports = function( grunt ) {
 				// Check if there is something to commit with `git status` first.
 				grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
 					// First character of the code checks the status in the index.
-					const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === options.readmeFile );
+					const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === options.readmeFile.split("/")[options.readmeFile.split("/").length -1] );
 
 					if ( hasStagedChangelog ) {
 						// Commit the changed readme.txt.
