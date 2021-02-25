@@ -1,5 +1,9 @@
+const parseVersion = require( "../lib/parse-version" );
+const _isEmpty = require( "lodash/isEmpty" );
+const escapeRegExp = require("../lib/escape-regexp");
+
 /*********************
- * class for building a changelog entry
+ * class for building a merged changelog entry using multipe inputs
  * 
  * @method parseChancelogLines 
  * @param {Object} multiline string
@@ -8,7 +12,7 @@
  * @param {Object} multiline string
  * 
  * @get cleanChangelog
- * 
+ * @retruns {Object} multiline string
  * 
  */
 class ChangelogBuilder {
@@ -185,12 +189,7 @@ class Unique {
 
  }
 
-//const mergeChangeLog = require( "../lib/merge-changelog" );
-const parseVersion = require( "../lib/parse-version" );
-const _isEmpty = require( "lodash/isEmpty" );
-const escapeRegExp = require("../lib/escape-regexp");
-
-/**
+ /**
  * A task to remove old changelog entries and add new ones in changlog file..
  *
  * @param {Object} grunt The grunt helper object.
