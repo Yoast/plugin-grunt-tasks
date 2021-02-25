@@ -199,11 +199,13 @@ const _isEmpty = require( "lodash/isEmpty" );
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"update-changelog-with-latest-pr-texts",
-		"Prompts the user for the changelog entries and updates the readme.txt",
+		"Prompts the user for the changelog entries and updates the changelog entry in a file specified.",
 		function() {
 			let options = this.options( {
 				useEditDistanceComapair: false,
 				commitChangelog: false,
+				useANewLineAfterHeader: true,
+				defaultChangelogEntrys: '',
 			} );
 			const done = this.async();
 			const newVersion = grunt.option( "plugin-version" );

@@ -1900,6 +1900,10 @@ We implement the following tasks:
     - The `useEditDistanceComapair` value is set to `true`.
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
     - The `options.commitChangelog`: true,
+
+
+
+
 - `wordpress-seo`
     - The `options.readmeFile` value is set to  `"./readme.txt"`.
 	- The `options.releaseInChangelog` value is set to `/[=] \d+\.\d+(\.\d+)? =/g`.
@@ -1915,16 +1919,11 @@ We implement the following tasks:
     - The `options.commitChangelog`: true,
 
 
-
-We add the following update-changelog-with-latest-pr-texts tasks:
-- `wordpress-seo`
-- `wordpress-seo-premium`
-
 #### Overview
-In your project's Gruntfile, add a section named `clean` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
 ```js
 grunt.initConfig( {
-    clean: {
+    update-changelog-with-latest-pr-texts: {
         options: {},     // Global options.
         taskName: {      // The name of your task.
             options: {}, // Task-specific options.
@@ -1935,6 +1934,55 @@ grunt.initConfig( {
 ```
 
 #### Options
+##### useEditDistanceComapair
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` allows the deletion duplicate line items with a Distance Comapair valu higher than 90.
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+
+##### commitChangelog
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` will commit the changes made to be commit to git.
+
+##### options.readmeFile
+##### options.releaseInChangelog
+##### options.matchChangelogHeader
+##### options.newHeadertemplate
+##### options.matchCorrectHeader
+##### options.matchCorrectLines
+##### options.matchCleanedChangelog
+##### options.replaceCleanedChangelog
+##### options.defaultChangelogEntrys
+
+##### options.useANewLineAfterHeader
+Type: `Boolean`  
+Default: `true`
+
+Setting this will effect the format of the resulting changelog.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##### force
 Type: `Boolean`  
 Default: `false`
