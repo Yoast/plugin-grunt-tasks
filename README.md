@@ -2058,7 +2058,7 @@ Default value: ``
 
 ##### Usages Example
 ```js
-get-with-latest-pr-texts: {
+get-latest-pr-texts: {
     "wordpress-seo": {
         options: {
             pluginSlug: "wordpress-seo",
