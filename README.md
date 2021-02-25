@@ -1902,23 +1902,6 @@ We implement the following tasks:
     - The `options.commitChangelog`: true,
 
 
-
-
-- `wordpress-seo`
-    - The `options.readmeFile` value is set to  `"./readme.txt"`.
-	- The `options.releaseInChangelog` value is set to `/[=] \d+\.\d+(\.\d+)? =/g`.
-    - The `options.matchChangelogHeader` value is set to `/[=]= Changelog ==\n\n/ig`.
-	- The `options.newHeadertemplate` value is set to `"== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n"`
-    - The `options.matchCorrectHeader`: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
-    - The `options.matchCorrectLines`: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
-    - The `options.matchCleanedChangelog`: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
-    - The `options.replaceCleanedChangelog`: "= Earlier versions =",
-    - The `options.pluginSlug`: "wordpress-seo",
-    - The `options.defaultChangelogEntrys`: "",
-    - The `options.useANewLineAfterHeader`: true,
-    - The `options.commitChangelog`: true,
-
-
 #### Overview
 In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
 ```js
@@ -2025,7 +2008,7 @@ Default: `true`
 
 Setting this will effect the format of the resulting changelog.
 
-##### Long (specific targets with per target options)
+##### Usages Example
 ```js
 update-changelog-with-latest-pr-texts: {
     "wordpress-seo": {
@@ -2048,6 +2031,41 @@ update-changelog-with-latest-pr-texts: {
 }
 ```
 
+### The `get-latest-pr-texts` task
+this is a support task for the `update-changelog-with-latest-pr-texts` task
+
+#### Using our configuration
+We implement the following tasks:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    
+#### Overview
+In your project's Gruntfile, add a section named `get-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### Usages Example
+```js
+get-with-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
 
 
 ## Release History
