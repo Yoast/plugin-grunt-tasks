@@ -1951,75 +1951,100 @@ Default: `false`
 
 Setting this to `true` will commit the changes made to be commit to git.
 
-##### options.readmeFile
-##### options.releaseInChangelog
-##### options.matchChangelogHeader
-##### options.newHeadertemplate
-##### options.matchCorrectHeader
-##### options.matchCorrectLines
-##### options.matchCleanedChangelog
-##### options.replaceCleanedChangelog
-##### options.defaultChangelogEntrys
+##### readmeFile
+Type: `String`  
+Default value: null
 
-##### options.useANewLineAfterHeader
+The source and destination file to update the changelog section in.
+
+##### releaseInChangelog
+Type: `String`  
+Default value: null
+
+Regexp to match the correct changelog section
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### matchChangelogHeader
+Type: `String`  
+Default value: null
+
+Regexp to match the correct the header 
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### newHeadertemplate
+Type: `String`  
+Default value: null
+
+Template used to create a new changelog header
+
+_Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values
+
+##### matchCorrectHeader
+Type: `String`  
+Default value: null
+
+Regexp to match the correct Header in the  changelog section
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### matchCorrectLines
+Type: `String`  
+Default value: null
+
+Regexp to match the correct lines in the changelog section
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### matchCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regexp to match the correct section a the cleaned (removed older entrys) changlog section
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### replaceCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regexp to match the correct used to replace the cleaned (removed older entrys) changlog section with the new.
+
+##### defaultChangelogEntrys
+Type: `String`  
+Default value: '""'
+
+Optional value to add default entrys to a new created section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value
+
+##### useANewLineAfterHeader
 Type: `Boolean`  
 Default: `true`
 
 Setting this will effect the format of the resulting changelog.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### force
-Type: `Boolean`  
-Default: `false`
-
-Setting this to `true` allows the deletion of folders outside the current working dir (CWD). Use with caution.
-
-##### no-write
-Type: `Boolean`  
-Default: `false`
-
-Will not actually delete any files or directories.
-If the task is run with the `--verbose` flag, the task will log messages of what files would have be deleted.
-
-_Note: As this task property contains a hyphen, you will need to surround it with quotes._
-
-#### Usage Examples
-There are three formats you can use to run this task.
-
-##### Short
-```js
-clean: [ "path/to/dir/one", "path/to/dir/two" ]
-```
-
-##### Medium (specific targets with global options)
-```js
-clean: {
-    build: [ "path/to/dir/one", "path/to/dir/two" ],
-    release: [ "path/to/another/dir/one", "path/to/another/dir/two" ]
-},
-```
-
 ##### Long (specific targets with per target options)
 ```js
-clean: {
-    build: {
-        src: [ "path/to/dir/one", "path/to/dir/two" ]
-    }
+update-changelog-with-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            readmeFile: "./readme.txt",
+            releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
+            matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
+            newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
+            matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
+            replaceCleanedChangelog: "= Earlier versions =",
+            pluginSlug: "wordpress-seo",
+            defaultChangelogEntrys: "",
+            useANewLineAfterHeader: true,
+            useEditDistanceComapair: true,
+            commitChangelog: false,
+        },
+    },
 }
 ```
 
