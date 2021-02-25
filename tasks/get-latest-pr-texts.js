@@ -1,5 +1,5 @@
 /**
- * A task to remove old changelog entries and add new ones in changlog file..
+ * A task to create a file with the lates PR texts using wiki yoast-cli
  *
  * @param {Object} grunt The grunt helper object.
  * @returns {void}
@@ -10,7 +10,7 @@
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"get-latest-pr-texts",
-		"",
+		"A task to create a file with the lates PR texts using wiki yoast-cli",
 		function() {
 			let options = this.options( { 
 				pluginSlug: "",
