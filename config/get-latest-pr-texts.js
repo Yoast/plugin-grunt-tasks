@@ -1,6 +1,7 @@
 module.exports = {
-	options: {
-		pluginSlug: "<%= pluginSlug %>",
+	default: {
+		options: {
+			pluginSlug: "<%= pluginSlug %>",
+		},
 	},
-	
 };
