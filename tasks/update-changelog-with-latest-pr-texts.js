@@ -1,5 +1,3 @@
-// "use strict";
-
 /**
  * escapes a string so it can be use as a regual expression.
  *
@@ -36,7 +34,7 @@ class ChangelogBuilder {
 			this.parseChancelogLines(changelogIn);
 		};
 	}
-	
+	// should be private but this breaks on ubuntu for some strange reason
 	addLinesPerHeader(value, index, array) {
 		const key = `${value.match(new RegExp(  "[ a-zA-Z]+:" ))}`;
 		const lines = value.match(new RegExp( "(?<=\n)\\*([\n]|.)+?(?=\Z|\n\n|\n\\*|\n$)", "gm" ));
@@ -48,7 +46,7 @@ class ChangelogBuilder {
 			this.ChangelogMap.set(key, uniqueLines);
 		};
 		if (this.useEditDistanceComapair) {
-			this.ChangelogMap.get(key).test();
+			this.ChangelogMap.get(key).applyEditdistanceFilter();
 		};
 	};
 	
@@ -99,6 +97,19 @@ class ChangelogBuilder {
 	};
 }
 
+/*********************
+ * class for building unigue line items 
+ * 
+ * @method append 
+ * @param {Object} array of strings
+ * 
+ * @method applyEditdistanceFilter
+ * 
+ * 
+ * @get cleanChangelog
+ * 
+ * 
+ */
 class Unique {
 	constructor(grunt, items) {
 		this.items = new Array();
@@ -116,7 +127,7 @@ class Unique {
 			}, this);    
 		}
 	};
-	test() {
+	applyEditdistanceFilter() {
 		var toBeRemoved = new Array();
 		for (var i = 0; i<this.items.length; i++) {
 			var arrlen = this.items.length;
@@ -141,7 +152,7 @@ class Unique {
 		};
 		
 	};
-
+	// should be private but this breaks on ubuntu for some strange reason
 	similarity(s1, s2) {
 		var longer = s1;
 		var shorter = s2;
@@ -155,7 +166,7 @@ class Unique {
 		};
 		return (longerLength - this.editDistance(longer, shorter)) / parseFloat(longerLength);
 	  };
-	
+	// should be private but this breaks on ubuntu for some strange reason
 	editDistance(s1, s2) {
 		s1 = s1.toLowerCase();
 		s2 = s2.toLowerCase();
