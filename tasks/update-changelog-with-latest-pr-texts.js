@@ -305,7 +305,6 @@ module.exports = function( grunt ) {
 
 				// put all parts togethor agian
 				const mergedReadme = changelog.replace(new RegExp( escapeRegExp(currentChangelogEntriesHeader + currentChangelogEntries)),  currentChangelogEntriesHeader  + changelogBuilder.cleanChangelog )
-
 				
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, mergedReadme );
@@ -321,25 +320,23 @@ module.exports = function( grunt ) {
 					changelogVersionNumber += "." + versionNumber.patch;
 				}
 				var d = new Date();
-				// guess release date, probaly tuesday in two weeks time
-				// options for better logic, get latest tag
+				// guess release date, probbaly next tuesday in two weeks time
+				// options for better logic, get latest tag date
 				// is date tag within 14 day next release 14 days
 				// if not next teleas 28 days
-				// login to jira get it there... 
+				// or login to jira get it there... 
 				d.setDate(d.getDate() + (2 + 14 - d.getDay()));
 				const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
 				const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
 				const da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
 				const datestring = `${mo} ${format(da)}, ${ye}`
 
-				
-
 				changelogBuilder.parseChancelogLines(defaultChangelogEntrys= options.defaultChangelogEntrys.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ));
 
 				var newChangelog = options.newHeadertemplate.replace(new RegExp( "VERSIONNUMBER" ), changelogVersionNumber);
 				newChangelog = newChangelog.replace(new RegExp( "DATESTRING" ), datestring) + changelogBuilder.cleanChangelog
 				
-				// Add the changelog, behind the == Changelog == header.
+				// Add the changelog, behind the 'matched' header.
 				changelog = changelog.replace( options.matchChangelogHeader, newChangelog );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );

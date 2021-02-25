@@ -1895,7 +1895,7 @@ grunt.initConfig( {
 
 ### The `update-changelog-with-latest-pr-texts` task
 #### Using our configuration
-We implement the following tasks:
+We implement the following configuration:
 - `options`
     - The `useEditDistanceComapair` value is set to `true`.
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
@@ -2035,7 +2035,7 @@ update-changelog-with-latest-pr-texts: {
 this is a support task for the `update-changelog-with-latest-pr-texts` task
 
 #### Using our configuration
-We implement the following tasks:
+We implement the following configuration:
 - `options`
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
     
