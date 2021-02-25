@@ -52,7 +52,8 @@ This adds the following tasks to your plugin's repo (see below for usage):
 * [update-version](https://github.com/Yoast/plugin-grunt-tasks#the-update-version-task)
 * [watch](https://github.com/Yoast/plugin-grunt-tasks#the-watch-task)
 * [wp_deploy](https://github.com/Yoast/plugin-grunt-tasks#the-wp_deploy-task)
-
+* [update-changelog-with-latest-pr-texts](https://github.com/Yoast/plugin-grunt-tasks#update-changelog-with-latest-pr-texts)
+* [get-latest-pr-texts](https://github.com/Yoast/plugin-grunt-tasks#get-latest-pr-texts)
 
 ### The `addtextdomain` task
 See: [cedaro/grunt-wp-i18n](https://github.com/cedaro/grunt-wp-i18n)
