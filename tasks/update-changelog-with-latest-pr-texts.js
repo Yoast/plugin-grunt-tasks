@@ -1,15 +1,3 @@
-/**
- * escapes a string so it can be use as a regual expression.
- *
- * @param {Object} string The response object.
- * 
- * @returns {Object} string 
- */
-function escapeRegExp(string) {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-}
-
-
 /*********************
  * class for building a changelog entry
  * 
@@ -200,6 +188,7 @@ class Unique {
 //const mergeChangeLog = require( "../lib/merge-changelog" );
 const parseVersion = require( "../lib/parse-version" );
 const _isEmpty = require( "lodash/isEmpty" );
+const escapeRegExp = require("../lib/escape-regexp");
 
 /**
  * A task to remove old changelog entries and add new ones in changlog file..
