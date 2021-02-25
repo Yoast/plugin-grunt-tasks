@@ -1899,6 +1899,7 @@ We implement the following tasks:
 - `options`
     - The `useEditDistanceComapair` value is set to `true`.
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.commitChangelog`: true,
 - `wordpress-seo`
     - The `options.readmeFile` value is set to  `"./readme.txt"`.
 	- The `options.releaseInChangelog` value is set to `/[=] \d+\.\d+(\.\d+)? =/g`.
