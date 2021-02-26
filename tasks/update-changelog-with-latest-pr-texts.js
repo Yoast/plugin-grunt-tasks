@@ -320,12 +320,12 @@ module.exports = function( grunt ) {
 					changelogVersionNumber += "." + versionNumber.patch;
 				}
 				var d = new Date();
-				// guess release date, probbaly next tuesday in two weeks time
+				// guess release date, probbaly next tuesday in three weeks time
 				// options for better logic, get latest tag date
-				// is date tag within 14 day next release 14 days
-				// if not next teleas 28 days
+				// is date tag within 21 day next release 21 days
+				// if not next release 42 days
 				// or login to jira get it there... 
-				d.setDate(d.getDate() + (2 + 14 - d.getDay()));
+				d.setDate(d.getDate() + (2 + 21 - d.getDay()));
 				const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
 				const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
 				const da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
