@@ -19,7 +19,7 @@ class ChangelogBuilder {
 	constructor(grunt , changelogIn, useEditDistanceComapair = false, useANewLineAfterHeader = true, pluginSlug) {
 		this.ChangelogMap = new Map();
 		this.grunt = grunt;
-		this.useEditDistanceComapair = useEditDistanceComapair;
+		this.useEditDistanceCompare = useEditDistanceCompare;
 		this.useANewLineAfterHeader = useANewLineAfterHeader;
 		this.pluginSlug = pluginSlug
 		if (changelogIn) {
@@ -37,7 +37,7 @@ class ChangelogBuilder {
 			uniqueLines.append(lines);
 			this.ChangelogMap.set(key, uniqueLines);
 		};
-		if (this.useEditDistanceComapair) {
+		if (this.useEditDistanceCompare) {
 			this.ChangelogMap.get(key).applyEditdistanceFilter();
 		};
 	};
@@ -201,7 +201,7 @@ module.exports = function( grunt ) {
 		"Prompts the user for the changelog entries and updates the changelog entry in a file specified.",
 		function() {
 			let options = this.options( {
-				useEditDistanceComapair: false,
+				useEditDistanceCompare: false,
 				commitChangelog: false,
 				useANewLineAfterHeader: true,
 				defaultChangelogEntrys: '',
@@ -272,7 +272,7 @@ module.exports = function( grunt ) {
 				}
 			}
 
-			const changelogBuilder = new ChangelogBuilder(grunt, null , options.useEditDistanceComapair,options.useANewLineAfterHeader , options.pluginSlug);
+			const changelogBuilder = new ChangelogBuilder(grunt, null , options.useEditDistanceCompare,options.useANewLineAfterHeader , options.pluginSlug);
 			
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {

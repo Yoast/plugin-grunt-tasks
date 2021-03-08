@@ -1,7 +1,7 @@
 // Custom task
 module.exports = {
 	options: {
-		useEditDistanceComapair: true,
+		useEditDistanceCompare: true,
 		pluginSlug: "<%= pluginSlug %>",
 		commitChangelog: true,
 	},	
