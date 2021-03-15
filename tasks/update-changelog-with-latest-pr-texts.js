@@ -145,7 +145,7 @@ class ChangelogBuilder {
 	* @param {bool} useEditDistanceCompare wheter to use EditDistanceCompairdefault false
 	* @param {bool} useANewLineAfterHeader  default true
 	* @param {string} pluginSlug pluginsug
-	* @returns {int} simularity in number
+	* @returns {object} class
 	*/
 	constructor( grunt, changelogIn, useEditDistanceCompare = false, useANewLineAfterHeader = true, pluginSlug ) {
 		this.ChangelogMap = new Map();
@@ -181,9 +181,14 @@ class ChangelogBuilder {
 		}
 	}
 
-
+	/**
+	 * Parse changelog lines
+	 * @param {string} changelogIn changelos to be parsed.
+	 * @returns {null} does not return
+	 */
 	parseChancelogLines( changelogIn ) {
 		this.grunt.verbose.writeln( "in: [" + changelogIn + "]" );
+		// eslint-disable-next-line no-control-regex
 		const parts = changelogIn.match( new RegExp( "(\n|^)[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ) );
 		// Console.log(parts)
 		// Make sure there are foreach items
@@ -194,7 +199,11 @@ class ChangelogBuilder {
 		}
 	}
 
-	// eslint-disable-next-line require-jsdoc
+	/**
+	 * Parse changelog lines parseChancelogLines special for yoast-cli generated file.
+	 * @param {string} changelogIn changelos to be parsed .
+	 * @returns {null} does not return
+	 */
 	parseYoastCliGeneratedChangelog( changelogIn ) {
 		// Strip header from new file.
 		changelogIn = changelogIn.replace( new RegExp( "# Yoast/" + this.pluginSlug + ":(.|\\n)*?(?=\n[ a-zA-Z]+:)" ),
@@ -208,7 +217,10 @@ class ChangelogBuilder {
 	}
 
 
-	// eslint-disable-next-line require-jsdoc
+	/**
+	 * Returns the class generated changelog
+	 * @returns {string} changelog without doubles
+	 */
 	get cleanChangelog() {
 		var newlines = "";
 		const line = this.useANewLineAfterHeader ? "\n" : "";
@@ -262,7 +274,11 @@ module.exports = function( grunt ) {
 			const pr = new Intl.PluralRules( "en-US", {
 				type: "ordinal",
 			} );
-			// eslint-disable-next-line require-jsdoc
+			/**
+	 		* Append suffix to number
+	 		* @param {int} number changelos to be parsed .
+	 		* @returns {string}  number with suffix appended
+	 		*/
 			const format = ( number ) => `${number}${suffixes[ pr.select( number ) ]}`;
 
 			let changelog = grunt.file.read( options.readmeFile );
@@ -316,6 +332,7 @@ module.exports = function( grunt ) {
 				}
 			}
 
+			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
