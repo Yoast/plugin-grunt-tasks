@@ -1917,11 +1917,11 @@ grunt.initConfig( {
 ```
 
 #### Options
-##### useEditDistanceComapair
+##### useEditDistanceCompare
 Type: `Boolean`  
 Default: `false`
 
-Setting this to `true` allows the deletion duplicate line items with a Distance Comapair valu higher than 90.
+Setting this to `true` allows the deletion duplicate line items with a Distance Compare value higher than 90.
 
 ##### pluginSlug
 Type: `String`  

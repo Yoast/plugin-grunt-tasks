@@ -142,15 +142,15 @@ class ChangelogBuilder {
 	* Constructor
 	* @param {object} grunt the grunt object
 	* @param {strin} changelogIn changelog to start with
-	* @param {bool} useEditDistanceCompair wheter to use EditDistanceCompairdefault false
+	* @param {bool} useEditDistanceCompare wheter to use EditDistanceCompairdefault false
 	* @param {bool} useANewLineAfterHeader  default true
 	* @param {string} pluginSlug pluginsug
 	* @returns {int} simularity in number
 	*/
-	constructor( grunt, changelogIn, useEditDistanceCompair = false, useANewLineAfterHeader = true, pluginSlug ) {
+	constructor( grunt, changelogIn, useEditDistanceCompare = false, useANewLineAfterHeader = true, pluginSlug ) {
 		this.ChangelogMap = new Map();
 		this.grunt = grunt;
-		this.useEditDistanceComapair = useEditDistanceCompair;
+		this.useEditDistanceCompare = useEditDistanceCompare;
 		this.useANewLineAfterHeader = useANewLineAfterHeader;
 		this.pluginSlug = pluginSlug;
 		if ( changelogIn ) {
@@ -176,16 +176,14 @@ class ChangelogBuilder {
 			uniqueLines.append( lines );
 			this.ChangelogMap.set( key, uniqueLines );
 		}
-		if ( this.useEditDistanceComapair ) {
+		if ( this.useEditDistanceCompare ) {
 			this.ChangelogMap.get( key ).applyEditdistanceFilter();
 		}
 	}
 
 
-	// eslint-disable-next-line require-jsdoc
 	parseChancelogLines( changelogIn ) {
 		this.grunt.verbose.writeln( "in: [" + changelogIn + "]" );
-		// eslint-disable-next-line no-control-regex
 		const parts = changelogIn.match( new RegExp( "(\n|^)[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ) );
 		// Console.log(parts)
 		// Make sure there are foreach items
@@ -247,7 +245,7 @@ module.exports = function( grunt ) {
 		// eslint-disable-next-line max-statements
 		function() {
 			const options = this.options( {
-				useEditDistanceComapair: false,
+				useEditDistanceCompare: false,
 				commitChangelog: false,
 				useANewLineAfterHeader: true,
 				defaultChangelogEntrys: "",
@@ -318,8 +316,7 @@ module.exports = function( grunt ) {
 				}
 			}
 
-			// eslint-disable-next-line max-len
-			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceComapair, options.useANewLineAfterHeader, options.pluginSlug );
+			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {

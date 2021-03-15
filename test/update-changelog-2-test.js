@@ -50,7 +50,7 @@ exports.testChangeLog2Command = {
 					pluginSlug: "wordpress-seo-premium",
 					defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 					useANewLineAfterHeader: false,
-					useEditDistanceComapair: true,
+					useEditDistanceCompare: true,
 					commitChangelog: false,
 				},
 			},
@@ -95,4 +95,3 @@ exports.testChangeLog2Command = {
 		test.done();
 	},
 };
-
