@@ -4,5 +4,5 @@ module.exports = {
 		useEditDistanceComapair: true,
 		pluginSlug: "<%= pluginSlug %>",
 		commitChangelog: true,
-	},	
+	},
 };

@@ -1,5 +1,5 @@
 module.exports = {
-	default: {
+	"default": {
 		options: {
 			pluginSlug: "<%= pluginSlug %>",
 		},
