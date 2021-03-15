@@ -1,3 +1,6 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable max-depth */
+/* eslint-disable complexity */
 const parseVersion = require( "../lib/parse-version" );
 const _isEmpty = require( "lodash/isEmpty" );
 const escapeRegExp = require( "../lib/escape-regexp" );
@@ -5,18 +8,15 @@ const escapeRegExp = require( "../lib/escape-regexp" );
 /**
  * Class for building unigue line items
  *
- * @method append
- * @param {Object} array of strings
- *
- * @method applyEditdistanceFilter
- *
- *
- * @get cleanChangelog
- *
  *
  */
 class Unique {
-	// eslint-disable-next-line require-jsdoc
+	/**
+	 * Constructor
+	 * @param {object} grunt grunt object
+	 * @param {array} items array of initial items
+	 * @returns {null} does not return
+	 */
 	constructor( grunt, items ) {
 		this.items = [];
 		this.grunt = grunt;
@@ -24,7 +24,11 @@ class Unique {
 			this.items = items;
 		}
 	}
-	// eslint-disable-next-line require-jsdoc
+	/**
+	* Append items to the items
+	* @param {array} newItems array of initial items
+	* @returns {null} does not return
+	*/
 	append( newItems ) {
 		if ( newItems ) {
 			newItems.forEach( function( newItem ) {
@@ -34,7 +38,10 @@ class Unique {
 			}, this );
 		}
 	}
-	// eslint-disable-next-line require-jsdoc
+	/**
+	* If called it will remove doubles using filter
+	* @returns {null} does not return
+	*/
 	applyEditdistanceFilter() {
 		var toBeRemoved = [];
 		for ( var i = 0; i < this.items.length; i++ ) {
@@ -61,7 +68,12 @@ class Unique {
 		}
 	}
 	// Should be private but this breaks on ubuntu for some strange reason
-	// eslint-disable-next-line require-jsdoc
+	/**
+	* Calulates similarity in 2 strings
+	* @param {string} s1 item 1
+	* @param {string} s2 item 2
+	* @returns {int} simularity in number
+	*/
 	similarity( s1, s2 ) {
 		var longer = s1;
 		var shorter = s2;
@@ -70,27 +82,32 @@ class Unique {
 		  shorter = s1;
 		}
 		var longerLength = longer.length;
-		if ( longerLength == 0 ) {
+		if ( longerLength === 0 ) {
 		  return 1.0;
 		}
 		return ( longerLength - this.editDistance( longer, shorter ) ) / parseFloat( longerLength );
 	  }
 	// Should be private but this breaks on ubuntu for some strange reason
-	// eslint-disable-next-line require-jsdoc
+	/**
+	* Calulates cost in 2 strings
+	* @param {string} s1 item 1
+	* @param {string} s2 item 2
+	* @returns {int} cast as number
+	*/
 	editDistance( s1, s2 ) {
 		s1 = s1.toLowerCase();
 		s2 = s2.toLowerCase();
 
-		var costs = new Array();
+		var costs = [];
 		for ( var i = 0; i <= s1.length; i++ ) {
-		  var lastValue = i;
-		  for ( var j = 0; j <= s2.length; j++ ) {
-				if ( i == 0 ) {
-			  costs[ j ] = j;
+			var lastValue = i;
+			for ( var j = 0; j <= s2.length; j++ ) {
+				if ( i === 0 ) {
+					costs[ j ] = j;
 				} else {
-			  	if ( j > 0 ) {
+					if ( j > 0 ) {
 						var newValue = costs[ j - 1 ];
-						if ( s1.charAt( i - 1 ) != s2.charAt( j - 1 ) ) {
+						if ( s1.charAt( i - 1 ) !== s2.charAt( j - 1 ) ) {
 							newValue = Math.min( Math.min( newValue, lastValue ),
 								costs[ j ] ) + 1;
 						}
@@ -107,7 +124,7 @@ class Unique {
 	  }
 }
 
-/** *******************
+/**
  * Class for building a merged changelog entry using multipe inputs
  *
  * @method parseChancelogLines
@@ -121,11 +138,19 @@ class Unique {
  *
  */
 class ChangelogBuilder {
-	// eslint-disable-next-line require-jsdoc
-	constructor( grunt, changelogIn, useEditDistanceComapair = false, useANewLineAfterHeader = true, pluginSlug ) {
+	/**
+	* Constructor
+	* @param {object} grunt the grunt object
+	* @param {strin} changelogIn changelog to start with
+	* @param {bool} useEditDistanceCompair wheter to use EditDistanceCompairdefault false
+	* @param {bool} useANewLineAfterHeader  default true
+	* @param {string} pluginSlug pluginsug
+	* @returns {int} simularity in number
+	*/
+	constructor( grunt, changelogIn, useEditDistanceCompair = false, useANewLineAfterHeader = true, pluginSlug ) {
 		this.ChangelogMap = new Map();
 		this.grunt = grunt;
-		this.useEditDistanceComapair = useEditDistanceComapair;
+		this.useEditDistanceComapair = useEditDistanceCompair;
 		this.useANewLineAfterHeader = useANewLineAfterHeader;
 		this.pluginSlug = pluginSlug;
 		if ( changelogIn ) {
@@ -133,7 +158,13 @@ class ChangelogBuilder {
 		}
 	}
 	// Should be private but this breaks on ubuntu for some strange reason
-	// eslint-disable-next-line require-jsdoc
+	/**
+	 * For each function add the lines corospondig to a header
+	 * @param {int} value value of item.
+	 * @param {int} _index The second number.
+	 * @param {array} _array the for each
+	 * @returns {null} does not return
+	 */
 	addLinesPerHeader( value, _index, _array ) {
 		const key = `${value.match( new RegExp(  "[ a-zA-Z]+:" ) )}`;
 		// eslint-disable-next-line no-control-regex
@@ -154,6 +185,7 @@ class ChangelogBuilder {
 	// eslint-disable-next-line require-jsdoc
 	parseChancelogLines( changelogIn ) {
 		this.grunt.verbose.writeln( "in: [" + changelogIn + "]" );
+		// eslint-disable-next-line no-control-regex
 		const parts = changelogIn.match( new RegExp( "(\n|^)[ a-zA-Z]+:(.|\\n)*?(?=(\n[ a-zA-Z]+:|\$))", "g" ) );
 		// Console.log(parts)
 		// Make sure there are foreach items
@@ -211,6 +243,8 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"update-changelog-with-latest-pr-texts",
 		"Prompts the user for the changelog entries and updates the changelog entry in a file specified.",
+		// eslint-disable-next-line complexity
+		// eslint-disable-next-line max-statements
 		function() {
 			const options = this.options( {
 				useEditDistanceComapair: false,
@@ -230,6 +264,7 @@ module.exports = function( grunt ) {
 			const pr = new Intl.PluralRules( "en-US", {
 				type: "ordinal",
 			} );
+			// eslint-disable-next-line require-jsdoc
 			const format = ( number ) => `${number}${suffixes[ pr.select( number ) ]}`;
 
 			let changelog = grunt.file.read( options.readmeFile );
@@ -283,12 +318,14 @@ module.exports = function( grunt ) {
 				}
 			}
 
+			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceComapair, options.useANewLineAfterHeader, options.pluginSlug );
 
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {
 				// Get the changelog entry's for the current version from the readme.
 				const changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
+				// eslint-disable-next-line max-len
 				const matchCorrectHeader =  options.matchCorrectHeader.replace( new RegExp( "VERSIONNUMBER" ), escapeRegExp( changelogVersionNumber ) );
 				const matchCorrectLines = options.matchCorrectLines.replace( new RegExp( "VERSIONNUMBER" ), escapeRegExp( changelogVersionNumber ) );
 				const currentChangelogEntriesMatches = changelog.match( new RegExp( matchCorrectLines,  ) );
@@ -314,6 +351,7 @@ module.exports = function( grunt ) {
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ) );
 
 				// Put all parts togethor agian
+				// eslint-disable-next-line max-len
 				const mergedReadme = changelog.replace( new RegExp( escapeRegExp( currentChangelogEntriesHeader + currentChangelogEntries ) ),  currentChangelogEntriesHeader  + changelogBuilder.cleanChangelog );
 
 				// Write changes to the file.
@@ -340,7 +378,8 @@ module.exports = function( grunt ) {
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
 				const datestring = `${mo} ${format( da )}, ${ye}`;
 
-				changelogBuilder.parseChancelogLines( defaultChangelogEntrys = options.defaultChangelogEntrys.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
+				// eslint-disable-next-line max-len
+				changelogBuilder.parseChancelogLines( options.defaultChangelogEntrys.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 
 				var newChangelog = options.newHeadertemplate.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber );
 				newChangelog = newChangelog.replace( new RegExp( "DATESTRING" ), datestring ) + changelogBuilder.cleanChangelog;
@@ -360,6 +399,7 @@ module.exports = function( grunt ) {
 				// Check if there is something to commit with `git status` first.
 				grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
 					// First character of the code checks the status in the index.
+					// eslint-disable-next-line max-len
 					const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === options.readmeFile.split( "/" )[ options.readmeFile.split( "/" ).length - 1 ] );
 
 					if ( hasStagedChangelog ) {
