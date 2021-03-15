@@ -13,16 +13,16 @@ const svgoOptions = {
 		{ removeTitle: true },
 		{ removeDesc: true },
 		{ removeUnknownsAndDefaults: {
-				keepRoleAttr: true,
-				keepAriaAttrs: true,
-			} },
+			keepRoleAttr: true,
+			keepAriaAttrs: true,
+		} },
 		{ addAttributesToSVGElement: {
-				attributes: [
-					{ role: "img" },
-					{ "aria-hidden": "true" },
-					{ focusable: "false" },
-				],
-			} },
+			attributes: [
+				{ role: "img" },
+				{ "aria-hidden": "true" },
+				{ focusable: "false" },
+			],
+		} },
 	],
 };
 
