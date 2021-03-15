@@ -7,15 +7,13 @@ const escapeRegExp = require( "../lib/escape-regexp" );
 
 /**
  * Class for building unigue line items
- *
- *
  */
 class Unique {
 	/**
 	 * Constructor
 	 * @param {object} grunt grunt object
 	 * @param {array} items array of initial items
-	 * @returns {null} does not return
+	 * @returns {object} class
 	 */
 	constructor( grunt, items ) {
 		this.items = [];
