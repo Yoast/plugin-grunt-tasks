@@ -165,7 +165,7 @@ class ChangelogBuilder {
 	 * @param {array} _array the for each
 	 * @returns {null} does not return
 	 */
-	addLinesPerHeader( value, _index, _array ) {
+	addLinesPerHeader( value ) {
 		const key = `${value.match( new RegExp(  "[ a-zA-Z]+:" ) )}`;
 		// eslint-disable-next-line no-control-regex
 		const lines = value.match( new RegExp( "(?<=\n)\\*([\n]|.)+?(?=\Z|\n\n|\n\\*|\n$)", "gm" ) );
@@ -230,6 +230,7 @@ class ChangelogBuilder {
 		if ( this.ChangelogMap.has( "Bugfixes:" ) ) {
 			newlines = newlines + "Bugfixes:\n" + line + this.ChangelogMap.get( "Bugfixes:" ).items.join( "\n" ) + "\n\n";
 		}
+		// eslint-disable-next-line no-unused-vars
 		this.ChangelogMap.forEach( function( _value, key, _map ) {
 			if ( ! ( key === "Enhancements:" || key === "Bugfixes:" || key === "Non user facing:" || key === "Other:" ) ) {
 				newlines = newlines +  key + "\n" + line + this.ChangelogMap.get( key ).items.join( "\n" ) + "\n\n";
