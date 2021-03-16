@@ -392,7 +392,6 @@ module.exports = function( grunt ) {
 				const datestring = `${mo} ${format( da )}, ${ye}`;
 
 				// eslint-disable-next-line max-len
-				// X changelogBuilder.parseChancelogLines( defaultChangelogEntrys = options.defaultChangelogEntrys.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 				changelogBuilder.parseChancelogLines( options.defaultChangelogEntrys.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 
 				var newChangelog = options.newHeadertemplate.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber );
