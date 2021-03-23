@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
 				commitChangelog: false,
 				useANewLineAfterHeader: true,
 				defaultChangelogEntrys: "",
+				daysToAddForNexRelease: 14,
 			} );
 			const done = this.async();
 			const newVersion = grunt.option( "plugin-version" );
@@ -147,7 +148,7 @@ module.exports = function( grunt ) {
 				// Is date tag within 14 day next release 21 days
 				// If not next release 42 days
 				// Or login to jira get it there...
-				d.setDate( d.getDate() + ( 2 + 14 - d.getDay() ) );
+				d.setDate( d.getDate() + ( 2 + options.daysToAddForNexRelease - d.getDay() ) );
 				const ye = new Intl.DateTimeFormat( "en", { year: "numeric" } ).format( d );
 				const mo = new Intl.DateTimeFormat( "en", { month: "long" } ).format( d );
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
