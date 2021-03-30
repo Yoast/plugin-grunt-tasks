@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
 				typeOfPreRelease: "RC",
+				readmeFile: "/tmp/readme.txt",
 			} );
 			const done = this.async();
 			grunt.file.write( options.readmeFile, "hoi" );
