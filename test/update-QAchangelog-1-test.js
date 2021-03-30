@@ -33,11 +33,13 @@ exports.testChangeLog3Command = {
 		grunt.file.copy( srcWikimdfile, dstWikimdfile );
 		grunt.log.writeln( "setup is done!" );
 
-		runTask.option( "plugin-version", "15.9-RC2" );
+		runTask.option( "plugin-version", "15.9-beta2" );
 		ChanceLogTask = runTask.task( "build-qa-changelog", {
 			"wordpress-seo": {
 				options: {
 					readmeFile: "tmp/changelogqa.md",
+					typeOfPreRelease: "beta",
+					pluginSlug: "wordpress-seo-premium",
 				},
 			},
 		} );
