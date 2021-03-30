@@ -28,6 +28,7 @@ module.exports = function( grunt ) {
 
 			console.log( options.useANewLineAfterHeader );
 			console.log( versionNumber.patch );
+			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
 	);
