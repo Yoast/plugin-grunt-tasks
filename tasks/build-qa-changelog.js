@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-const parseVersion = require( "../lib/parse-version" );
+// Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
 // Const escapeRegExp = require( "../lib/escape-regexp" );
 // Const ChangelogBuilder = require( "../lib/logbuilder" );
@@ -20,14 +20,31 @@ module.exports = function( grunt ) {
 			const options = this.options( {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
-				defaultChangelogEntrys: "",
+				typeOfPreRelease: "RC",
 			} );
 			const done = this.async();
 			const newVersion = grunt.option( "plugin-version" );
-			const versionNumber = parseVersion( newVersion );
+			// Strip off the RC part from the current plugin version.
+			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
 
-			console.log( options.useANewLineAfterHeader );
-			console.log( versionNumber.patch );
+			// From the resulting array, get the first value (the second value is the RC number).
+			const strippedVersion = splitVersion[ 0 ];
+			const preReleaseNumber = splitVersion[ 1 ];
+			// Const versionNumber = parseVersion( strippedVersion );
+			var i;
+			for ( i = 0; i < preReleaseNumber; i++ ) {
+				if ( i === 0 ) {
+					console.log( "load wiki file " );
+				} else {
+					if ( preReleaseNumber === 1 ) {
+						console.log( "use wiki file " );
+					} else {
+						console.log( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
+					}
+				}
+			}
+
+
 			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}

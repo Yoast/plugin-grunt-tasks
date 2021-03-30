@@ -33,7 +33,7 @@ exports.testChangeLog3Command = {
 		grunt.file.copy( srcWikimdfile, dstWikimdfile );
 		grunt.log.writeln( "setup is done!" );
 
-		runTask.option( "plugin-version", "15.9-RC1" );
+		runTask.option( "plugin-version", "15.9-RC2" );
 		ChanceLogTask = runTask.task( "build-qa-changelog", {
 			"wordpress-seo": {
 				options: {
