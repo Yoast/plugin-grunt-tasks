@@ -1,38 +1,8 @@
 /* eslint-disable complexity */
-const githubApi = require( "../lib/github-api" );
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
 // Const escapeRegExp = require( "../lib/escape-regexp" );
 // Const ChangelogBuilder = require( "../lib/logbuilder" );
-
-
-/**
- * Gets a milestone from the  repo.
- *
- * @param {string} pluginTag The name of the milestone
- * @param {string} pluginSlug The slug name of the repo
- * @param {object} grunt the grunt object
- *
- * @returns {Promise<object|null>} A promise resolving to a single milestone.
- */
-async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
-	pluginSlug = pluginSlug.toLowerCase();
-	let responseData;
-	try {
-		const response = await githubApi( "yoast/" + pluginSlug + "/releases/tags/" + pluginTag, null, "GET" );
-		if ( ! response.ok ) {
-			grunt.log.error( response );
-		}
-		responseData = await response.json();
-	} catch ( error ) {
-		grunt.log.error( error );
-		grunt.fail.fatal( "An error occurred." );
-	}
-	// / bl message: 'Not Found',
-	// Console.log( responseData );
-	const body = typeof responseData.body === "string" ? responseData.body  : "";
-	return body;
-}
 
 
 /**
@@ -74,9 +44,7 @@ module.exports = function( grunt ) {
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
-					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
-					grunt.verbose.writeln( gitlog );
-					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
+					// Grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
 			}
 

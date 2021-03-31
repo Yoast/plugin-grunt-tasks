@@ -1,13 +1,7 @@
-/* eslint-disable complexity */
 const githubApi = require( "../lib/github-api" );
-// Const parseVersion = require( "../lib/parse-version" );
-// Const _isEmpty = require( "lodash/isEmpty" );
-// Const escapeRegExp = require( "../lib/escape-regexp" );
-// Const ChangelogBuilder = require( "../lib/logbuilder" );
-
 
 /**
- * Gets a milestone from the  repo.
+ * Gets the release text from the github repo.
  *
  * @param {string} pluginTag The name of the milestone
  * @param {string} pluginSlug The slug name of the repo
@@ -15,7 +9,7 @@ const githubApi = require( "../lib/github-api" );
  *
  * @returns {Promise<object|null>} A promise resolving to a single milestone.
  */
-async function getGitTagChangeLog2( pluginTag, pluginSlug, grunt ) {
+async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 	pluginSlug = pluginSlug.toLowerCase();
 	let responseData;
 	try {
@@ -28,10 +22,7 @@ async function getGitTagChangeLog2( pluginTag, pluginSlug, grunt ) {
 		grunt.log.error( error );
 		grunt.fail.fatal( "An error occurred." );
 	}
-	// / bl message: 'Not Found',
-	// Console.log( responseData );
-	const body = typeof responseData.body === "string" ? responseData.body  : "";
-	return body;
+	return typeof responseData.body === "string" ? responseData.body  : "";
 }
 
 
@@ -44,37 +35,30 @@ async function getGitTagChangeLog2( pluginTag, pluginSlug, grunt ) {
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"download-qa-changelog",
-		"updates the changelog entry in a file specified.",
-		// eslint-disable-next-line complexity
-		// eslint-disable-next-line max-statements
+		"support function for the build-qa-changelog this will download the needed log entries from github",
 		async function() {
 			const options = this.options( {
-				useEditDistanceCompare: false,
-				useANewLineAfterHeader: false,
 				typeOfPreRelease: "RC",
-				readmeFile: "/tmp/readme.txt",
 			} );
 			const done = this.async();
-			grunt.file.write( options.readmeFile, "hoi" );
 			const newVersion = grunt.option( "plugin-version" );
+
 			// Strip off the RC part from the current plugin version.
 			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
 
 			// From the resulting array, get the first value (the second value is the RC/beta number).
 			const strippedVersion = splitVersion[ 0 ];
 			const preReleaseNumber = splitVersion[ 1 ];
-			// Const versionNumber = parseVersion( strippedVersion );
 
-			// Load the file from the wiki (yoast-cli)
-			grunt.verbose.writeln( "load wiki file " );
-			// Remove the already mentioned entries
+			// Download the inbetween git release md files
+			// So we can use them in de build-qa-changelog function
 			var i;
 			for ( i = 1; i < preReleaseNumber; i++ ) {
 				if ( preReleaseNumber === 1 ) {
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
-					const gitlog = await getGitTagChangeLog2( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
+					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
 					grunt.verbose.writeln( gitlog );
 					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
