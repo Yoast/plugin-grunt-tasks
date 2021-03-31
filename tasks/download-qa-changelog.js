@@ -16,6 +16,7 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 		const response = await githubApi( "yoast/" + pluginSlug + "/releases/tags/" + pluginTag, null, "GET" );
 		if ( ! response.ok ) {
 			grunt.log.error( response );
+			console.log( response );
 		}
 		responseData = await response.json();
 	} catch ( error ) {
