@@ -5,6 +5,37 @@ const githubApi = require( "../lib/github-api" );
 // Const escapeRegExp = require( "../lib/escape-regexp" );
 // Const ChangelogBuilder = require( "../lib/logbuilder" );
 
+
+/**
+ * Gets a milestone from the  repo.
+ *
+ * @param {string} pluginTag The name of the milestone
+ * @param {string} pluginSlug The slug name of the repo
+ * @param {object} grunt
+ *
+ * @returns {Promise<object|null>} A promise resolving to a single milestone.
+ */
+async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
+	pluginSlug = pluginSlug.toLowerCase();
+	let responseData;
+	try {
+		const response = await githubApi( "yoast/" + pluginSlug + "/releases/tags/" + pluginTag, null, "GET" );
+		if ( ! response.ok ) {
+			// Await logError( response, grunt );
+			grunt.log.error( response );
+		}
+		responseData = await response.json();
+	} catch ( error ) {
+		grunt.log.error( error );
+		grunt.fail.fatal( "An error occurred." );
+	}
+
+	console.log( responseData );
+
+	return responseData.body;
+}
+
+
 /**
  * A task to remove old changelog entries and add new ones in changlog file..
  *
@@ -47,22 +78,24 @@ module.exports = function( grunt ) {
 				}
 			}
 
+			const gitlog = await getGitTagChangeLog( "16.1-beta1", options.pluginSlug, grunt );
+			console.log( gitlog );
 
-			// Curl -H "Authorization: token ${GITHUB_ACCESS_TOKEN}" -H "Accept: application/vnd.github.v3+json" -s https://api.github.com/repos/${GITHUBACOUNT}/${FOLDER_NAME}/releases/tags/16.1-beta1 | jq .body
-			let responseData;
-			try {
-				const response = await githubApi( "yoast/" + options.pluginSlug + "/releases/tags/" + "16.1-beta1", null, "GET" );
-				if ( ! response.ok ) {
-					// Await logError( response, grunt );
-					grunt.log.error( response );
-				}
-				responseData = await response.json();
-			} catch ( error ) {
-				grunt.log.error( error );
-				grunt.fail.fatal( "An error occurred." );
-			}
+			// // Curl -H "Authorization: token ${GITHUB_ACCESS_TOKEN}" -H "Accept: application/vnd.github.v3+json" -s https://api.github.com/repos/${GITHUBACOUNT}/${FOLDER_NAME}/releases/tags/16.1-beta1 | jq .body
+			// Let responseData;
+			// Try {
+			// 	Const response = await githubApi( "yoast/" + options.pluginSlug + "/releases/tags/" + "16.1-beta1", null, "GET" );
+			// 	If ( ! response.ok ) {
+			// 		// Await logError( response, grunt );
+			// 		Grunt.log.error( response );
+			// 	}
+			// 	ResponseData = await response.json();
+			// } catch ( error ) {
+			// 	Grunt.log.error( error );
+			// 	Grunt.fail.fatal( "An error occurred." );
+			// }
 
-			console.log( responseData );
+			// Console.log( responseData );
 			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
