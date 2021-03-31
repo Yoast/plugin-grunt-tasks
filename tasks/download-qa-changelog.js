@@ -16,10 +16,11 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 		const response = await githubApi( "yoast/" + pluginSlug + "/releases/tags/" + pluginTag, null, "GET" );
 		if ( ! response.ok ) {
 			if ( response.status === 404 ) {
-				console.log( "status 404" );
+				grunt.verbose.writeln( "request returnd status 404, release: " + pluginTag + " does not seem to exist" );
+			} else {
+				grunt.log.error( response.status );
+			// Console.log( response );
 			}
-			grunt.log.error( response );
-			console.log( response );
 		}
 		responseData = await response.json();
 	} catch ( error ) {
