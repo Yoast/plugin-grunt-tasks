@@ -15,7 +15,7 @@ const githubApi = require( "../lib/github-api" );
  *
  * @returns {Promise<object|null>} A promise resolving to a single milestone.
  */
-async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
+async function getGitTagChangeLog2( pluginTag, pluginSlug, grunt ) {
 	pluginSlug = pluginSlug.toLowerCase();
 	let responseData;
 	try {
@@ -74,7 +74,7 @@ module.exports = function( grunt ) {
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
-					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
+					const gitlog = await getGitTagChangeLog2( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
 					grunt.verbose.writeln( gitlog );
 					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
