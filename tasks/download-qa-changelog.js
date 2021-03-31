@@ -22,6 +22,7 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 		grunt.log.error( error );
 		grunt.fail.fatal( "An error occurred." );
 	}
+	grunt.verbose.writeln( responseData );
 	return typeof responseData.body === "string" ? responseData.body  : "";
 }
 
