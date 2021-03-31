@@ -66,16 +66,16 @@ module.exports = function( grunt ) {
 			// Const versionNumber = parseVersion( strippedVersion );
 
 			// Load the file from the wiki (yoast-cli)
-			console.log( "load wiki file " );
+			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
 			var i;
 			for ( i = 1; i < preReleaseNumber; i++ ) {
 				if ( preReleaseNumber === 1 ) {
-					console.log( "use wiki file " );
+					grunt.verbose.writeln( "use wiki file " );
 				} else {
-					console.log( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
+					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
 					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
-					console.log( gitlog );
+					grunt.verbose.writeln( gitlog );
 					grunt.file.write( ".tmp/" + strippedVersion + "-" + options.typeOfPreRelease + i, gitlog );
 				}
 			}
