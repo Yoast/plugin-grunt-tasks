@@ -43,14 +43,10 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
  */
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
-		"build-qa-changelog",
-		"updates the changelog entry in a file specified.",
-		// eslint-disable-next-line complexity
-		// eslint-disable-next-line max-statements
+		"download-qa-changelogs",
+		"download qa logs for a specific number form the github release",
 		async function() {
 			const options = this.options( {
-				useEditDistanceCompare: false,
-				useANewLineAfterHeader: false,
 				typeOfPreRelease: "RC",
 				readmeFile: "/tmp/readme.txt",
 			} );
@@ -79,10 +75,8 @@ module.exports = function( grunt ) {
 					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
 			}
-
-
-			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
 	);
 };
+
