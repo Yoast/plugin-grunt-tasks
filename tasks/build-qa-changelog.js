@@ -15,9 +15,7 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"build-qa-changelog",
 		"updates the changelog entry in a file specified.",
-		// eslint-disable-next-line complexity
-		// eslint-disable-next-line max-statements
-		async function() {
+		function() {
 			const options = this.options( {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
@@ -25,7 +23,7 @@ module.exports = function( grunt ) {
 				readmeFile: "/tmp/readme.txt",
 			} );
 			const done = this.async();
-			grunt.file.write( options.readmeFile, "hoi" );
+			// Grunt.file.write( options.readmeFile, "hoi" );
 			const newVersion = grunt.option( "plugin-version" );
 			// Strip off the RC part from the current plugin version.
 			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
@@ -34,17 +32,22 @@ module.exports = function( grunt ) {
 			const strippedVersion = splitVersion[ 0 ];
 			const preReleaseNumber = splitVersion[ 1 ];
 			// Const versionNumber = parseVersion( strippedVersion );
-
+			console.log( "TEEEST" + preReleaseNumber );
 			// Load the file from the wiki (yoast-cli)
 			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
 			var i;
 			for ( i = 1; i < preReleaseNumber; i++ ) {
+				console.log( i );
 				if ( preReleaseNumber === 1 ) {
 					grunt.verbose.writeln( "use wiki file " );
+					console.log( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
+					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md" );
 					// Grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
+					console.log( changelog );
+					// Grunt.file.write( options.readmeFile, changelog );
 				}
 			}
 

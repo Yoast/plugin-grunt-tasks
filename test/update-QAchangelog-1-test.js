@@ -10,8 +10,14 @@ const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
 const tempFilePath = [ "tmp/changelogqa.md" ];
 const expectedFilePath = [ "test/expected/changelogqa.md" ];
-const srcWikimdfile = "test/fixtures/wordpress-seo-15.9.md";
-const dstWikimdfile = "./.tmp/wordpress-seo-15.9.md";
+const srcWikimdfile1 = "test/fixtures/qachangelog-16.1-RC1.md";
+const dstWikimdfile1 = "./.tmp/qachangelog-16.1-RC1.md";
+const srcWikimdfile2 = "test/fixtures/qachangelog-16.1-RC2.md";
+const dstWikimdfile2 = "./.tmp/qachangelog-16.1-RC2.md";
+const srcWikimdfile3 = "test/fixtures/qachangelog-16.1-RC3.md";
+const dstWikimdfile3 = "./.tmp/qachangelog-16.1-RC3.md";
+const srcWikimdfile4 = "test/fixtures/qachangelog-16.1-RC4.md";
+const dstWikimdfile4 = "./.tmp/qachangelog-16.1-RC4.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let ChanceLogTask;
 
@@ -30,15 +36,18 @@ exports.testChangeLog3Command = {
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
 		grunt.file.mkdir( "./tmp" );
-		grunt.file.copy( srcWikimdfile, dstWikimdfile );
+		grunt.file.copy( srcWikimdfile1, dstWikimdfile1 );
+		grunt.file.copy( srcWikimdfile2, dstWikimdfile2 );
+		grunt.file.copy( srcWikimdfile3, dstWikimdfile3 );
+		grunt.file.copy( srcWikimdfile4, dstWikimdfile4 );
 		grunt.log.writeln( "setup is done!" );
 
-		runTask.option( "plugin-version", "15.9-beta2" );
+		runTask.option( "plugin-version", "16.1-RC5" );
 		ChanceLogTask = runTask.task( "build-qa-changelog", {
 			"wordpress-seo": {
 				options: {
 					readmeFile: "tmp/changelogqa.md",
-					typeOfPreRelease: "beta",
+					typeOfPreRelease: "RC",
 					pluginSlug: "wordpress-seo-premium",
 				},
 			},
