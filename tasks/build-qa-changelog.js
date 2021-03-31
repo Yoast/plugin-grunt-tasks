@@ -76,19 +76,59 @@ module.exports = function( grunt ) {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
 					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
 					grunt.verbose.writeln( gitlog );
-					grunt.file.write( ".tmp/" + strippedVersion + "-" + options.typeOfPreRelease + i, gitlog );
+					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
 			}
 
-			// Const gitlog = await getGitTagChangeLog( "16.1-beta1", options.pluginSlug, grunt );
-			// Console.log( gitlog );
 
-
-			// Console.log( responseData );
 			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
 	);
 };
 
+/**
+ * A task to remove old changelog entries and add new ones in changlog file..
+ *
+ * @param {Object} grunt The grunt helper object.
+ * @returns {void}
+ */
+module.exports = function( grunt ) {
+	grunt.registerMultiTask(
+		"download-qa-changelogs",
+		"download qa logs for a specific number form the github release",
+		async function() {
+			const options = this.options( {
+				typeOfPreRelease: "RC",
+				readmeFile: "/tmp/readme.txt",
+			} );
+			const done = this.async();
+			grunt.file.write( options.readmeFile, "hoi" );
+			const newVersion = grunt.option( "plugin-version" );
+			// Strip off the RC part from the current plugin version.
+			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
+
+			// From the resulting array, get the first value (the second value is the RC/beta number).
+			const strippedVersion = splitVersion[ 0 ];
+			const preReleaseNumber = splitVersion[ 1 ];
+			// Const versionNumber = parseVersion( strippedVersion );
+
+			// Load the file from the wiki (yoast-cli)
+			grunt.verbose.writeln( "load wiki file " );
+			// Remove the already mentioned entries
+			var i;
+			for ( i = 1; i < preReleaseNumber; i++ ) {
+				if ( preReleaseNumber === 1 ) {
+					grunt.verbose.writeln( "use wiki file " );
+				} else {
+					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
+					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
+					grunt.verbose.writeln( gitlog );
+					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
+				}
+			}
+			done();
+		}
+	);
+};
 
