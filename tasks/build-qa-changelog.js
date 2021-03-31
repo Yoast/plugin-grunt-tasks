@@ -30,7 +30,7 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 	}
 	// / bl message: 'Not Found',
 	// Console.log( responseData );
-	const body = responseData.body ? typeof responseData.body === "string" : "";
+	const body = typeof responseData.body === "string" ? responseData.body  : "";
 	return body;
 }
 
