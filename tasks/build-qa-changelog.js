@@ -75,25 +75,14 @@ module.exports = function( grunt ) {
 					console.log( "use wiki file " );
 				} else {
 					console.log( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
+					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
+					console.log( gitlog );
 				}
 			}
 
-			const gitlog = await getGitTagChangeLog( "16.1-beta1", options.pluginSlug, grunt );
-			console.log( gitlog );
+			// Const gitlog = await getGitTagChangeLog( "16.1-beta1", options.pluginSlug, grunt );
+			// Console.log( gitlog );
 
-			// // Curl -H "Authorization: token ${GITHUB_ACCESS_TOKEN}" -H "Accept: application/vnd.github.v3+json" -s https://api.github.com/repos/${GITHUBACOUNT}/${FOLDER_NAME}/releases/tags/16.1-beta1 | jq .body
-			// Let responseData;
-			// Try {
-			// 	Const response = await githubApi( "yoast/" + options.pluginSlug + "/releases/tags/" + "16.1-beta1", null, "GET" );
-			// 	If ( ! response.ok ) {
-			// 		// Await logError( response, grunt );
-			// 		Grunt.log.error( response );
-			// 	}
-			// 	ResponseData = await response.json();
-			// } catch ( error ) {
-			// 	Grunt.log.error( error );
-			// 	Grunt.fail.fatal( "An error occurred." );
-			// }
 
 			// Console.log( responseData );
 			grunt.file.write( options.readmeFile, "hoi" );
