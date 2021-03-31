@@ -63,9 +63,6 @@ module.exports = function( grunt ) {
 					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
 				}
 			}
-
-
-			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
 	);
