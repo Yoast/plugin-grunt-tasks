@@ -76,6 +76,7 @@ module.exports = function( grunt ) {
 					console.log( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
 					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
 					console.log( gitlog );
+					grunt.file.write( ".tmp/" + strippedVersion + "-" + options.typeOfPreRelease + i, gitlog );
 				}
 			}
 
