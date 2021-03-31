@@ -11,7 +11,7 @@ const githubApi = require( "../lib/github-api" );
  *
  * @param {string} pluginTag The name of the milestone
  * @param {string} pluginSlug The slug name of the repo
- * @param {object} grunt
+ * @param {object} grunt the grunt object
  *
  * @returns {Promise<object|null>} A promise resolving to a single milestone.
  */
@@ -21,7 +21,6 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 	try {
 		const response = await githubApi( "yoast/" + pluginSlug + "/releases/tags/" + pluginTag, null, "GET" );
 		if ( ! response.ok ) {
-			// Await logError( response, grunt );
 			grunt.log.error( response );
 		}
 		responseData = await response.json();
@@ -29,10 +28,13 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 		grunt.log.error( error );
 		grunt.fail.fatal( "An error occurred." );
 	}
-
-	console.log( responseData );
-
-	return responseData.body;
+	// / bl message: 'Not Found',
+	// Console.log( responseData );
+	const body = responseData.body;
+	if ( typeof body === "string" ) {
+		return body;
+	}
+	return "";
 }
 
 
