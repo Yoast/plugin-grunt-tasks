@@ -16,7 +16,9 @@ module.exports = function( grunt ) {
 			} );
 			const done = this.async();
 
-			const newVersion = grunt.option( "plugin-version" );
+			// Grabb te XX.X only from XX.X-RCY/XX.X-betaY
+			const fullVersion = grunt.option( "plugin-version" );
+			const newVersion = fullVersion.split( "-" )[ 0 ];
 			grunt.file.write( "/tmp/.env", `GITHUB_API_TOKEN=${process.env.GITHUB_ACCESS_TOKEN}` );
 
 			console.log( newVersion );
