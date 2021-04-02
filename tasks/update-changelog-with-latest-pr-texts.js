@@ -28,6 +28,10 @@ module.exports = function( grunt ) {
 			// Grabb te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
+			if ( fullVersion.match( "beta" ) ) {
+				options.daysToAddForNexRelease = options.daysToAddForNexRelease + 7;
+			}
+
 			const versionNumber = parseVersion( newVersion );
 			const suffixes = {
 				one: "st",
