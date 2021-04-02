@@ -25,7 +25,9 @@ module.exports = function( grunt ) {
 				daysToAddForNexRelease: 14,
 			} );
 			const done = this.async();
-			const newVersion = grunt.option( "plugin-version" );
+			// Grabb te XX.X only from XX.X-RCY/XX.X-betaY
+			const fullVersion = grunt.option( "plugin-version" );
+			const newVersion = fullVersion.split( "-" )[ 0 ];
 			const versionNumber = parseVersion( newVersion );
 			const suffixes = {
 				one: "st",
