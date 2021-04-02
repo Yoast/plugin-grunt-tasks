@@ -20,7 +20,7 @@ module.exports = function( grunt ) {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
 				typeOfPreRelease: "RC",
-				readmeFile: "/tmp/readme.txt",
+				readmeFile: ".tmp/QA-Changelog.md",
 			} );
 			const done = this.async();
 			// Grunt.file.write( options.readmeFile, "hoi" );
@@ -31,33 +31,28 @@ module.exports = function( grunt ) {
 			// From the resulting array, get the first value (the second value is the RC/beta number).
 			const strippedVersion = splitVersion[ 0 ];
 			const preReleaseNumber = splitVersion[ 1 ];
-			// Const versionNumber = parseVersion( strippedVersion );
-			console.log( "TEEEST" + preReleaseNumber );
+
 			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
-			const wikimd = grunt.file.read( "./.tmp/wordpress-seo-premium-16.1.md" );
-			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd );
+			const wikimd = grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + strippedVersion + ".md" );
+			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd, false, false );
 
 			// Load the file from the wiki (yoast-cli)
 			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
 			var i;
 			for ( i = 1; i < preReleaseNumber; i++ ) {
-				console.log( i );
 				if ( preReleaseNumber === 1 ) {
 					grunt.verbose.writeln( "use wiki file " );
-					console.log( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
 					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md" );
-					changelogBuilder.parseChancelogLines( changelog );
-
-					// Console.log( changelog );
+					changelogBuilder.parseChancelogLines( changelog, true );
 				}
 			}
 
-			console.log( ">" + changelogBuilder.qaChangelog + "<" );
-			grunt.file.write( options.readmeFile, "hoi" );
+			// Console.log( ">" + changelogBuilder.qaChangelog + "<" );
+			grunt.file.write( options.readmeFile, changelogBuilder.qaChangelog );
 			done();
 		}
 	);
