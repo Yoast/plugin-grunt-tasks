@@ -66,7 +66,7 @@ module.exports = function( grunt ) {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + typeOfPreRelease + i );
 					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + typeOfPreRelease + i, options.pluginSlug, grunt );
 					grunt.verbose.writeln( gitlog );
-					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + typeOfPreRelease + i + ".md", gitlog );
+					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + typeOfPreRelease + i + ".md", gitlog.replace( /(\r\n|\n|\r)/gm, " " ) );
 				}
 			}
 			done();
