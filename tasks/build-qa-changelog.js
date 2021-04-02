@@ -25,6 +25,9 @@ module.exports = function( grunt ) {
 			const done = this.async();
 			// Grunt.file.write( options.readmeFile, "hoi" );
 			const newVersion = grunt.option( "plugin-version" );
+			if ( newVersion.match( "beta" ) ) {
+				options.typeOfPreRelease = "beta";
+			}
 			// Strip off the RC part from the current plugin version.
 			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
 
