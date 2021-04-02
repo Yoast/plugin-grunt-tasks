@@ -1,7 +1,7 @@
 // Custom task
 module.exports = {
 	options: {
-		useEditDistanceCompare: true,
+		useEditDistanceCompare: false,
 		pluginSlug: "<%= pluginSlug %>",
 	},
 };

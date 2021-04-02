@@ -49,7 +49,7 @@ exports.testChangeLog3Command = {
 		ChanceLogTask = runTask.task( "build-qa-changelog", {
 			"wordpress-seo": {
 				options: {
-					readmeFile: "tmp/changelogqa.md",
+					outputFile: "tmp/changelogqa.md",
 					typeOfPreRelease: "RC",
 					pluginSlug: "wordpress-seo-premium",
 				},

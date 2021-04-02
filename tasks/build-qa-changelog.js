@@ -20,7 +20,7 @@ module.exports = function( grunt ) {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
 				typeOfPreRelease: "RC",
-				readmeFile: ".tmp/QA-Changelog.md",
+				outputFile: ".tmp/QA-Changelog.md",
 			} );
 			const done = this.async();
 			// Grunt.file.write( options.readmeFile, "hoi" );
@@ -52,7 +52,7 @@ module.exports = function( grunt ) {
 			}
 
 			// Console.log( ">" + changelogBuilder.qaChangelog + "<" );
-			grunt.file.write( options.readmeFile, changelogBuilder.qaChangelog );
+			grunt.file.write( options.outputFile, changelogBuilder.qaChangelog );
 			done();
 		}
 	);
