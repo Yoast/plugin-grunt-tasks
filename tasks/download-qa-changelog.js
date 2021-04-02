@@ -43,15 +43,14 @@ module.exports = function( grunt ) {
 		"support function for the build-qa-changelog this will download the needed log entries from github",
 		async function() {
 			const options = this.options( {
-				typeOfPreRelease: "RC",
+
 			} );
 			const done = this.async();
 			const newVersion = grunt.option( "plugin-version" );
-			if ( newVersion.match( "beta" ) ) {
-				options.typeOfPreRelease = "beta";
-			}
+			const typeOfPreRelease = ( newVersion.match( "beta" ) ) ? "beta" : "RC";
+
 			// Strip off the RC part from the current plugin version.
-			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
+			const splitVersion = newVersion.split( "-" + typeOfPreRelease );
 
 			// From the resulting array, get the first value (the second value is the RC/beta number).
 			const strippedVersion = splitVersion[ 0 ];
@@ -64,10 +63,10 @@ module.exports = function( grunt ) {
 				if ( preReleaseNumber === 1 ) {
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
-					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
-					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + options.typeOfPreRelease + i, options.pluginSlug, grunt );
+					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + typeOfPreRelease + i );
+					const gitlog = await getGitTagChangeLog( strippedVersion + "-" + typeOfPreRelease + i, options.pluginSlug, grunt );
 					grunt.verbose.writeln( gitlog );
-					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
+					grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + typeOfPreRelease + i + ".md", gitlog );
 				}
 			}
 			done();

@@ -50,7 +50,6 @@ exports.testChangeLog3Command = {
 			"wordpress-seo": {
 				options: {
 					outputFile: "tmp/changelogqa.md",
-					typeOfPreRelease: "RC",
 					pluginSlug: "wordpress-seo-premium",
 				},
 			},

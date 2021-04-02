@@ -19,17 +19,16 @@ module.exports = function( grunt ) {
 			const options = this.options( {
 				useEditDistanceCompare: false,
 				useANewLineAfterHeader: false,
-				typeOfPreRelease: "RC",
 				outputFile: ".tmp/QA-Changelog.md",
 			} );
 			const done = this.async();
 			// Grunt.file.write( options.readmeFile, "hoi" );
 			const newVersion = grunt.option( "plugin-version" );
-			if ( newVersion.match( "beta" ) ) {
-				options.typeOfPreRelease = "beta";
-			}
+			const typeOfPreRelease = ( newVersion.match( "beta" ) ) ? "beta" : "RC";
+
+
 			// Strip off the RC part from the current plugin version.
-			const splitVersion = newVersion.split( "-" + options.typeOfPreRelease );
+			const splitVersion = newVersion.split( "-" + typeOfPreRelease );
 
 			// From the resulting array, get the first value (the second value is the RC/beta number).
 			const strippedVersion = splitVersion[ 0 ];
@@ -48,8 +47,8 @@ module.exports = function( grunt ) {
 				if ( preReleaseNumber === 1 ) {
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
-					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
-					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md" );
+					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + typeOfPreRelease + i );
+					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + typeOfPreRelease + i + ".md" );
 					changelogBuilder.parseChancelogLines( changelog, true );
 				}
 			}
