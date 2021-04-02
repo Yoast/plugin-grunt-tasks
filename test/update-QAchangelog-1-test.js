@@ -18,6 +18,8 @@ const srcWikimdfile3 = "test/fixtures/qachangelog-16.1-RC3.md";
 const dstWikimdfile3 = "./.tmp/qachangelog-16.1-RC3.md";
 const srcWikimdfile4 = "test/fixtures/qachangelog-16.1-RC4.md";
 const dstWikimdfile4 = "./.tmp/qachangelog-16.1-RC4.md";
+const srcWikimdfile5 = "test/fixtures/wordpress-seo-premium-16.1.md";
+const dstWikimdfile5 = "./.tmp/wordpress-seo-premium-16.1.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let ChanceLogTask;
 
@@ -40,6 +42,7 @@ exports.testChangeLog3Command = {
 		grunt.file.copy( srcWikimdfile2, dstWikimdfile2 );
 		grunt.file.copy( srcWikimdfile3, dstWikimdfile3 );
 		grunt.file.copy( srcWikimdfile4, dstWikimdfile4 );
+		grunt.file.copy( srcWikimdfile5, dstWikimdfile5 );
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.1-RC5" );

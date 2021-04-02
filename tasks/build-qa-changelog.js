@@ -2,7 +2,7 @@
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
 // Const escapeRegExp = require( "../lib/escape-regexp" );
-// Const ChangelogBuilder = require( "../lib/logbuilder" );
+const ChangelogBuilder = require( "../lib/logbuilder" );
 
 
 /**
@@ -33,6 +33,11 @@ module.exports = function( grunt ) {
 			const preReleaseNumber = splitVersion[ 1 ];
 			// Const versionNumber = parseVersion( strippedVersion );
 			console.log( "TEEEST" + preReleaseNumber );
+			// eslint-disable-next-line max-len
+			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
+			const wikimd = grunt.file.read( "./.tmp/wordpress-seo-premium-16.1.md" );
+			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd );
+
 			// Load the file from the wiki (yoast-cli)
 			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
@@ -45,13 +50,13 @@ module.exports = function( grunt ) {
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + options.typeOfPreRelease + i );
 					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md" );
-					// Grunt.file.write( ".tmp/qachangelog-" + strippedVersion + "-" + options.typeOfPreRelease + i + ".md", gitlog );
-					console.log( changelog );
-					// Grunt.file.write( options.readmeFile, changelog );
+					changelogBuilder.parseChancelogLines( changelog );
+
+					// Console.log( changelog );
 				}
 			}
 
-
+			console.log( ">" + changelogBuilder.qaChangelog + "<" );
 			grunt.file.write( options.readmeFile, "hoi" );
 			done();
 		}
