@@ -76,11 +76,11 @@ module.exports = function( grunt ) {
 			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
 			var i;
-			var header = "Changes compared to ";
+			var header = "Changes compared to " + previusVersion( strippedVersion ) + "\n\n";
 			for ( i = 1; i < preReleaseNumber; i++ ) {
 				if ( preReleaseNumber === 1 ) {
 					// Set header tpo previos main
-					header = "Changes compared to " + previusVersion( strippedVersion );
+					header = "Changes compared to " + previusVersion( strippedVersion ) + "\n\n";
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + typeOfPreRelease + i );
