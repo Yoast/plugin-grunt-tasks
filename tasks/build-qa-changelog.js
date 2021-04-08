@@ -1,8 +1,42 @@
 /* eslint-disable complexity */
-// Const parseVersion = require( "../lib/parse-version" );
-// Const _isEmpty = require( "lodash/isEmpty" );
-// Const escapeRegExp = require( "../lib/escape-regexp" );
+const parseVersion = require( "../lib/parse-version" );
 const ChangelogBuilder = require( "../lib/logbuilder" );
+
+/**
+ * A calulate previus Version
+ * @param {string} strippedVersion string
+ * @returns {string} previsu version string
+ */
+function previusVersion( strippedVersion ) {
+	const versionNumber = parseVersion( strippedVersion );
+	var patch = 0;
+	var major = 0;
+	var minor = 0;
+	if ( versionNumber.patch ) {
+		patch =  versionNumber.patch - 1;
+		major = versionNumber.major;
+		minor = versionNumber.minor;
+	} else {
+		if ( versionNumber.minor === 0 ) {
+			minor = 9;
+			major = versionNumber.major - 1;
+		} else {
+			major = versionNumber.major;
+			minor = versionNumber.minor - 1;
+		}
+	}
+	/* Ba
+		versionNumber.major
+		versionNumber.minor
+		versionNumber.patch
+	*/
+	var version = major + "." + minor;
+	if ( patch > 0 ) {
+		version = version + "." + patch;
+	}
+
+	return version;
+}
 
 
 /**
@@ -26,7 +60,6 @@ module.exports = function( grunt ) {
 			const newVersion = grunt.option( "plugin-version" );
 			const typeOfPreRelease = ( newVersion.match( "beta" ) ) ? "beta" : "RC";
 
-
 			// Strip off the RC part from the current plugin version.
 			const splitVersion = newVersion.split( "-" + typeOfPreRelease );
 
@@ -43,18 +76,22 @@ module.exports = function( grunt ) {
 			grunt.verbose.writeln( "load wiki file " );
 			// Remove the already mentioned entries
 			var i;
+			var header = "Changes compared to ";
 			for ( i = 1; i < preReleaseNumber; i++ ) {
 				if ( preReleaseNumber === 1 ) {
+					// Set header tpo previos main
+					header = "Changes compared to " + previusVersion( strippedVersion );
 					grunt.verbose.writeln( "use wiki file " );
 				} else {
 					grunt.verbose.writeln( "get from git " + strippedVersion + "-" + typeOfPreRelease + i );
 					const changelog = grunt.file.read( ".tmp/qachangelog-" + strippedVersion + "-" + typeOfPreRelease + i + ".md" );
 					changelogBuilder.parseChancelogLines( changelog, true );
+					header = "Changes compared to " + strippedVersion + "-" + typeOfPreRelease + i + "\n\n";
 				}
 			}
 
 			// Console.log( ">" + changelogBuilder.qaChangelog + "<" );
-			grunt.file.write( options.outputFile, changelogBuilder.qaChangelog );
+			grunt.file.write( options.outputFile, header + changelogBuilder.qaChangelog );
 			done();
 		}
 	);

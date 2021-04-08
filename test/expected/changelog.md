@@ -1,4 +1,4 @@
-### 16.0: April 13th, 2021
+### 16.0: April 20th, 2021
 Other:
 * Includes every change in Yoast SEO core 16.0. See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).
 
