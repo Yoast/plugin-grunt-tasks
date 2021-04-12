@@ -1897,10 +1897,12 @@ grunt.initConfig( {
 #### Using our configuration
 We implement the following configuration:
 - `options`
-    - The `useEditDistanceComapair` value is set to `true`.
+    - The `options.useEditDistanceComapair` value is set to `true`.
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
-    - The `options.commitChangelog`: true,
-
+    - The `options.commitChangelog` value is set to `true`,
+    - The `useANewLineAfterHeader` value is set to `true`,
+	- The `defaultChangelogEntrys` value is set to `""`,
+	- The `daysToAddForNexRelease` value is set to `14`,
 
 #### Overview
 In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
@@ -1910,7 +1912,6 @@ grunt.initConfig( {
         options: {},     // Global options.
         taskName: {      // The name of your task.
             options: {}, // Task-specific options.
-            src: {},     // Files to target.
         }
     }
 } )
@@ -1996,7 +1997,7 @@ Regexp to match the correct used to replace the cleaned (removed older entrys) c
 
 ##### defaultChangelogEntrys
 Type: `String`  
-Default value: '""'
+Default value: `""`
 
 Optional value to add default entrys to a new created section.
 
@@ -2007,6 +2008,12 @@ Type: `Boolean`
 Default: `true`
 
 Setting this will effect the format of the resulting changelog.
+
+##### daysToAddForNexRelease
+Type: `Integer`
+Default: `14`
+
+Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used) 
 
 ##### Usages Example
 ```js
@@ -2067,6 +2074,102 @@ get-latest-pr-texts: {
 }
 ```
 
+### The `build-qa-changelog` task
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.useEditDistanceComapair` value is set to `false`.
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.useANewLineAfterHeader` value is set to `false`.
+	- The `options.outputFile` is set to `.tmp/QA-Changelog.md`.
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+
+#### Overview
+In your project's Gruntfile, add a section named `build-qa-changelog` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    build-qa-changelog: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+#### Options
+##### useEditDistanceCompare
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` allows the deletion duplicate line items with a Distance Compare value higher than 90.
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### outputFile
+Type: `String`  
+Default value: `.tmp/QA-Changelog.md`
+
+The destination file to write the build changelog in.
+
+##### useANewLineAfterHeader
+Type: `Boolean`  
+Default: `false`
+
+Setting this will effect the format of the resulting changelog.
+
+##### Usages Example
+```js
+update-changelog-with-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            readmeFile: ".tmp/QA-Changelog.md",
+            pluginSlug: "wordpress-seo",
+            useANewLineAfterHeader: false,
+            useEditDistanceComapair: false,
+            
+        },
+    },
+}
+```
+
+### The `download-qa-changelog` task
+this is a support task for the `build-qa-changelog` task
+
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    
+#### Overview
+In your project's Gruntfile, add a section named `get-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### Usages Example
+```js
+get-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
 
 ## Release History
 
