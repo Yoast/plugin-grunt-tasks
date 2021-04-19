@@ -13,7 +13,7 @@ const ChangelogBuilder = require( "../lib/logbuilder" );
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"update-changelog-with-latest-pr-texts",
-		"Prompts the user for the changelog entries and updates the changelog entry in a file specified.",
+		"updates the changelog file with data retreaved from yoast-cli ",
 		// eslint-disable-next-line complexity
 		// eslint-disable-next-line max-statements
 		function() {

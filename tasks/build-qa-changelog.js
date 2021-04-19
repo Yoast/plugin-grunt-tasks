@@ -48,7 +48,7 @@ function previusVersion( strippedVersion ) {
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"build-qa-changelog",
-		"updates the changelog entry in a file specified.",
+		"Build a file needed for the QA changelog calculates this from github release entry's and yoast-cli generated git",
 		function() {
 			const options = this.options( {
 				useEditDistanceCompare: false,
