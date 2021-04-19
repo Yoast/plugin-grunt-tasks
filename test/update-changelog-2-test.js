@@ -48,7 +48,7 @@ exports.testChangeLog2Command = {
 					matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
 					replaceCleanedChangelog: "",
 					pluginSlug: "wordpress-seo-premium",
-					defaultChangelogEntrys: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
+					defaultChangelogEntries: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 					useANewLineAfterHeader: false,
 					useEditDistanceCompare: true,
 					commitChangelog: false,

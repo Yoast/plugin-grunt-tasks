@@ -1901,8 +1901,8 @@ We implement the following configuration:
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
     - The `options.commitChangelog` value is set to `true`,
     - The `useANewLineAfterHeader` value is set to `true`,
-	- The `defaultChangelogEntrys` value is set to `""`,
-	- The `daysToAddForNexRelease` value is set to `14`,
+	- The `defaultChangelogEntries` value is set to `""`,
+	- The `daysToAddForNextRelease` value is set to `14`,
 
 #### Overview
 In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
@@ -1995,7 +1995,7 @@ Default value: null
 
 Regexp to match the correct used to replace the cleaned (removed older entrys) changlog section with the new.
 
-##### defaultChangelogEntrys
+##### defaultChangelogEntries
 Type: `String`  
 Default value: `""`
 
@@ -2009,7 +2009,7 @@ Default: `true`
 
 Setting this will effect the format of the resulting changelog.
 
-##### daysToAddForNexRelease
+##### daysToAddForNextRelease
 Type: `Integer`
 Default: `14`
 
@@ -2029,7 +2029,7 @@ update-changelog-with-latest-pr-texts: {
             matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
             replaceCleanedChangelog: "= Earlier versions =",
             pluginSlug: "wordpress-seo",
-            defaultChangelogEntrys: "",
+            defaultChangelogEntries: "",
             useANewLineAfterHeader: true,
             useEditDistanceComapair: true,
             commitChangelog: false,
@@ -2136,7 +2136,7 @@ update-changelog-with-latest-pr-texts: {
 ```
 
 ### The `download-qa-changelog` task
-this is a support task for the `build-qa-changelog` task
+This is a support task for the `build-qa-changelog` task.
 
 #### Using our configuration
 We implement the following configuration:
@@ -2178,10 +2178,7 @@ get-latest-pr-texts: {
 - Adds `download-qa-changelog` Grunt task & config
 - Adds `get-latest-pr-texts` Grunt task & config
 - Adds `update-changelog-with-latest-pr-texts` Grunt task & config
-- Adds `update-changelog-1-test` test task
-- Adds `update-changelog-2-test` test task
-- Adds `update-changelog-3-test` test task
-- Adds `update-QAchangelog-1-test` test task
+
 
 ### 2.0.0
 - Removes watch configuration for JS & CSS. From now on plugins need to have their own `watch.js` file.

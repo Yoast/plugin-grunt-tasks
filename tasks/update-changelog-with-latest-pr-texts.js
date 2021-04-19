@@ -13,7 +13,7 @@ const ChangelogBuilder = require( "../lib/logbuilder" );
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"update-changelog-with-latest-pr-texts",
-		"updates the changelog file with data retreaved from yoast-cli ",
+		"updates the changelog file with data retreived from yoast-cli.",
 		// eslint-disable-next-line complexity
 		// eslint-disable-next-line max-statements
 		function() {
@@ -21,15 +21,15 @@ module.exports = function( grunt ) {
 				useEditDistanceCompare: false,
 				commitChangelog: false,
 				useANewLineAfterHeader: true,
-				defaultChangelogEntrys: "",
-				daysToAddForNexRelease: 14,
+				defaultChangelogEntries: "",
+				daysToAddForNextRelease: 14,
 			} );
 			const done = this.async();
-			// Grabb te XX.X only from XX.X-RCY/XX.X-betaY
+			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
 			if ( fullVersion.match( "beta" ) ) {
-				options.daysToAddForNexRelease = options.daysToAddForNexRelease + 7;
+				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
 			}
 
 			const versionNumber = parseVersion( newVersion );
@@ -43,9 +43,9 @@ module.exports = function( grunt ) {
 				type: "ordinal",
 			} );
 			/**
-	 		* Append suffix to number
-	 		* @param {int} number changelos to be parsed .
-	 		* @returns {string}  number with suffix appended
+	 		* Append suffix to number.
+	 		* @param {int} number changelogs to be parsed.
+	 		* @returns {string} number with suffix appended.
 	 		*/
 			const format = ( number ) => `${number}${suffixes[ pr.select( number ) ]}`;
 
@@ -105,19 +105,19 @@ module.exports = function( grunt ) {
 
 			// If the current version is already in the changelog, retrieve the full readme and let the user edit it.
 			if ( containsCurrentVersion ) {
-				// Get the changelog entry's for the current version from the readme.
+				// Get the changelog entries for the current version from the readme.
 				const changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 				// eslint-disable-next-line max-len
 				const matchCorrectHeader =  options.matchCorrectHeader.replace( new RegExp( "VERSIONNUMBER" ), escapeRegExp( changelogVersionNumber ) );
 				const matchCorrectLines = options.matchCorrectLines.replace( new RegExp( "VERSIONNUMBER" ), escapeRegExp( changelogVersionNumber ) );
-				const currentChangelogEntriesMatches = changelog.match( new RegExp( matchCorrectLines,  ) );
+				const currentChangelogEntriesMatches = changelog.match( new RegExp( matchCorrectLines ) );
 
 				var currentChangelogEntries = "";
 				if ( currentChangelogEntriesMatches ) {
 					currentChangelogEntries = `${currentChangelogEntriesMatches[ 0 ]}`;
 				}
 
-				// Get the header from the changelog entry's
+				// Get the header from the changelog entries
 
 				const currentChangelogEntriesHeaderMatches = changelog.match( new RegExp( matchCorrectHeader,  ) );
 				var currentChangelogEntriesHeader = "";
@@ -154,14 +154,14 @@ module.exports = function( grunt ) {
 				// Is date tag within 14 day next release 21 days
 				// If not next release 42 days
 				// Or login to jira get it there...
-				d.setDate( d.getDate() + ( 2 + options.daysToAddForNexRelease - d.getDay() ) );
+				d.setDate( d.getDate() + ( 2 + options.daysToAddForNextRelease - d.getDay() ) );
 				const ye = new Intl.DateTimeFormat( "en", { year: "numeric" } ).format( d );
 				const mo = new Intl.DateTimeFormat( "en", { month: "long" } ).format( d );
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
 				const datestring = `${mo} ${format( da )}, ${ye}`;
 
 				// eslint-disable-next-line max-len
-				changelogBuilder.parseChancelogLines( options.defaultChangelogEntrys.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
+				changelogBuilder.parseChancelogLines( options.defaultChangelogEntries.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 
 				var newChangelog = options.newHeadertemplate.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber );
 				newChangelog = newChangelog.replace( new RegExp( "DATESTRING" ), datestring ) + changelogBuilder.cleanChangelog;

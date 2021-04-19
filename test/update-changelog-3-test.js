@@ -49,7 +49,7 @@ exports.testChangeLog3Command = {
 					matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
 					replaceCleanedChangelog: "= Earlier versions =",
 					pluginSlug: "wordpress-seo",
-					defaultChangelogEntrys: "",
+					defaultChangelogEntries: "",
 					useANewLineAfterHeader: true,
 					useEditDistanceCompare: true,
 					commitChangelog: false,
