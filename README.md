@@ -2173,6 +2173,16 @@ get-latest-pr-texts: {
 
 ## Release History
 
+### 2.1
+- Adds `build-qa-changelog` Grunt task & config
+- Adds `download-qa-changelog` Grunt task & config
+- Adds `get-latest-pr-texts` Grunt task & config
+- Adds `update-changelog-with-latest-pr-texts` Grunt task & config
+- Adds `update-changelog-1-test` test task
+- Adds `update-changelog-2-test` test task
+- Adds `update-changelog-3-test` test task
+- Adds `update-QAchangelog-1-test` test task
+
 ### 2.0.0
 - Removes watch configuration for JS & CSS. From now on plugins need to have their own `watch.js` file.
 - Adds Grunt config file watching.
