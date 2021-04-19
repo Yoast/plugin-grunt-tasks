@@ -1933,7 +1933,7 @@ Default value: ``
 Type: `Boolean`  
 Default: `false`
 
-Setting this to `true` will commit the changes made to be commit to git.
+Setting this to `true` will commit the changes made to git.
 
 ##### readmeFile
 Type: `String`  
@@ -1945,7 +1945,7 @@ The source and destination file to update the changelog section in.
 Type: `String`  
 Default value: null
 
-Regexp to match the correct changelog section
+Regular expression to match the correct changelog section.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -1953,7 +1953,7 @@ _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 Type: `String`  
 Default value: null
 
-Regexp to match the correct the header 
+Regular expression to match the correct the header.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -1961,7 +1961,7 @@ _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 Type: `String`  
 Default value: null
 
-Template used to create a new changelog header
+Template used to create a new changelog header.
 
 _Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values_
 
@@ -1969,7 +1969,7 @@ _Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values_
 Type: `String`  
 Default value: null
 
-Regexp to match the correct Header in the  changelog section
+Regular expression to match the correct header in the changelog section.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -1977,7 +1977,7 @@ _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 Type: `String`  
 Default value: null
 
-Regexp to match the correct lines in the changelog section
+Regular expression to match the correct lines in the changelog section.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -1985,7 +1985,7 @@ _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 Type: `String`  
 Default value: null
 
-Regexp to match the correct section a the cleaned (removed older entrys) changlog section
+Regular expression to match the cleaned (removed older entries) changelog section.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -1993,13 +1993,13 @@ _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 Type: `String`  
 Default value: null
 
-Regexp to match the correct used to replace the cleaned (removed older entrys) changlog section with the new.
+Regular expression to replace the cleaned (removed older entries) changelog section with the new.
 
 ##### defaultChangelogEntries
 Type: `String`  
 Default value: `""`
 
-Optional value to add default entrys to a new created section.
+Optional value to add default entries to a new created section.
 
 _Note: `VERSIONNUMBER` will be replaced by a dynamic value_
 
@@ -2013,7 +2013,7 @@ Setting this will effect the format of the resulting changelog.
 Type: `Integer`
 Default: `14`
 
-Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used) 
+Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used).
 
 ##### Usages Example
 ```js
@@ -2031,7 +2031,7 @@ update-changelog-with-latest-pr-texts: {
             pluginSlug: "wordpress-seo",
             defaultChangelogEntries: "",
             useANewLineAfterHeader: true,
-            useEditDistanceComapair: true,
+            useEditDistanceCompare: true,
             commitChangelog: false,
         },
     },
@@ -2039,7 +2039,7 @@ update-changelog-with-latest-pr-texts: {
 ```
 
 ### The `get-latest-pr-texts` task
-this is a support task for the `update-changelog-with-latest-pr-texts` task
+This is a support task for the `update-changelog-with-latest-pr-texts` task.
 
 #### Using our configuration
 We implement the following configuration:
@@ -2082,7 +2082,7 @@ We implement the following configuration:
     - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
     - The `options.useANewLineAfterHeader` value is set to `false`.
 	- The `options.outputFile` is set to `.tmp/QA-Changelog.md`.
-    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.pluginSlug` value is from the Grunt configuration: `pluginSlug`.
 
 #### Overview
 In your project's Gruntfile, add a section named `build-qa-changelog` to the data object passed into `grunt.initConfig()`.
@@ -2102,7 +2102,7 @@ grunt.initConfig( {
 Type: `Boolean`  
 Default: `false`
 
-Setting this to `true` allows the deletion duplicate line items with a Distance Compare value higher than 90.
+Setting this to `true` allows the deletion of duplicate lines with a Distance Compare value higher than 90.
 
 ##### pluginSlug
 Type: `String`  
@@ -2112,7 +2112,7 @@ Default value: ``
 Type: `String`  
 Default value: `.tmp/QA-Changelog.md`
 
-The destination file to write the build changelog in.
+The destination file to write the built changelog in.
 
 ##### useANewLineAfterHeader
 Type: `Boolean`  
@@ -2174,10 +2174,10 @@ get-latest-pr-texts: {
 ## Release History
 
 ### 2.1
-- Adds `build-qa-changelog` Grunt task & config
-- Adds `download-qa-changelog` Grunt task & config
-- Adds `get-latest-pr-texts` Grunt task & config
-- Adds `update-changelog-with-latest-pr-texts` Grunt task & config
+- Adds `build-qa-changelog` Grunt task & config.
+- Adds `download-qa-changelog` Grunt task & config.
+- Adds `get-latest-pr-texts` Grunt task & config.
+- Adds `update-changelog-with-latest-pr-texts` Grunt task & config.
 
 
 ### 2.0.0
