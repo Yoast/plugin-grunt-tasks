@@ -235,7 +235,7 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 == Changelog ==
 
 = 16.0 =
-Release Date: April 20th, 2021
+Release Date: May 4th, 2021
 
 Bugfixes:
 
