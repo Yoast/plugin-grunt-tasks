@@ -8,7 +8,7 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"set-version",
 		"Sets a new version number.",
-		async function() {
+		function() {
 			const options = this.options(
 				{
 					base: "The JSON file base object for the target to be in.",
