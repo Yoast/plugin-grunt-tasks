@@ -52,7 +52,10 @@ This adds the following tasks to your plugin's repo (see below for usage):
 * [update-version](https://github.com/Yoast/plugin-grunt-tasks#the-update-version-task)
 * [watch](https://github.com/Yoast/plugin-grunt-tasks#the-watch-task)
 * [wp_deploy](https://github.com/Yoast/plugin-grunt-tasks#the-wp_deploy-task)
-
+* [update-changelog-with-latest-pr-texts](https://github.com/Yoast/plugin-grunt-tasks#the-update-changelog-with-latest-pr-texts-task)
+* [get-latest-pr-texts](https://github.com/Yoast/plugin-grunt-tasks#the-get-latest-pr-texts-task)
+* [build-qa-changelog-task](https://github.com/Yoast/plugin-grunt-tasks#the-build-qa-changelog-task)
+* [download-qa-changelog](https://github.com/Yoast/plugin-grunt-tasks##the-download-qa-changelog-task)
 
 ### The `addtextdomain` task
 See: [cedaro/grunt-wp-i18n](https://github.com/cedaro/grunt-wp-i18n)
@@ -1889,7 +1892,295 @@ grunt.initConfig( {
 ```
 
 
+
+
+
+### The `update-changelog-with-latest-pr-texts` task
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.useEditDistanceComapair` value is set to `true`.
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.commitChangelog` value is set to `true`,
+    - The `useANewLineAfterHeader` value is set to `true`,
+	- The `defaultChangelogEntries` value is set to `""`,
+	- The `daysToAddForNextRelease` value is set to `14`,
+
+#### Overview
+In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+#### Options
+##### useEditDistanceCompare
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` allows the deletion duplicate line items with a Distance Compare value higher than 90.
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+
+##### commitChangelog
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` will commit the changes made to git.
+
+##### readmeFile
+Type: `String`  
+Default value: null
+
+The source and destination file to update the changelog section in.
+
+##### releaseInChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchChangelogHeader
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct the header.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### newHeadertemplate
+Type: `String`  
+Default value: null
+
+Template used to create a new changelog header.
+
+_Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values_
+
+##### matchCorrectHeader
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct header in the changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchCorrectLines
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct lines in the changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to match the cleaned (removed older entries) changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### replaceCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to replace the cleaned (removed older entries) changelog section with the new.
+
+##### defaultChangelogEntries
+Type: `String`  
+Default value: `""`
+
+Optional value to add default entries to a new created section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### useANewLineAfterHeader
+Type: `Boolean`  
+Default: `true`
+
+Setting this will effect the format of the resulting changelog.
+
+##### daysToAddForNextRelease
+Type: `Integer`
+Default: `14`
+
+Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used).
+
+##### Usages Example
+```js
+update-changelog-with-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            readmeFile: "./readme.txt",
+            releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
+            matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
+            newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
+            matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
+            replaceCleanedChangelog: "= Earlier versions =",
+            pluginSlug: "wordpress-seo",
+            defaultChangelogEntries: "",
+            useANewLineAfterHeader: true,
+            useEditDistanceCompare: true,
+            commitChangelog: false,
+        },
+    },
+}
+```
+
+### The `get-latest-pr-texts` task
+This is a support task for the `update-changelog-with-latest-pr-texts` task.
+
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    
+#### Overview
+In your project's Gruntfile, add a section named `get-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### Usages Example
+```js
+get-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
+
+### The `build-qa-changelog` task
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.useEditDistanceComapair` value is set to `false`.
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.useANewLineAfterHeader` value is set to `false`.
+	- The `options.outputFile` is set to `.tmp/QA-Changelog.md`.
+    - The `options.pluginSlug` value is from the Grunt configuration: `pluginSlug`.
+
+#### Overview
+In your project's Gruntfile, add a section named `build-qa-changelog` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    build-qa-changelog: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+#### Options
+##### useEditDistanceCompare
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` allows the deletion of duplicate lines with a Distance Compare value higher than 90.
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### outputFile
+Type: `String`  
+Default value: `.tmp/QA-Changelog.md`
+
+The destination file to write the built changelog in.
+
+##### useANewLineAfterHeader
+Type: `Boolean`  
+Default: `false`
+
+Setting this will effect the format of the resulting changelog.
+
+##### Usages Example
+```js
+update-changelog-with-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            readmeFile: ".tmp/QA-Changelog.md",
+            pluginSlug: "wordpress-seo",
+            useANewLineAfterHeader: false,
+            useEditDistanceComapair: false,
+            
+        },
+    },
+}
+```
+
+### The `download-qa-changelog` task
+This is a support task for the `build-qa-changelog` task.
+
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    
+#### Overview
+In your project's Gruntfile, add a section named `get-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### Usages Example
+```js
+get-latest-pr-texts: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
+
 ## Release History
+
+### 2.1
+- Adds `build-qa-changelog` Grunt task & config.
+- Adds `download-qa-changelog` Grunt task & config.
+- Adds `get-latest-pr-texts` Grunt task & config.
+- Adds `update-changelog-with-latest-pr-texts` Grunt task & config.
+
 
 ### 2.0.0
 - Removes watch configuration for JS & CSS. From now on plugins need to have their own `watch.js` file.

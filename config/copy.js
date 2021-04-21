@@ -6,10 +6,10 @@ module.exports = {
 				expand: true,
 				cwd: "css/src",
 				// TO DO: remove the exclude when ready
-				src: ["**/**.css"],
+				src: [ "**/**.css" ],
 				flatten: false,
 				dest: "css/dist/",
 			},
 		],
-	}
-}
+	},
+};

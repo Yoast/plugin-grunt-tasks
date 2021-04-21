@@ -1,7 +1,7 @@
 {
 	"name": "@yoast/grunt-plugin-tasks",
 	"description": "Custom Yoast grunt tasks",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"homepage": "https://github.com/Yoast/",
 	"repository": {
 		"type": "git",
@@ -48,7 +48,8 @@
 	},
 	"devDependencies": {
 		"grunt-contrib-nodeunit": "^1.0.0",
-		"grunt-run-task": "^1.0.0"
+		"grunt-run-task": "^1.0.0",
+		"node-fetch": "^2.6.1"
 	},
 	"keywords": [
 		"gruntplugin"
