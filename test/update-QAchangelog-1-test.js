@@ -75,7 +75,6 @@ exports.testChangeLog3Command = {
 		function compareFiles( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {
 				const actual = grunt.file.read( file1 );
-				// Console.log(actual)
 				const expected = grunt.file.read( file2 );
 				test.deepEqual( actual, expected, "Compare the file '" + file1 + "' with '" + file2 + "'" );
 				return;

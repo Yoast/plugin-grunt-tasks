@@ -19,7 +19,6 @@ async function getGitTagChangeLog( pluginTag, pluginSlug, grunt ) {
 				grunt.verbose.writeln( "request returnd status 404, release: " + pluginTag + " does not seem to exist" );
 			} else {
 				grunt.log.error( response.status );
-			// Console.log( response );
 			}
 		}
 		responseData = await response.json();

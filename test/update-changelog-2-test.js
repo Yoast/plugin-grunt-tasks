@@ -10,8 +10,8 @@ const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
 const tempFilePath = [ "tmp/changelog.md" ];
 const expectedFilePath = [ "test/expected/changelog.md" ];
-const srcWikimdfile = "test/fixtures/wordpress-seo-premium-16.0.md"
-const dstWikimdfile = "./.tmp/wordpress-seo-premium-16.0.md"
+const srcWikimdfile = "test/fixtures/wordpress-seo-premium-16.0.md";
+const dstWikimdfile = "./.tmp/wordpress-seo-premium-16.0.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let ChanceLogTask;
 
@@ -29,19 +29,19 @@ exports.testChangeLog2Command = {
 			grunt.log.writeln( "\n [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[ i ] + "'" );
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
-		grunt.file.mkdir("./tmp")
-		grunt.file.copy(srcWikimdfile , dstWikimdfile)
+		grunt.file.mkdir( "./tmp" );
+		grunt.file.copy( srcWikimdfile, dstWikimdfile );
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.0" );
 		ChanceLogTask = runTask.task( "update-changelog-with-latest-pr-texts", {
 			"wordpress-seo-premium": {
 				options: {
-					// premium header:
+					// Premium header:
 					// ### 15.9: February 23rd, 2021
 					readmeFile: "tmp/changelog.md",
 					releaseInChangelog: /[#] \d+\.\d+(\.\d+)?\: /g,
-					matchChangelogHeader:  /^/ig,
+					matchChangelogHeader: /^/ig,
 					newHeadertemplate: "### " + "VERSIONNUMBER" + ": " + "DATESTRING"  + "\n",
 					matchCorrectLines: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))",
 					matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|### \\d+[\.\\d]+\: |$))",
@@ -76,7 +76,6 @@ exports.testChangeLog2Command = {
 		function compareFiles( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {
 				const actual = grunt.file.read( file1 );
-				//console.log(actual)
 				const expected = grunt.file.read( file2 );
 				test.deepEqual( actual, expected, "Compare the file '" + file1 + "' with '" + file2 + "'" );
 				return;

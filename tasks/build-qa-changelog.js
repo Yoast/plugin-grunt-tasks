@@ -89,8 +89,6 @@ module.exports = function( grunt ) {
 					header = "Changes compared to " + strippedVersion + "-" + typeOfPreRelease + i + "\n\n";
 				}
 			}
-
-			// Console.log( ">" + changelogBuilder.qaChangelog + "<" );
 			grunt.file.write( options.outputFile, header + changelogBuilder.qaChangelog );
 			done();
 		}

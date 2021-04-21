@@ -10,8 +10,8 @@ const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
 const tempFilePath = [ "tmp/readme3.txt" ];
 const expectedFilePath = [ "test/expected/readme3.txt" ];
-const srcWikimdfile = "test/fixtures/wordpress-seo-15.9.md"
-const dstWikimdfile = "./.tmp/wordpress-seo-15.9.md"
+const srcWikimdfile = "test/fixtures/wordpress-seo-15.9.md";
+const dstWikimdfile = "./.tmp/wordpress-seo-15.9.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let ChanceLogTask;
 
@@ -29,21 +29,21 @@ exports.testChangeLog3Command = {
 			grunt.log.writeln( "\n [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[ i ] + "'" );
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
-		grunt.file.mkdir("./tmp")
-		grunt.file.copy(srcWikimdfile , dstWikimdfile)
+		grunt.file.mkdir( "./tmp" );
+		grunt.file.copy( srcWikimdfile, dstWikimdfile );
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "15.9" );
 		ChanceLogTask = runTask.task( "update-changelog-with-latest-pr-texts", {
 			"wordpress-seo": {
 				options: {
-					// free header:
+					// Free header:
 					// = 15.7 =
 					// Release Date: January 26th, 2021
 					readmeFile: "tmp/readme3.txt",
 					releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
-					matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
-					newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
+					matchChangelogHeader: /[=]= Changelog ==\n\n/ig,
+					newHeadertemplate: "== Changelog ==\n\n" + "= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
 					matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
 					matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
 					matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
@@ -77,7 +77,6 @@ exports.testChangeLog3Command = {
 		function compareFiles( file1, file2 ) {
 			if ( grunt.file.exists( file1 ) && grunt.file.exists( file2 ) ) {
 				const actual = grunt.file.read( file1 );
-				//console.log(actual)
 				const expected = grunt.file.read( file2 );
 				test.deepEqual( actual, expected, "Compare the file '" + file1 + "' with '" + file2 + "'" );
 				return;

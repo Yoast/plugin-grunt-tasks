@@ -21,7 +21,6 @@ module.exports = function( grunt ) {
 			const newVersion = fullVersion.split( "-" )[ 0 ];
 			grunt.file.write( "/tmp/.env", `GITHUB_API_TOKEN=${process.env.GITHUB_ACCESS_TOKEN}` );
 
-			console.log( newVersion );
 			grunt.config( "shell.get-changelog-lines-with-wiki-yoast-cli.command", ( [
 				"mkdir -p ./.tmp",
 				"cd /tmp/",
