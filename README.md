@@ -2175,6 +2175,9 @@ get-latest-pr-texts: {
 
 ## Release History
 
+### 2.1.1
+- fix issue with finding correct yoast-cli option
+
 ### 2.1
 - Adds `build-qa-changelog` Grunt task & config.
 - Adds `download-qa-changelog` Grunt task & config.
