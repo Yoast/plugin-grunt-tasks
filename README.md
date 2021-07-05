@@ -2176,6 +2176,10 @@ get-latest-pr-texts: {
 ## Release History
 
 ### 2.1.1
+- Fixes a issue with Z cutting of changelog lines
+- Fixes a issue with the install command. Props to [chrisschwartze](ttps://github.com/chrisschwartze).
+
+### 2.1.1
 - fix issue with finding correct yoast-cli option
 
 ### 2.1
