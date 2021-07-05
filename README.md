@@ -8,7 +8,7 @@ This plugin requires Grunt `^1.0.4`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-yoast-tasks --save-dev
+npm i @yoast/grunt-plugin-tasks --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this bit of JavaScript:
@@ -2174,6 +2174,10 @@ get-latest-pr-texts: {
 ```
 
 ## Release History
+
+### 2.1.1
+- Fixes a issue with Z cutting of changelog lines
+- Fixes a issue with the install command. Props to [chrisschwartze](ttps://github.com/chrisschwartze).
 
 ### 2.1.1
 - fix issue with finding correct yoast-cli option
