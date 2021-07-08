@@ -234,13 +234,18 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 16.0 =
+= 16.7 =
 Release Date: July 20th, 2021
+
+Enhancements:
+
+* Upgrades our REST API to include individual keys/values for all of our meta tags, data and schema output. Read all about it in [this in-depth explanation about our REST API](https://yoa.st/rest-api).
 
 Bugfixes:
 
-* Fixes a bug where invalid breadcrumbs may show PHP warnings. 
-* Fixes a fatal error when a post ancestor is not an indexable.
+* Fixes a bug where a database entry would be added in the indexables table every time a WooCommerce order was created. 
+* Fixes a bug where the SEO optimization could run indefinitely when the database contained at least 25 faulty indexables without a permalink.
+* Fixes a bug where the Advanced section and Schema tab wouldn't be visible in the metabox for Editors. Props to [jordif](https://github.com/jordif).
 
 = 15.9 =
 Release Date: February 23rd, 2021
@@ -251,7 +256,6 @@ Enhancements:
 * Adds an image preview of the chosen image for the Facebook front page and default image.
 * Adds an image preview of the chosen image for the social images.
 * Improves interoperability and consistency in database queries.
-* Performance: prevents database queries for the homepage indexable.
 
 Bugfixes:
 
