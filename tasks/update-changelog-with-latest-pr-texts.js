@@ -23,6 +23,7 @@ module.exports = function( grunt ) {
 				useANewLineAfterHeader: true,
 				defaultChangelogEntries: "",
 				daysToAddForNextRelease: 14,
+				useTodayasReleaseDate: false,
 			} );
 			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
@@ -31,7 +32,7 @@ module.exports = function( grunt ) {
 			if ( fullVersion.match( "beta" ) ) {
 				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
 			}
-
+			let useTodayasReleaseDate = false;
 			const versionNumber = parseVersion( newVersion );
 			const suffixes = {
 				one: "st",
@@ -64,6 +65,10 @@ module.exports = function( grunt ) {
 					);
 				} )
 			);
+
+			if ( ! versionNumber.patch === 0 || options.useTodayasReleaseDate ) {
+				useTodayasReleaseDate = true;
+			}
 
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
@@ -130,7 +135,7 @@ module.exports = function( grunt ) {
 
 				// Create unique linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines( currentChangelogEntries );
-				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ) );
+				changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
 
 				// Put all parts togethor agian
 				// eslint-disable-next-line max-len
@@ -140,7 +145,7 @@ module.exports = function( grunt ) {
 				grunt.file.write( options.readmeFile, mergedReadme );
 				done();
 			} else {
-				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ) );
+				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
 				// If the current version is not in the changelog, build a new one from input file.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 
@@ -154,12 +159,17 @@ module.exports = function( grunt ) {
 				// Is date tag within 14 day next release 21 days
 				// If not next release 42 days
 				// Or login to jira get it there...
-				d.setDate( d.getDate() + ( 2 + options.daysToAddForNextRelease - d.getDay() ) );
+
+
+				if ( useTodayasReleaseDate ) {
+					d.setDate(  d.getDate() );
+				} else {
+					d.setDate( d.getDate() + ( 2 + options.daysToAddForNextRelease - d.getDay() ) );
+				}
 				const ye = new Intl.DateTimeFormat( "en", { year: "numeric" } ).format( d );
 				const mo = new Intl.DateTimeFormat( "en", { month: "long" } ).format( d );
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
 				const datestring = `${mo} ${format( da )}, ${ye}`;
-
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseChancelogLines( options.defaultChangelogEntries.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 

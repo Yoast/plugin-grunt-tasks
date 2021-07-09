@@ -70,7 +70,7 @@ module.exports = function( grunt ) {
 			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			const wikimd = grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + strippedVersion + ".md" );
-			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd, false, false );
+			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd, false, false, true );
 
 			// Load the file from the wiki (yoast-cli)
 			grunt.verbose.writeln( "load wiki file " );

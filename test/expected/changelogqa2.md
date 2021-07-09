@@ -29,6 +29,5 @@ Non user facing:
 * Renames `Job Posting` to `JobPosting` in the context of Schema. [#17157](https://github.com/Yoast/wordpress-seo/pull/17157)
 * Removes unnecessary validation logic and constants. [#17155](https://github.com/Yoast/wordpress-seo/pull/17155)
 * Moves function for checking whether plugin is network activated, and function for getting home url with a network activation check, to `url-helper.php`. [#17143](https://github.com/Yoast/wordpress-seo/pull/17143)
-* [@yoast/schema-blocks] Adds the `RecipeInstructions` instruction for adding instructions to a Yoast Recipe block. [#17142](https://github.com/Yoast/wordpress-seo/pull/17142)
 * Updates the Recipe ingredients block and the Recipe instructions block. [#17142](https://github.com/Yoast/wordpress-seo/pull/17142)
 

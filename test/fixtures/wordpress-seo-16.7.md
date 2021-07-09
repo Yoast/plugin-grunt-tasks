@@ -32,6 +32,7 @@ Bugfixes:
 * Fixes a bug where a database entry would be added in the indexables table every time a WooCommerce order was created.  [#17191](https://github.com/Yoast/wordpress-seo/pull/17191)
 * Fixes a bug where the SEO optimization could run indefinitely when the database contained at least 25 faulty indexables without a permalink. [#17185](https://github.com/Yoast/wordpress-seo/pull/17185)
 * Fixes a bug where the Advanced section and Schema tab wouldn't be visible in the metabox for Editors. Props to [jordif](https://github.com/jordif). [#17170](https://github.com/Yoast/wordpress-seo/pull/17170)
+* [@yoast/schema-blocks] test entry
 
 Enhancements:
 
