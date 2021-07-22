@@ -8,14 +8,15 @@
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
-const tempFilePath = [ "tmp/changelogqa2.md" ];
-const expectedFilePath = [ "test/expected/changelogqa2.md" ];
+const tempFilePath = [ "tmp/extracted.md" ];
+const expectedFilePath = [ "test/expected/extracted.md" ];
 const srcWikimdfile1 = "test/fixtures/wordpress-seo-16.7.md";
 const dstWikimdfile1 = "./.tmp/wordpress-seo-16.7.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
+
 let ChanceLogTask;
 
-exports.testChangeLog4Command = {
+exports.testChangeLog5Command = {
 	/**
 	 * @param {function} done Function to execute when done.
 	 * @returns {void}
@@ -34,10 +35,10 @@ exports.testChangeLog4Command = {
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.7-RC1" );
-		ChanceLogTask = runTask.task( "build-qa-changelog", {
+		ChanceLogTask = runTask.task( "extract-addon-pr-texts", {
 			"wordpress-seo": {
 				options: {
-					outputFile: "tmp/changelogqa2.md",
+					outputFile: "tmp/extracted.md",
 					pluginSlug: "wordpress-seo",
 				},
 			},
@@ -70,7 +71,7 @@ exports.testChangeLog4Command = {
 			grunt.fail.warn( "Expected files not found" );
 		}
 
-		const task = "build-qa-changelog";
+		const task = "extract-addon-pr-texts";
 		if ( grunt.task.exists( task ) ) {
 			for ( let i = 0; i < noOfFiles; i++ ) {
 				compareFiles( tempFilePath[ i ], expectedFilePath[ i ] );
