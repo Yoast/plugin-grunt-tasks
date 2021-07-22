@@ -45,7 +45,8 @@ module.exports = function( grunt ) {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element ), true  );
-				grunt.file.write( options.outputFolder + element.replace( "/", "--" ) + ".md", changelogBuilder.qaChangelog );
+				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
+				grunt.file.write( filename, changelogBuilder.qaChangelog );
 			} );
 
 			done();
