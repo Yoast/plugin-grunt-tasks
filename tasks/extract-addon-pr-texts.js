@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 		function() {
 			const options = this.options( {
 				all: true,
-				findThesePackages: [ "[@yoast/schema-blocks]", "[@yoast/seo]" ],
+				findThesePackages: [ ],
 			} );
 			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
@@ -28,16 +28,22 @@ module.exports = function( grunt ) {
 			if ( fullVersion.match( "beta" ) ) {
 				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
 			}
-			// eslint-disable-next-line no-console
-			console.log( newVersion );
 			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			// eslint-disable-next-line max-len
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
-			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true, escapeRegExp( "[@yoast/schema-blocks]" )  );
 
-			// Grunt.file.write( options.outputFile, "bla", );
+			// eslint-disable-next-line max-len
+			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true, escapeRegExp( element )  ) );
+
 			grunt.file.write( options.outputFile, changelogBuilder.qaChangelog );
+
+			options.findThesePackages.forEach( element => {
+				changelogBuilder.resetlog();
+				// eslint-disable-next-line max-len
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element )  );
+				grunt.file.write( "tmp/" + element.replace( "/", "-" ) + ".md", changelogBuilder.qaChangelog );
+			} );
 
 			done();
 		}
