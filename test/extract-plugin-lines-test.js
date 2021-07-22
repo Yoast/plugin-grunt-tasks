@@ -41,6 +41,7 @@ exports.testChangeLog5Command = {
 					outputFile: "tmp/extracted.md",
 					pluginSlug: "wordpress-seo",
 					findThesePackages: [ "[@yoast/schema-blocks]", "[@yoast/seo]" ],
+					outputFolder: "tmp/",
 				},
 			},
 		} );

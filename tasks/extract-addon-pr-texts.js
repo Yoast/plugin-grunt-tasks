@@ -20,6 +20,7 @@ module.exports = function( grunt ) {
 			const options = this.options( {
 				all: true,
 				findThesePackages: [ ],
+				outputFolder: "tmp/",
 			} );
 			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
@@ -42,7 +43,7 @@ module.exports = function( grunt ) {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element )  );
-				grunt.file.write( "tmp/" + element.replace( "/", "-" ) + ".md", changelogBuilder.qaChangelog );
+				grunt.file.write( options.outputFolder + element.replace( "/", "-" ) + ".md", changelogBuilder.qaChangelog );
 			} );
 
 			done();
