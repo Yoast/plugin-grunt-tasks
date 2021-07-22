@@ -37,13 +37,15 @@ module.exports = function( grunt ) {
 			// eslint-disable-next-line max-len
 			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true, escapeRegExp( element )  ) );
 
-			grunt.file.write( options.outputFile, changelogBuilder.qaChangelog );
-
+			const leftoveritems = changelogBuilder.qaChangelog;
+			if ( leftoveritems !==  "" ) {
+				grunt.file.write( options.outputFile, changelogBuilder.qaChangelog );
+			}
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element )  );
-				grunt.file.write( options.outputFolder + element.replace( "/", "-" ) + ".md", changelogBuilder.qaChangelog );
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element ), true  );
+				grunt.file.write( options.outputFolder + element.replace( "/", "--" ) + ".md", changelogBuilder.qaChangelog );
 			} );
 
 			done();

@@ -1,4 +1,4 @@
 Enhancements:
 
-* [wordpress-seo-premium] test left over entry.
+* [@yoast/seo] test Enhancements entry.
 
