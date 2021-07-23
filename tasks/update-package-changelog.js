@@ -27,13 +27,22 @@ module.exports = function( grunt ) {
 				changelogMd: "tmp/CHANGELOG1.md",
 				addthistochangelogMd: "tmp/yoast--schema-blocks.md",
 			} );
-			console.log( " go go go" );
+			// Test if there is input we need to add
+			if ( ! grunt.file.exists( options.addthistochangelogMd ) ) {
+				return;
+			}
+
 			const changelog = grunt.file.read( options.changelogMd );
 
-			console.log( "read: " + changelog );
-			// Check if the ## Future Release header already exists
-			console.log( " go go go" );
+			// Console.log( "read: " + changelog );
 
+
+			// Check if the ## Future Release header already exists
+
+			const currentChangelogEntriesMatches = changelog.match( new RegExp( "## Future Release\n(.|\n)*?(?=\n##\\W)" ) );
+			if  ( currentChangelogEntriesMatches ) {
+				console.log( "read: " + currentChangelogEntriesMatches[ 0 ] );
+			}
 			if ( options.commitChangelog ) {
 				// Stage the changed readme.txt.
 				grunt.config( "gitadd.addChangelog.files", { src: [ options.changelogMd ] } );
