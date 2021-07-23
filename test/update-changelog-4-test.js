@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-useless-concat */
 /**
  * A unit test for 'set-version.js'.
  *
