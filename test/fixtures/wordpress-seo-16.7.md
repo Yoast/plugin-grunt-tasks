@@ -32,10 +32,10 @@ Bugfixes:
 * Fixes a bug where a database entry would be added in the indexables table every time a WooCommerce order was created.  [#17191](https://github.com/Yoast/wordpress-seo/pull/17191)
 * Fixes a bug where the SEO optimization could run indefinitely when the database contained at least 25 faulty indexables without a permalink. [#17185](https://github.com/Yoast/wordpress-seo/pull/17185)
 * Fixes a bug where the Advanced section and Schema tab wouldn't be visible in the metabox for Editors. Props to [jordif](https://github.com/jordif). [#17170](https://github.com/Yoast/wordpress-seo/pull/17170)
-* [@yoast/schema-blocks] test bugfix entry.
+* [@yoast/schema-blocks] test bugfix entry. [#12345](https://github.com/Yoast/wordpress-seo/pull/12345)
 
 Enhancements:
 
 * Upgrades our REST API to include individual keys/values for all of our meta tags, data and schema output. Read all about it in [this in-depth explanation about our REST API](https://yoa.st/rest-api). [#17162](https://github.com/Yoast/wordpress-seo/pull/17162)
-* [@yoast/seo] test Enhancements entry.
-* [wordpress-seo-premium] test left over entry.
+* [@yoast/seo] test Enhancements entry. [#1234](https://github.com/Yoast/wordpress-seo/pull/1234)
+* [wordpress-seo-premium] test left over entry. [#1234](https://github.com/Yoast/wordpress-seo/pull/1234)

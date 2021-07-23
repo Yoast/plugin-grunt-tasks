@@ -35,7 +35,6 @@ module.exports = function( grunt ) {
 				findTheseAddons: [ ],
 				outputFolder: "tmp/",
 			} );
-			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
@@ -70,7 +69,6 @@ module.exports = function( grunt ) {
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
 				writefileifnotempty( filename, changelogBuilder.qaChangelog, grunt );
 			} );
-			done();
 		}
 	);
 };
