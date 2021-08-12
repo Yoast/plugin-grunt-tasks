@@ -33,7 +33,7 @@ module.exports = function( grunt ) {
 			}
 
 			const changelog = grunt.file.read( options.changelogMd );
-
+			var currentChangelogSection = "";
 			// Console.log( "read: " + changelog );
 
 
@@ -41,8 +41,13 @@ module.exports = function( grunt ) {
 
 			const currentChangelogEntriesMatches = changelog.match( new RegExp( "## Future Release\n(.|\n)*?(?=\n##\\W)" ) );
 			if  ( currentChangelogEntriesMatches ) {
-				console.log( "read: " + currentChangelogEntriesMatches[ 0 ] );
+				currentChangelogSection =  currentChangelogEntriesMatches[ 0 ];
 			}
+			if ( currentChangelogSection !== "" ) {
+				console.log( "READ: " + currentChangelogSection );
+			}
+
+
 			if ( options.commitChangelog ) {
 				// Stage the changed readme.txt.
 				grunt.config( "gitadd.addChangelog.files", { src: [ options.changelogMd ] } );
