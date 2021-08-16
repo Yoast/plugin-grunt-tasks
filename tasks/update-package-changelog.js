@@ -1,8 +1,8 @@
 // /* eslint-disable complexity */
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
-// Const escapeRegExp = require( "../lib/escape-regexp" );
-// Const ChangelogBuilder = require( "../lib/logbuilder" );
+const escapeRegExp = require( "../lib/escape-regexp" );
+const ChangelogBuilder = require( "../lib/logbuilder" );
 
 /**
  * A task to remove old changelog entries and add new ones in changlog file..
@@ -20,10 +20,8 @@ module.exports = function( grunt ) {
 			const options = this.options( {
 				useEditDistanceCompare: false,
 				commitChangelog: false,
-				useANewLineAfterHeader: true,
+				useANewLineAfterHeader: false,
 				defaultChangelogEntries: "",
-				daysToAddForNextRelease: 14,
-				useTodayasReleaseDate: false,
 				changelogMd: "tmp/CHANGELOG1.md",
 				addthistochangelogMd: "tmp/yoast--schema-blocks.md",
 			} );
@@ -39,14 +37,26 @@ module.exports = function( grunt ) {
 
 			// Check if the ## Future Release header already exists
 
-			const currentChangelogEntriesMatches = changelog.match( new RegExp( "## Future Release\n(.|\n)*?(?=\n##\\W)" ) );
+			// eslint-disable-next-line no-control-regex
+			const currentChangelogEntriesMatches = changelog.match( new RegExp( "## Future Release\n(.|\n)*?(?=\n## )" ) );
 			if  ( currentChangelogEntriesMatches ) {
 				currentChangelogSection =  currentChangelogEntriesMatches[ 0 ];
 			}
 			if ( currentChangelogSection !== "" ) {
 				console.log( "READ: " + currentChangelogSection );
 			}
+			// Console.log( currentChangelogEntriesMatches );
+			const changelogBuilder = new ChangelogBuilder( grunt, currentChangelogSection, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug, true );
 
+			const extralines =  grunt.file.read( "tmp/yoast--schema-blocks.md" );
+			console.log( extralines );
+			changelogBuilder.parseYoastCliGeneratedChangelog( extralines );
+			// Console.log( "out " + changelogBuilder.packageChangelog );
+
+
+			const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  currentChangelogSection ) ), "## Future Release\n" + changelogBuilder.packageChangelog );
+
+			grunt.file.write( options.changelogMd, mergedReadme );
 
 			if ( options.commitChangelog ) {
 				// Stage the changed readme.txt.

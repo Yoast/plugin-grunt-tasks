@@ -6,9 +6,12 @@ All notable changes to this project will be documented in this file.
 We follow [Semantic Versioning](http://semver.org/).
 
 ## Future Release
-### Enhancements
-* TEST line here...
+### Bugfixes:
+* TEST line bugfix
+* TEST extra line.
 
+### Enhancements:
+* TEST line here...
 
 ## 1.10.0
 ### Enhancements:

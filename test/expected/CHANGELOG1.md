@@ -9,6 +9,14 @@ We follow [Semantic Versioning](http://semver.org/).
 ### Enhancements
 * TEST line here...
 
+### Bugfixes
+* TEST line bugfix
+* TEST extra line.
+* test bugfix entry.
+
+### Non user facing
+* Adds the `RecipeInstructions` instruction for adding instructions to a Yoast Recipe block.
+
 
 ## 1.10.0
 ### Enhancements:
