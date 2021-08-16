@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
+// Const { file } = require( "grunt" );
 const ChangelogBuilder = require( "../lib/logbuilder" );
 /**
  *
@@ -43,6 +44,10 @@ module.exports = function( grunt ) {
 
 			// eslint-disable-next-line max-len
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
+			if ( grunt.file.exists( options.outputFile ) ) {
+				changelogBuilder.parseChancelogLines( grunt.file.read( options.outputFile ) );
+			}
+
 
 			// eslint-disable-next-line max-len
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
@@ -52,7 +57,7 @@ module.exports = function( grunt ) {
 			// eslint-disable-next-line max-len
 			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
 
-
+			// First write left overs
 			writefileifnotempty( options.outputFile, changelogBuilder.qaChangelog, grunt );
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
