@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable complexity */
 const { file } = require( "grunt" );
 const ChangelogBuilder = require( "../lib/logbuilder" );
@@ -40,19 +41,18 @@ module.exports = function( grunt ) {
 				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
 			}
 
-			// eslint-disable-next-line max-len
+
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			if ( grunt.file.exists( options.outputFile ) ) {
 				changelogBuilder.parseChancelogLines( grunt.file.read( options.outputFile ) );
 			}
 
 
-			// eslint-disable-next-line max-len
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
 
-			// eslint-disable-next-line max-len
+
 			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
-			// eslint-disable-next-line max-len
+
 			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
 
 			// First write left overs
@@ -60,7 +60,7 @@ module.exports = function( grunt ) {
 			// Write packages files
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
-				// eslint-disable-next-line max-len
+
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
 				writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog );
@@ -68,7 +68,7 @@ module.exports = function( grunt ) {
 			// Write Addons files
 			options.findTheseAddons.forEach( element => {
 				changelogBuilder.resetlog();
-				// eslint-disable-next-line max-len
+
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
 				writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog );
