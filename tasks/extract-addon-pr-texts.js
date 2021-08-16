@@ -16,7 +16,6 @@ function writefileifnotempty( filename, data, grunt ) {
 	}
 }
 
-
 /**
  * A task to remove old changelog entries and add new ones in changlog file..
  *
