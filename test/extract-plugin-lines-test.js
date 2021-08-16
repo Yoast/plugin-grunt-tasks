@@ -35,7 +35,7 @@ exports.testChangeLog5Command = {
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.7-RC1" );
-		ChanceLogTask = runTask.task( "extract-addon-pr-texts", {
+		ChanceLogTask = runTask.task( "extract-extra-pr-texts-from-yoast-cli-md", {
 			"wordpress-seo": {
 				options: {
 					outputFile: "tmp/extracted.md",
@@ -74,7 +74,7 @@ exports.testChangeLog5Command = {
 			grunt.fail.warn( "Expected files not found" );
 		}
 
-		const task = "extract-addon-pr-texts";
+		const task = "extract-extra-pr-texts-from-yoast-cli-md";
 		if ( grunt.task.exists( task ) ) {
 			for ( let i = 0; i < noOfFiles; i++ ) {
 				compareFiles( tempFilePath[ i ], expectedFilePath[ i ] );
