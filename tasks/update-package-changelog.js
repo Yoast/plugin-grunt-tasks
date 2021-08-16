@@ -22,41 +22,44 @@ module.exports = function( grunt ) {
 				commitChangelog: false,
 				useANewLineAfterHeader: false,
 				defaultChangelogEntries: "",
-				changelogMd: "tmp/CHANGELOG1.md",
+				changelogMd: "",
 				addthistochangelogMd: "tmp/yoast--schema-blocks.md",
 			} );
 			// Test if there is input we need to add
 			if ( ! grunt.file.exists( options.addthistochangelogMd ) ) {
 				return;
 			}
-
+			// Setup log builder for packages format input/output
+			// eslint-disable-next-line max-len
+			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug, true );
 			const changelog = grunt.file.read( options.changelogMd );
-			var currentChangelogSection = "";
-			// Console.log( "read: " + changelog );
-
 
 			// Check if the ## Future Release header already exists
-
 			// eslint-disable-next-line no-control-regex
-			const currentChangelogEntriesMatches = changelog.match( new RegExp( "## Future Release\n(.|\n)*?(?=\n## )" ) );
-			if  ( currentChangelogEntriesMatches ) {
-				currentChangelogSection =  currentChangelogEntriesMatches[ 0 ];
-			}
-			if ( currentChangelogSection !== "" ) {
-				console.log( "READ: " + currentChangelogSection );
-			}
-			// Console.log( currentChangelogEntriesMatches );
-			const changelogBuilder = new ChangelogBuilder( grunt, currentChangelogSection, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug, true );
-
+			const currentChangelogEntriesMatches = changelog.match( new RegExp( "\n## Future Release\n(.|\n)*?(?=\n## )" ) );
+			const currentChangelogSection = currentChangelogEntriesMatches ? currentChangelogEntriesMatches[ 0 ] : "";
 			const extralines =  grunt.file.read( "tmp/yoast--schema-blocks.md" );
-			console.log( extralines );
-			changelogBuilder.parseYoastCliGeneratedChangelog( extralines );
-			// Console.log( "out " + changelogBuilder.packageChangelog );
 
 
-			const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  currentChangelogSection ) ), "## Future Release\n" + changelogBuilder.packageChangelog );
-
-			grunt.file.write( options.changelogMd, mergedReadme );
+			// eslint-disable-next-line no-negated-condition
+			if ( currentChangelogSection !== "" ) {
+				// Add "existing items" to changelog
+				changelogBuilder.parseChancelogLines( currentChangelogSection );
+				// Add "new items" to changelog
+				changelogBuilder.parseYoastCliGeneratedChangelog( extralines );
+				// eslint-disable-next-line max-len
+				const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  currentChangelogSection ) ), "\n## Future Release\n" + changelogBuilder.packageChangelog );
+				grunt.file.write( options.changelogMd, mergedReadme );
+			} else {
+				// Add "new items" to changelog
+				changelogBuilder.parseYoastCliGeneratedChangelog( extralines );
+				// eslint-disable-next-line no-control-regex
+				const ChangelogEntriesMatches = changelog.match( new RegExp( "\n##(.|\n)*?(?=\n## )" ) );
+				const ChangelogSection = ChangelogEntriesMatches ? ChangelogEntriesMatches[ 0 ] : "";
+				// eslint-disable-next-line max-len
+				const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  ChangelogSection ) ), "\n## Future Release\n" + changelogBuilder.packageChangelog + ChangelogSection );
+				grunt.file.write( options.changelogMd, mergedReadme );
+			}
 
 			if ( options.commitChangelog ) {
 				// Stage the changed readme.txt.

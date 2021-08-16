@@ -8,10 +8,10 @@
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
-const tempFilePath = [ "tmp/CHANGELOG1.md" ];
-const expectedFilePath = [ "test/expected/CHANGELOG1.md" ];
-const srcWikimdfile1 = "test/fixtures/CHANGELOG1.md";
-const dstWikimdfile1 = "./.tmp/CHANGELOG1.md";
+const tempFilePath = [ "tmp/CHANGELOG2.md" ];
+const expectedFilePath = [ "test/expected/CHANGELOG2.md" ];
+const srcWikimdfile1 = "test/fixtures/CHANGELOG2.md";
+const dstWikimdfile1 = "./.tmp/CHANGELOG2.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 
 let ChanceLogTask;
@@ -40,6 +40,7 @@ exports.testChangeLog6Command = {
 				options: {
 
 					pluginSlug: "wordpress-seo",
+					changelogMd: "tmp/CHANGELOG2.md",
 
 				},
 			},
