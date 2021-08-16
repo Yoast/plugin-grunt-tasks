@@ -1,7 +1,6 @@
 /* eslint-disable complexity */
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
-const escapeRegExp = require( "../lib/escape-regexp" );
 const ChangelogBuilder = require( "../lib/logbuilder" );
 /**
  *
@@ -49,23 +48,23 @@ module.exports = function( grunt ) {
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
 
 			// eslint-disable-next-line max-len
-			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true, escapeRegExp( element )  ) );
+			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
 			// eslint-disable-next-line max-len
-			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true, escapeRegExp( element )  ) );
+			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
 
 
 			writefileifnotempty( options.outputFile, changelogBuilder.qaChangelog, grunt );
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element ), true  );
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
 				writefileifnotempty( filename, changelogBuilder.packageChangelog, grunt );
 			} );
 			options.findTheseAddons.forEach( element => {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, escapeRegExp( element ), true  );
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
 				writefileifnotempty( filename, changelogBuilder.qaChangelog, grunt );
 			} );

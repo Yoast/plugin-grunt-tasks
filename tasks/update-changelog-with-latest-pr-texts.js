@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable complexity */
 const parseVersion = require( "../lib/parse-version" );
 const _isEmpty = require( "lodash/isEmpty" );
@@ -145,6 +146,7 @@ module.exports = function( grunt ) {
 				grunt.file.write( options.readmeFile, mergedReadme );
 				done();
 			} else {
+				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
 				// If the current version is not in the changelog, build a new one from input file.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
