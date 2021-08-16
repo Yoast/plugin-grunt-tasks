@@ -1,8 +1,7 @@
 /* eslint-disable complexity */
-// Const parseVersion = require( "../lib/parse-version" );
-// Const _isEmpty = require( "lodash/isEmpty" );
-// Const { file } = require( "grunt" );
+const { file } = require( "grunt" );
 const ChangelogBuilder = require( "../lib/logbuilder" );
+
 /**
  *
  * @param {string} filename filename to write to
@@ -10,9 +9,9 @@ const ChangelogBuilder = require( "../lib/logbuilder" );
  * @param {object} grunt grunt obejct
  * @returns {null} no return
  */
-function writefileifnotempty( filename, data, grunt ) {
+function writeFileIfNotEmpty( filename, data ) {
 	if ( data !== "" ) {
-		grunt.file.write( filename, data );
+		file.write( filename, data );
 	}
 }
 
@@ -25,7 +24,7 @@ function writefileifnotempty( filename, data, grunt ) {
 module.exports = function( grunt ) {
 	grunt.registerMultiTask(
 		"extract-extra-pr-texts-from-yoast-cli-md",
-		"extract addon PR lines from data retreived with yoast-cli.",
+		"extract addon and packages PR lines from data retreived with yoast-cli.",
 		// eslint-disable-next-line max-statements
 		function() {
 			const options = this.options( {
@@ -57,20 +56,22 @@ module.exports = function( grunt ) {
 			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
 
 			// First write left overs
-			writefileifnotempty( options.outputFile, changelogBuilder.qaChangelog, grunt );
+			writeFileIfNotEmpty( options.outputFile, changelogBuilder.qaChangelog );
+			// Write packages files
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				writefileifnotempty( filename, changelogBuilder.packageChangelog, grunt );
+				writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog );
 			} );
+			// Write Addons files
 			options.findTheseAddons.forEach( element => {
 				changelogBuilder.resetlog();
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
 				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				writefileifnotempty( filename, changelogBuilder.qaChangelog, grunt );
+				writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog );
 			} );
 		}
 	);
