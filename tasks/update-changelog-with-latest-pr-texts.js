@@ -25,6 +25,7 @@ module.exports = function( grunt ) {
 				defaultChangelogEntries: "",
 				daysToAddForNextRelease: 14,
 				useTodayasReleaseDate: false,
+				addTheseExtraFiles: [],
 			} );
 			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
@@ -137,6 +138,11 @@ module.exports = function( grunt ) {
 				// Create unique linses using class ChangelogBuilder
 				changelogBuilder.parseChancelogLines( currentChangelogEntries );
 				changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
+				options.addTheseExtraFiles.forEach( filename => {
+					if ( grunt.file.exists( filename ) ) {
+						changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, true, true );
+					}
+				} );
 
 				// Put all parts togethor agian
 				// eslint-disable-next-line max-len
@@ -148,6 +154,11 @@ module.exports = function( grunt ) {
 			} else {
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseYoastCliGeneratedChangelog( grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
+				options.addTheseExtraFiles.forEach( filename => {
+					if ( grunt.file.exists( filename ) ) {
+						changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, true, true );
+					}
+				} );
 				// If the current version is not in the changelog, build a new one from input file.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 

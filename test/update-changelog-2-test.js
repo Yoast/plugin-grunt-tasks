@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-useless-concat */
 /**
  * A unit test for 'set-version.js'.
  *
@@ -48,10 +50,12 @@ exports.testChangeLog2Command = {
 					matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
 					replaceCleanedChangelog: "",
 					pluginSlug: "wordpress-seo-premium",
+					// eslint-disable-next-line max-len
 					defaultChangelogEntries: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
 					useANewLineAfterHeader: false,
 					useEditDistanceCompare: true,
 					commitChangelog: false,
+					addTheseExtraFiles: [ "./tmp/wordpress-seo-premium.md" ],
 				},
 			},
 		} );

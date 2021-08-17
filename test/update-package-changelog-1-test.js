@@ -8,10 +8,8 @@
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
-const tempFilePath = [ "tmp/CHANGELOG1.md" ];
-const expectedFilePath = [ "test/expected/CHANGELOG1.md" ];
-const srcWikimdfile1 = "test/fixtures/CHANGELOG1.md";
-const dstWikimdfile1 = "./.tmp/CHANGELOG1.md";
+const tempFilePath = [  "tmp/CHANGELOG1.md", "tmp/CHANGELOG2.md" ];
+const expectedFilePath = [ "test/expected/CHANGELOG1.md", "test/expected/CHANGELOG2.md" ];
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 
 let ChanceLogTask;
@@ -30,17 +28,14 @@ exports.testChangeLog6Command = {
 			grunt.log.writeln( "\n [" + ( i + 1 ) + "/" + noOfFiles + "] Copying '" + fixturePath + "' to '" + tempFilePath[ i ] + "'" );
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
-		grunt.file.mkdir( "./tmp" );
-		grunt.file.copy( srcWikimdfile1, dstWikimdfile1 );
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.7-RC1" );
 		ChanceLogTask = runTask.task( "update-package-changelog", {
 			"wordpress-seo": {
 				options: {
-
 					pluginSlug: "wordpress-seo",
-					changelogMd: "tmp/CHANGELOG1.md",
+					addTheseChangeLogs: [ [ "tmp/CHANGELOG1.md", "tmp/yoast--schema-blocks.md" ], [ "tmp/CHANGELOG2.md", "tmp/yoast--schema-blocks.md" ], [ "tmp/CHANGELOG3.md", "tmp/yoast--seo.md" ] ],
 				},
 			},
 		} );

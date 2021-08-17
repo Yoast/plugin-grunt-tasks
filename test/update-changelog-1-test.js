@@ -55,6 +55,7 @@ exports.testChangeLog1Command = {
 					useANewLineAfterHeader: true,
 					useEditDistanceCompare: true,
 					commitChangelog: false,
+					addTheseExtraFiles: [ "./tmp/wordpress-seo.md" ],
 				},
 			},
 		} );
