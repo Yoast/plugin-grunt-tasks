@@ -10,7 +10,7 @@ We follow [Semantic Versioning](http://semver.org/).
 * TEST line bugfix
 * TEST extra line.
 
-### Enhancements:
+### Enhancements
 * TEST line here...
 
 ## 1.10.0
