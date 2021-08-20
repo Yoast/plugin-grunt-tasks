@@ -61,7 +61,7 @@ module.exports = function( grunt ) {
 				// Add "new items" to changelog
 					changelogBuilder.parseYoastCliGeneratedChangelog( extralines );
 					// eslint-disable-next-line no-control-regex
-					const ChangelogEntriesMatches = changelog.match( new RegExp( "\n##(.|\n)*?(?=\n## )" ) );
+					const ChangelogEntriesMatches = changelog.match( new RegExp( "\n##(.|\n)*?(?=(\n## )|$)" ) );
 					const ChangelogSection = ChangelogEntriesMatches ? ChangelogEntriesMatches[ 0 ] : "";
 					// eslint-disable-next-line max-len
 					const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  ChangelogSection ) ), "\n## Future Release\n" + changelogBuilder.packageChangelog + ChangelogSection );
