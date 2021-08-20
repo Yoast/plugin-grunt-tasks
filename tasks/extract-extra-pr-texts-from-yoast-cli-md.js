@@ -10,8 +10,16 @@ const ChangelogBuilder = require( "../lib/logbuilder" );
  * @param {object} grunt grunt obejct
  * @returns {null} no return
  */
-function writeFileIfNotEmpty( filename, data ) {
+function writeFileIfNotEmpty( filename, data, grunt ) {
 	if ( data !== "" ) {
+		if ( file.exists( filename ) ) {
+			const original = file.read( filename );
+			if ( original !== "" ) {
+				const changelogBuilder = new ChangelogBuilder( grunt, original, false, true, "" );
+				changelogBuilder.parseChancelogLines( data );
+				data = changelogBuilder.qaChangelog;
+			}
+		}
 		file.write( filename, data );
 	}
 }
@@ -37,10 +45,11 @@ module.exports = function( grunt ) {
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
-			if ( fullVersion.match( "beta" ) ) {
+			/*
+			If ( fullVersion.match( "beta" ) ) {
 				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
 			}
-
+*/
 
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			if ( grunt.file.exists( options.outputFile ) ) {
@@ -51,27 +60,31 @@ module.exports = function( grunt ) {
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
 
 
-			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
+			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element[ 0 ], false ) );
 
-			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element, false ) );
+			options.findTheseAddons.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element[ 0 ], false ) );
 
 			// First write left overs
-			writeFileIfNotEmpty( options.outputFile, changelogBuilder.qaChangelog );
+			writeFileIfNotEmpty( options.outputFile, changelogBuilder.qaChangelog, grunt );
 			// Write packages files
 			options.findThesePackages.forEach( element => {
 				changelogBuilder.resetlog();
 
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
-				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog );
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
+				// Const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
+				const filename = options.outputFolder + element[ 1 ];
+				console.log( "filename: " + filename );
+				writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog, grunt );
 			} );
 			// Write Addons files
 			options.findTheseAddons.forEach( element => {
 				changelogBuilder.resetlog();
 
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element, true  );
-				const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog );
+				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
+				// Const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
+				const filename = options.outputFolder + element[ 1 ];
+				console.log( "filename: " + filename );
+				writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog, grunt );
 			} );
 		}
 	);

@@ -40,8 +40,8 @@ exports.testChangeLog5Command = {
 				options: {
 					outputFile: "tmp/extracted.md",
 					pluginSlug: "wordpress-seo",
-					findThesePackages: [ "[@yoast/schema-blocks]", "[@yoast/schema-blocksss]" ],
-					findTheseAddons: [ "[wordpress-seo-premium]" ],
+					findThesePackages: [ [ "[@yoast/schema-blocks]", "pg-schema-blocks.md" ], [ "[Schema-Blocks]", "pg-schema-blocks.md" ] ],
+					findTheseAddons: [ [ "[wordpress-seo-premium]", "wordpress-seo-premium.md" ] ],
 					outputFolder: "tmp/",
 				},
 			},

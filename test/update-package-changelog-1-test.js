@@ -35,7 +35,7 @@ exports.testChangeLog6Command = {
 			"wordpress-seo": {
 				options: {
 					pluginSlug: "wordpress-seo",
-					addTheseChangeLogs: [ [ "tmp/CHANGELOG1.md", "tmp/yoast--schema-blocks.md" ], [ "tmp/CHANGELOG2.md", "tmp/yoast--schema-blocks.md" ], [ "tmp/CHANGELOG3.md", "tmp/yoast--seo.md" ] ],
+					addTheseChangeLogs: [ [ "tmp/CHANGELOG1.md", "tmp/pg-schema-blocks.md" ], [ "tmp/CHANGELOG2.md", "tmp/pg-schema-blocks.md" ], [ "tmp/CHANGELOG3.md", "tmp/pg-yoast--seo.md" ] ],
 				},
 			},
 		} );
