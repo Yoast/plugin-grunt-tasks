@@ -45,20 +45,13 @@ module.exports = function( grunt ) {
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
-			/*
-			If ( fullVersion.match( "beta" ) ) {
-				options.daysToAddForNextRelease = options.daysToAddForNextRelease + 7;
-			}
-*/
 
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			if ( grunt.file.exists( options.outputFile ) ) {
 				changelogBuilder.parseChancelogLines( grunt.file.read( options.outputFile ) );
 			}
 
-
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
-
 
 			options.findThesePackages.forEach( element => changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), true,  element[ 0 ], false ) );
 
