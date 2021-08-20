@@ -74,7 +74,7 @@ module.exports = function( grunt ) {
 					const filename = options.outputFolder + element[ 1 ];
 					writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog, grunt );
 				}  else {
-					grunt.fail.fatal( "findThesePackages options not a array" );
+					grunt.fail.fatal( "findThesePackages options not a array:" + element );
 				}
 			} );
 			// Write Addons files
@@ -85,7 +85,7 @@ module.exports = function( grunt ) {
 					const filename = options.outputFolder + element[ 1 ];
 					writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog, grunt );
 				} else {
-					grunt.fail.fatal( "findTheseAddons options not a array" );
+					grunt.fail.fatal( "findTheseAddons options not a array" + element );
 				}
 			} );
 		}

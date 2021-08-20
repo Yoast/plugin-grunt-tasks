@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // /* eslint-disable complexity */
 // Const parseVersion = require( "../lib/parse-version" );
 // Const _isEmpty = require( "lodash/isEmpty" );
@@ -25,6 +26,9 @@ module.exports = function( grunt ) {
 			} );
 
 			options.addTheseChangeLogs.forEach( element => {
+				if ( element.length !== 2 ) {
+					grunt.fail.fatal( "addTheseChangeLogs options not a array" + element );
+				}
 				const changelogMd = element[ 0 ];
 				const addthistochangelogMd = element[ 1 ];
 
