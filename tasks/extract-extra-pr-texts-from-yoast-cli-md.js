@@ -37,7 +37,7 @@ module.exports = function( grunt ) {
 		// eslint-disable-next-line max-statements
 		function() {
 			const options = this.options( {
-				all: true,
+				outputFile: "tmp/extracted.md",
 				findThesePackages: [ ],
 				findTheseAddons: [ ],
 				outputFolder: "tmp/",
@@ -68,23 +68,25 @@ module.exports = function( grunt ) {
 			writeFileIfNotEmpty( options.outputFile, changelogBuilder.qaChangelog, grunt );
 			// Write packages files
 			options.findThesePackages.forEach( element => {
-				changelogBuilder.resetlog();
-
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
-				// Const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				const filename = options.outputFolder + element[ 1 ];
-				console.log( "filename: " + filename );
-				writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog, grunt );
+				if ( element.length === 2 ) {
+					changelogBuilder.resetlog();
+					changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
+					const filename = options.outputFolder + element[ 1 ];
+					writeFileIfNotEmpty( filename, changelogBuilder.packageChangelog, grunt );
+				}  else {
+					grunt.fail.fatal( "findThesePackages options not a array" );
+				}
 			} );
 			// Write Addons files
 			options.findTheseAddons.forEach( element => {
-				changelogBuilder.resetlog();
-
-				changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
-				// Const filename = options.outputFolder + element.replace( "/", "--" ).replace( "[", "" ).replace( "]", "" ).replace( "@", "" ) + ".md";
-				const filename = options.outputFolder + element[ 1 ];
-				console.log( "filename: " + filename );
-				writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog, grunt );
+				if ( element.length === 2 ) {
+					changelogBuilder.resetlog();
+					changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false,  element[ 0 ], true  );
+					const filename = options.outputFolder + element[ 1 ];
+					writeFileIfNotEmpty( filename, changelogBuilder.qaChangelog, grunt );
+				} else {
+					grunt.fail.fatal( "findTheseAddons options not a array" );
+				}
 			} );
 		}
 	);
