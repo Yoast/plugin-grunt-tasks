@@ -38,6 +38,7 @@ module.exports = function( grunt ) {
 		function() {
 			const options = this.options( {
 				outputFile: "tmp/extracted.md",
+				deleteOutputFile: false,
 				findThesePackages: [ ],
 				findTheseAddons: [ ],
 				outputFolder: "tmp/",
@@ -48,7 +49,11 @@ module.exports = function( grunt ) {
 
 			const changelogBuilder = new ChangelogBuilder( grunt, null, options.useEditDistanceCompare, options.useANewLineAfterHeader, options.pluginSlug );
 			if ( grunt.file.exists( options.outputFile ) ) {
-				changelogBuilder.parseChancelogLines( grunt.file.read( options.outputFile ) );
+				if ( options.deleteOutputFile ) {
+					grunt.file.delete( options.outputFile );
+				} else {
+					changelogBuilder.parseChancelogLines( grunt.file.read( options.outputFile ) );
+				}
 			}
 
 			changelogBuilder.parseYoastCliGeneratedChangelogPackageItemsOnly(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" )   );
