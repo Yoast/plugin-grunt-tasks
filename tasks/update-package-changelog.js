@@ -66,30 +66,30 @@ module.exports = function( grunt ) {
 					// eslint-disable-next-line max-len
 					const mergedReadme = changelog.replace( new RegExp( escapeRegExp(  ChangelogSection ) ), "\n## Future Release\n" + changelogBuilder.packageChangelog + ChangelogSection );
 					grunt.file.write( changelogMd, mergedReadme );
+				}
 
+				if ( options.commitChangelog ) {
+					// Stage the changed readme.txt.
+					grunt.log.writeln( "debug: " +  changelogMd );
+					grunt.config( "gitadd.addChangelog.files", { src: [ changelogMd ] } );
+					grunt.task.run( "gitadd:addChangelog" );
 
-					if ( options.commitChangelog ) {
-						// Stage the changed readme.txt.
-						grunt.config( "gitadd.addChangelog.files", { src: [ changelogMd ] } );
-						grunt.task.run( "gitadd:addChangelog" );
+					// Check if there is something to commit with `git status` first.
+					grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
+						// First character of the code checks the status in the index.
+						// eslint-disable-next-line max-len
+						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd.split( "/" )[ changelogMd.split( "/" ).length - 1 ] );
+						grunt.log.writeln( "debug: " + changes );
+						if ( hasStagedChangelog ) {
+							// Commit the changed readme.txt.
+							grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog " + changelogMd );
+							grunt.task.run( "gitcommit:commitChangelog" );
+						} else {
+							grunt.log.writeln( "Changelog is unchanged. Nothing to commit." + changelogMd );
+						}
+					} );
 
-						// Check if there is something to commit with `git status` first.
-						grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
-							// First character of the code checks the status in the index.
-							// eslint-disable-next-line max-len
-							const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd.split( "/" )[ changelogMd.split( "/" ).length - 1 ] );
-							grunt.log.writeln( "debug: " + changes );
-							if ( hasStagedChangelog ) {
-								// Commit the changed readme.txt.
-								grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog " + changelogMd );
-								grunt.task.run( "gitcommit:commitChangelog" );
-							} else {
-								grunt.log.writeln( "Changelog is unchanged. Nothing to commit." + changelogMd );
-							}
-						} );
-
-						grunt.task.run( "gitstatus:checkChangelog" );
-					}
+					grunt.task.run( "gitstatus:checkChangelog" );
 				}
 			} );
 		}
