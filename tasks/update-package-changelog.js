@@ -77,14 +77,14 @@ module.exports = function( grunt ) {
 					grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
 					// First character of the code checks the status in the index.
 					// eslint-disable-next-line max-len
-						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd );
-
+						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd.split( "/" )[ changelogMd.split( "/" ).length - 1 ] );
+						grunt.log.writeln( "debug: " + changes );
 						if ( hasStagedChangelog ) {
 						// Commit the changed readme.txt.
-							grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog" );
+							grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog " + changelogMd );
 							grunt.task.run( "gitcommit:commitChangelog" );
 						} else {
-							grunt.log.writeln( "Changelog is unchanged. Nothing to commit." );
+							grunt.log.writeln( "Changelog is unchanged. Nothing to commit." + changelogMd );
 						}
 					} );
 
