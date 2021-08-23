@@ -1892,9 +1892,6 @@ grunt.initConfig( {
 ```
 
 
-
-
-
 ### The `update-changelog-with-latest-pr-texts` task
 #### Using our configuration
 We implement the following configuration:
@@ -1905,6 +1902,8 @@ We implement the following configuration:
     - The `useANewLineAfterHeader` value is set to `true`,
 	- The `defaultChangelogEntries` value is set to `""`,
 	- The `daysToAddForNextRelease` value is set to `14`,
+    - The `useTodayasReleaseDate` value is set to  `false`,
+    - The `options.addTheseExtraFiles`is set to a empty array [ ],
 
 #### Overview
 In your project's Gruntfile, add a section named `update-changelog-with-latest-pr-texts` to the data object passed into `grunt.initConfig()`.
@@ -2017,6 +2016,18 @@ Default: `14`
 
 Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used).
 
+##### addTheseExtraFiles:
+Type: Array if `strings`
+Default `[]`
+
+Setting this will add that file content (parsed) to the changelog
+
+##### useTodayasReleaseDate:
+Type `Boolean`
+Default: `false`
+
+Setting this will set the release date (if not already set) to today
+
 ##### Usages Example
 ```js
 update-changelog-with-latest-pr-texts: {
@@ -2076,6 +2087,140 @@ get-latest-pr-texts: {
 }
 ```
 
+### The `extract-extra-pr-texts-from-yoast-cli-md` task
+This is a support task for the `update-package-changelog` task.
+
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.outputFile` value is set to `"tmp/extracted.md"`,
+	- The `options.deleteOutputFile`value is set to `false`,
+	- The `options.findThesePackages`value is set to empty array,
+	- The `options.findTheseAddons`value is set to empty array,
+	- The `options.outputFolder`value is set to `"tmp/"`,
+
+
+#### Overview
+In your project's Gruntfile, add a section named `extract-extra-pr-texts-from-yoast-cli-md` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-with-latest-pr-texts: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+##### outputFile
+Type: `String`  
+Default value: `"tmp/extracted.md"`
+
+ths sets the filename, for items that are left over 
+	
+##### deleteOutputFile
+Type: `Boolean`  
+Default value: `false`
+
+If set to `true` the outputfile will be deleted (if exists)  during initialize
+
+##### findThesePackages
+Type: `Array` of `Array` of two `strings`
+Default value: `[]` 
+
+Find these package items need items need to have this form: [`packageheader to search for`,`filename to add found item`]
+	
+##### findTheseAddons
+Type: `Array`  of `Array` of two `strings`
+Default value: `[]`
+
+Find these plugin items need items need to have this form:  [`pluginsheader to search for`,`filename to add found item`]
+
+##### outputFolder
+Type: `String`  
+Default value: `"tmp/"`
+
+
+Here the files contianing the items will be written to
+
+
+##### Usages Example
+```js
+extract-extra-pr-texts-from-yoast-cli-md: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
+
+### The `update-package-changelog` task
+This is a task.
+
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.useEditDistanceCompare`value is set to `false`
+	- The `options.commitChangelog`value is set to `false`
+	- The `options.useANewLineAfterHeader`value is set to `false`
+	- The `options.addTheseChangeLogs`value is set to `[  ]`
+
+#### Overview
+In your project's Gruntfile, add a section named `update-package-changelog` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-package-changelog: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+##### useEditDistanceCompare
+Type: `Boolean`  
+Default value: `false`
+
+##### commitChangelog
+Type: `Boolean`  
+Default value: `foalse`
+
+	
+##### useANewLineAfterHeader
+Type: `Boolean`  
+Default value: `false`
+
+If set to `true` the outputfile will be deleted (if exists)  during initialize
+
+##### addTheseChangeLogs
+Type: `Array`  of `Array` of two `strings`
+Default value: `[]` 
+
+Find these package items need items need to have this form: [`filename to chnagelog where to add`,`filename with items to add`]
+	
+
+
+##### Usages Example
+```js
+update-package-changelog: {
+    "wordpress-seo": {
+        options: {
+            pluginSlug: "wordpress-seo",
+        },
+    },
+}
+```
+
+
+
 ### The `build-qa-changelog` task
 #### Using our configuration
 We implement the following configuration:
@@ -2085,6 +2230,7 @@ We implement the following configuration:
     - The `options.useANewLineAfterHeader` value is set to `false`.
 	- The `options.outputFile` is set to `.tmp/QA-Changelog.md`.
     - The `options.pluginSlug` value is from the Grunt configuration: `pluginSlug`.
+    - The `options.addTheseExtraFiles`is set to a empty array [ ],
 
 #### Overview
 In your project's Gruntfile, add a section named `build-qa-changelog` to the data object passed into `grunt.initConfig()`.
@@ -2122,6 +2268,12 @@ Default: `false`
 
 Setting this will effect the format of the resulting changelog.
 
+##### addTheseExtraFiles:
+Type: `Array` of `strings`
+Default `[]`
+
+Setting this will add that file content (parsed) to the changelog
+
 ##### Usages Example
 ```js
 update-changelog-with-latest-pr-texts: {
@@ -2131,7 +2283,7 @@ update-changelog-with-latest-pr-texts: {
             pluginSlug: "wordpress-seo",
             useANewLineAfterHeader: false,
             useEditDistanceComapair: false,
-            
+            addTheseExtraFiles: [ ],
         },
     },
 }
@@ -2175,7 +2327,13 @@ get-latest-pr-texts: {
 
 ## Release History
 
-### 2.1.1
+### 2.2
+- Adds `update-package-changelog` Grunt task & config.
+- Adds `extract-extra-pr-texts-from-yoast-cli-md` Grunt task & config.
+- Adds features to `build-qa-changelog` to use more input files
+- Adds features to `update-changelog-with-latest-pr-texts.js` to use more input files
+
+### 2.1.2
 - Fixes a issue with Z cutting of changelog lines
 - Fixes a issue with the install command. Props to [chrisschwartze](ttps://github.com/chrisschwartze).
 
