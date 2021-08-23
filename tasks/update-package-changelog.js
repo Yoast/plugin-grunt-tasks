@@ -70,8 +70,9 @@ module.exports = function( grunt ) {
 
 				if ( options.commitChangelog ) {
 					// Stage the changed readme.txt.
+					// Use this to make a task names per package
 					const pg = changelogMd.split( "/" )[ 1 ];
-					grunt.log.writeln( "debug: " +   pg );
+
 					grunt.config( "gitadd.addChangelog" + pg + ".files", { src: [ changelogMd ] } );
 					grunt.task.run( "gitadd:addChangelog" + pg );
 
@@ -80,7 +81,6 @@ module.exports = function( grunt ) {
 						// First character of the code checks the status in the index.
 						// eslint-disable-next-line max-len
 						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd );
-						grunt.log.writeln( "debug: " + changes );
 						if ( hasStagedChangelog ) {
 							// Commit the changed readme.txt.
 							grunt.config( "gitcommit.commitChangelog" + pg + ".options.message", "Add changelog " + changelogMd );
