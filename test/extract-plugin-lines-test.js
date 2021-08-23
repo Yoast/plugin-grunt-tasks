@@ -12,6 +12,8 @@ const tempFilePath = [ "tmp/extracted.md" ];
 const expectedFilePath = [ "test/expected/extracted.md" ];
 const srcWikimdfile1 = "test/fixtures/wordpress-seo-16.7.md";
 const dstWikimdfile1 = "./.tmp/wordpress-seo-16.7.md";
+const srcWikimdfile2 = "test/fixtures/pg-schema-blocks.md";
+const dstWikimdfile2 = "tmp/pg-schema-blocks.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 
 let ChanceLogTask;
@@ -32,6 +34,7 @@ exports.testChangeLog5Command = {
 		}
 		grunt.file.mkdir( "./tmp" );
 		grunt.file.copy( srcWikimdfile1, dstWikimdfile1 );
+		grunt.file.copy( srcWikimdfile2, dstWikimdfile2 );
 		grunt.log.writeln( "setup is done!" );
 
 		runTask.option( "plugin-version", "16.7-RC1" );
@@ -40,7 +43,7 @@ exports.testChangeLog5Command = {
 				options: {
 					outputFile: "tmp/extracted.md",
 					pluginSlug: "wordpress-seo",
-					findThesePackages: [ [ "[@yoast/schema-blocks]", "pg-schema-blocks.md" ], [ "[Schema-Blocks]", "pg-schema-blocks.md" ], [ "a" ] ],
+					findThesePackages: [ [ "[@yoast/schema-blocks]", "pg-schema-blocks.md" ], [ "[Schema-Blocks]", "pg-schema-blocks.md" ] ],
 					findTheseAddons: [ [ "[wordpress-seo-premium]", "wordpress-seo-premium.md" ] ],
 					outputFolder: "tmp/",
 				},

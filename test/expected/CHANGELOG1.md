@@ -12,6 +12,7 @@ We follow [Semantic Versioning](http://semver.org/).
 ### Bugfixes
 * TEST line bugfix
 * TEST extra line.
+* Original item.
 * test bugfix entry.
 
 ### Non user facing
