@@ -79,7 +79,7 @@ module.exports = function( grunt ) {
 					grunt.config( "gitstatus.checkChangelog" + pg + ".options.callback", function( changes ) {
 						// First character of the code checks the status in the index.
 						// eslint-disable-next-line max-len
-						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd.split( "/" )[ changelogMd.split( "/" ).length - 1 ] );
+						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd );
 						grunt.log.writeln( "debug: " + changes );
 						if ( hasStagedChangelog ) {
 							// Commit the changed readme.txt.
