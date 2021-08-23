@@ -70,7 +70,8 @@ module.exports = function( grunt ) {
 
 				if ( options.commitChangelog ) {
 					// Stage the changed readme.txt.
-					grunt.log.writeln( "debug: " +  changelogMd );
+					const pg = changelogMd.split( "/" )[ 1 ];
+					grunt.log.writeln( "debug: " +   pg );
 					grunt.config( "gitadd.addChangelog.files", { src: [ changelogMd ] } );
 					grunt.task.run( "gitadd:addChangelog" );
 
