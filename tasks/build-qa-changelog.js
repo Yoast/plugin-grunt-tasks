@@ -73,8 +73,10 @@ module.exports = function( grunt ) {
 			const wikimd = grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + strippedVersion + ".md" );
 			changelogBuilder.parseYoastCliGeneratedChangelog( wikimd, false, false, true );
 			options.addTheseExtraFiles.forEach( filename => {
-				if ( grunt.file.exists( filename ) ) {
-					changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, false, true );
+				if  ( filename !== "" ) {
+					if ( grunt.file.exists( filename ) ) {
+						changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, false, true );
+					}
 				}
 			} );
 

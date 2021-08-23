@@ -139,8 +139,10 @@ module.exports = function( grunt ) {
 				changelogBuilder.parseChancelogLines( currentChangelogEntries );
 				changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( "./.tmp/" + options.pluginSlug + "-" + newVersion + ".md" ), false, true, true );
 				options.addTheseExtraFiles.forEach( filename => {
-					if ( grunt.file.exists( filename ) ) {
-						changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, true, true );
+					if  ( filename !== "" ) {
+						if ( grunt.file.exists( filename ) ) {
+							changelogBuilder.parseYoastCliGeneratedChangelog(  grunt.file.read( filename ), false, true, true );
+						}
 					}
 				} );
 
