@@ -72,25 +72,25 @@ module.exports = function( grunt ) {
 					// Stage the changed readme.txt.
 					const pg = changelogMd.split( "/" )[ 1 ];
 					grunt.log.writeln( "debug: " +   pg );
-					grunt.config( "gitadd.addChangelog.files", { src: [ changelogMd ] } );
-					grunt.task.run( "gitadd:addChangelog" );
+					grunt.config( "gitadd.addChangelog" + pg + ".files", { src: [ changelogMd ] } );
+					grunt.task.run( "gitadd:addChangelog" + pg );
 
 					// Check if there is something to commit with `git status` first.
-					grunt.config( "gitstatus.checkChangelog.options.callback", function( changes ) {
+					grunt.config( "gitstatus.checkChangelog" + pg + ".options.callback", function( changes ) {
 						// First character of the code checks the status in the index.
 						// eslint-disable-next-line max-len
 						const hasStagedChangelog = changes.some( change => change.code[ 0 ] !== " " && change.file === changelogMd.split( "/" )[ changelogMd.split( "/" ).length - 1 ] );
 						grunt.log.writeln( "debug: " + changes );
 						if ( hasStagedChangelog ) {
 							// Commit the changed readme.txt.
-							grunt.config( "gitcommit.commitChangelog.options.message", "Add changelog " + changelogMd );
-							grunt.task.run( "gitcommit:commitChangelog" );
+							grunt.config( "gitcommit.commitChangelog" + pg + ".options.message", "Add changelog " + changelogMd );
+							grunt.task.run( "gitcommit:commitChangelog" + pg );
 						} else {
 							grunt.log.writeln( "Changelog is unchanged. Nothing to commit." + changelogMd );
 						}
 					} );
 
-					grunt.task.run( "gitstatus:checkChangelog" );
+					grunt.task.run( "gitstatus:checkChangelog" + pg );
 				}
 			} );
 		}
