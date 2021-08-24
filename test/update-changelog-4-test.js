@@ -10,14 +10,14 @@
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
-const tempFilePath = [ "tmp/changelog.md" ];
-const expectedFilePath = [ "test/expected/changelog.md" ];
-const srcWikimdfile = "test/fixtures/wordpress-seo-premium-16.0.md";
-const dstWikimdfile = "./.tmp/wordpress-seo-premium-16.0.md";
+const tempFilePath = [ "tmp/readme4.txt" ];
+const expectedFilePath = [ "test/expected/readme4.txt" ];
+const srcWikimdfile = "test/fixtures/wordpress-seo-16.7.md";
+const dstWikimdfile = "./.tmp/wordpress-seo-16.7.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
 let ChanceLogTask;
 
-exports.testChangeLog2Command = {
+exports.testChangeLog3Command = {
 	/**
 	 * @param {function} done Function to execute when done.
 	 * @returns {void}
@@ -35,27 +35,26 @@ exports.testChangeLog2Command = {
 		grunt.file.copy( srcWikimdfile, dstWikimdfile );
 		grunt.log.writeln( "setup is done!" );
 
-		runTask.option( "plugin-version", "16.0" );
+		runTask.option( "plugin-version", "16.7" );
 		ChanceLogTask = runTask.task( "update-changelog-with-latest-pr-texts", {
-			"wordpress-seo-premium": {
+			"wordpress-seo": {
 				options: {
-					// Premium header:
-					// ### 15.9: February 23rd, 2021
-					readmeFile: "tmp/changelog.md",
-					releaseInChangelog: /[#] \d+\.\d+(\.\d+)?\: /g,
-					matchChangelogHeader: /^/ig,
-					newHeadertemplate: "### " + "VERSIONNUMBER" + ": " + "DATESTRING"  + "\n",
-					matchCorrectLines: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))",
-					matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|### \\d+[\.\\d]+\: |$))",
-					matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
-					replaceCleanedChangelog: "",
-					pluginSlug: "wordpress-seo-premium",
-					// eslint-disable-next-line max-len
-					defaultChangelogEntries: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
-					useANewLineAfterHeader: false,
+					// Free header:
+					// = 15.7 =
+					// Release Date: January 26th, 2021
+					readmeFile: "tmp/readme4.txt",
+					releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
+					matchChangelogHeader: /[=]= Changelog ==\n\n/ig,
+					newHeadertemplate: "== Changelog ==\n\n" + "= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
+					matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
+					matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
+					matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
+					replaceCleanedChangelog: "= Earlier versions =",
+					pluginSlug: "wordpress-seo",
+					defaultChangelogEntries: "",
+					useANewLineAfterHeader: true,
 					useEditDistanceCompare: true,
 					commitChangelog: false,
-					addTheseExtraFiles: [ "./tmp/pl-wordpress-seo-premium.md" ],
 				},
 			},
 		} );

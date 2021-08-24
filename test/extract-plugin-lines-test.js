@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-useless-concat */
 /**
  * A unit test for 'set-version.js'.
  *
@@ -10,14 +8,17 @@
 
 const grunt = require( "grunt" );
 const runTask = require( "grunt-run-task" );
-const tempFilePath = [ "tmp/changelog.md" ];
-const expectedFilePath = [ "test/expected/changelog.md" ];
-const srcWikimdfile = "test/fixtures/wordpress-seo-premium-16.0.md";
-const dstWikimdfile = "./.tmp/wordpress-seo-premium-16.0.md";
+const tempFilePath = [ "tmp/extracted.md" ];
+const expectedFilePath = [ "test/expected/extracted.md" ];
+const srcWikimdfile1 = "test/fixtures/wordpress-seo-16.7.md";
+const dstWikimdfile1 = "./.tmp/wordpress-seo-16.7.md";
+const srcWikimdfile2 = "test/fixtures/pg-schema-blocks.md";
+const dstWikimdfile2 = "tmp/pg-schema-blocks.md";
 const noOfFiles = Math.min( tempFilePath.length, expectedFilePath.length );
+
 let ChanceLogTask;
 
-exports.testChangeLog2Command = {
+exports.testChangeLog5Command = {
 	/**
 	 * @param {function} done Function to execute when done.
 	 * @returns {void}
@@ -32,30 +33,19 @@ exports.testChangeLog2Command = {
 			grunt.file.copy( fixturePath, tempFilePath[ i ] );
 		}
 		grunt.file.mkdir( "./tmp" );
-		grunt.file.copy( srcWikimdfile, dstWikimdfile );
+		grunt.file.copy( srcWikimdfile1, dstWikimdfile1 );
+		grunt.file.copy( srcWikimdfile2, dstWikimdfile2 );
 		grunt.log.writeln( "setup is done!" );
 
-		runTask.option( "plugin-version", "16.0" );
-		ChanceLogTask = runTask.task( "update-changelog-with-latest-pr-texts", {
-			"wordpress-seo-premium": {
+		runTask.option( "plugin-version", "16.7-RC1" );
+		ChanceLogTask = runTask.task( "extract-extra-pr-texts-from-yoast-cli-md", {
+			"wordpress-seo": {
 				options: {
-					// Premium header:
-					// ### 15.9: February 23rd, 2021
-					readmeFile: "tmp/changelog.md",
-					releaseInChangelog: /[#] \d+\.\d+(\.\d+)?\: /g,
-					matchChangelogHeader: /^/ig,
-					newHeadertemplate: "### " + "VERSIONNUMBER" + ": " + "DATESTRING"  + "\n",
-					matchCorrectLines: "### " + "VERSIONNUMBER" + "(.|\\n)*?(?=(### \\d+[\.\\d]+\: |$))",
-					matchCorrectHeader: "### " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|### \\d+[\.\\d]+\: |$))",
-					matchCleanedChangelog: "### " + "VERSIONNUMBER" + "(.|\\n)*$",
-					replaceCleanedChangelog: "",
-					pluginSlug: "wordpress-seo-premium",
-					// eslint-disable-next-line max-len
-					defaultChangelogEntries: "Other:\n* Includes every change in Yoast SEO core " + "VERSIONNUMBER" + ". See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).\n",
-					useANewLineAfterHeader: false,
-					useEditDistanceCompare: true,
-					commitChangelog: false,
-					addTheseExtraFiles: [ "./tmp/pl-wordpress-seo-premium.md" ],
+					outputFile: "tmp/extracted.md",
+					pluginSlug: "wordpress-seo",
+					findThesePackages: [ [ "[@yoast/schema-blocks]", "pg-schema-blocks.md" ], [ "[Schema-Blocks]", "pg-schema-blocks.md" ] ],
+					findTheseAddons: [ [ "[wordpress-seo-premium]", "pl-wordpress-seo-premium.md" ] ],
+					outputFolder: "tmp/",
 				},
 			},
 		} );
@@ -87,7 +77,7 @@ exports.testChangeLog2Command = {
 			grunt.fail.warn( "Expected files not found" );
 		}
 
-		const task = "update-changelog-with-latest-pr-texts";
+		const task = "extract-extra-pr-texts-from-yoast-cli-md";
 		if ( grunt.task.exists( task ) ) {
 			for ( let i = 0; i < noOfFiles; i++ ) {
 				compareFiles( tempFilePath[ i ], expectedFilePath[ i ] );

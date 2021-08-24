@@ -1,4 +1,7 @@
-### 16.0: May 4th, 2021
+### 16.0: September 7th, 2021
+Enhancements:
+* test left over entry.
+
 Other:
 * Includes every change in Yoast SEO core 16.0. See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).
 
