@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-useless-concat */
 /**
  * A unit test for 'set-version.js'.
  *
@@ -53,6 +55,7 @@ exports.testChangeLog1Command = {
 					useANewLineAfterHeader: true,
 					useEditDistanceCompare: true,
 					commitChangelog: false,
+					addTheseExtraFiles: [ "./tmp/wordpress-seo.md" ],
 				},
 			},
 		} );
