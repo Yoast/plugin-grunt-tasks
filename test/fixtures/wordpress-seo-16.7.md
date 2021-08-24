@@ -37,5 +37,5 @@ Bugfixes:
 Enhancements:
 
 * Upgrades our REST API to include individual keys/values for all of our meta tags, data and schema output. Read all about it in [this in-depth explanation about our REST API](https://yoa.st/rest-api). [#17162](https://github.com/Yoast/wordpress-seo/pull/17162)
-* [@yoast/seo] test Enhancements entry. [#1234](https://github.com/Yoast/wordpress-seo/pull/1234)
+*   [@yoast/seo] test Enhancements entry. [#1234](https://github.com/Yoast/wordpress-seo/pull/1234)
 * [wordpress-seo-premium] test left over entry. [#1234](https://github.com/Yoast/wordpress-seo/pull/1234)
