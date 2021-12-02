@@ -68,10 +68,9 @@ module.exports = function( grunt ) {
 				} )
 			);
 
-			if ( ! versionNumber.patch === 0 || options.useTodayasReleaseDate ) {
+			if ( versionNumber.patch !== 0 || options.useTodayasReleaseDate ) {
 				useTodayasReleaseDate = true;
 			}
-
 
 			// Only if the current version is not in the changelog yet, and is not a patch, we remove old changelog entries.
 			if ( ! containsCurrentVersion && versionNumber.patch === 0 ) {
