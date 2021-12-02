@@ -2327,6 +2327,9 @@ get-latest-pr-texts: {
 
 ## Release History
 
+### 2.2.1
+- FIXES a issue with `update-changelog-with-latest-pr-texts.js` selecting the todays date on a hotfix. 
+
 ### 2.2
 - Adds `update-package-changelog` Grunt task & config.
 - Adds `extract-extra-pr-texts-from-yoast-cli-md` Grunt task & config.
