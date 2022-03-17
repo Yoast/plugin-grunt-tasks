@@ -24,7 +24,7 @@ module.exports = function( grunt ) {
 				defaultChangelogEntries: "",
 				daysToAddForNextRelease: 14,
 				useTodayasReleaseDate: false,
-
+				changelogToInject: "",
 			} );
 			const done = this.async();
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
@@ -105,6 +105,8 @@ module.exports = function( grunt ) {
 				}
 			}
 
+			// Add n8n log here!!!
+			const n8nChangelog = grunt.file.read( options.changelogToInject );
 
 			// If the current version is already in the changelog.
 			if ( containsCurrentVersion ) {
@@ -130,8 +132,6 @@ module.exports = function( grunt ) {
 
 				currentChangelogEntries = currentChangelogEntries.replace( new RegExp( escapeRegExp( currentChangelogEntriesHeader ) ), "" );
 
-				// Add n8n log here!!!
-				const n8nChangelog = grunt.file.read( "myn8nchangelogfile" );
 
 				// Put all parts togethor agian
 				// eslint-disable-next-line max-len
@@ -141,9 +141,6 @@ module.exports = function( grunt ) {
 				grunt.file.write( options.readmeFile, mergedReadme );
 				done();
 			} else {
-				// If the current version is not in the changelog.
-
-				const n8nChangelog = grunt.file.read( "myn8nchangelogfile" );
 				// If the current version is not in the changelog, build a new one from input file.
 				let changelogVersionNumber = versionNumber.major + "." + versionNumber.minor;
 
