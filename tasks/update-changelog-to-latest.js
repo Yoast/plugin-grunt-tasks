@@ -114,7 +114,6 @@ module.exports = function( grunt ) {
 			// Add n8n log here!!!
 			const n8nChangelog = grunt.file.read( options.changelogToInject );
 
-
 			// If the current version is already in the changelog.
 			if ( containsCurrentVersion ) {
 				// Get the changelog entries for the current version from the readme.
@@ -138,7 +137,6 @@ module.exports = function( grunt ) {
 				}
 
 				currentChangelogEntries = currentChangelogEntries.replace( new RegExp( escapeRegExp( currentChangelogEntriesHeader ) ), "" );
-
 
 				// Put all parts togethor agian
 				// eslint-disable-next-line max-len
