@@ -27,6 +27,7 @@ module.exports = function( grunt ) {
 				changelogToInject: "",
 			} );
 			const done = this.async();
+
 			// Grab te XX.X only from XX.X-RCY/XX.X-betaY
 			const fullVersion = grunt.option( "plugin-version" );
 			const newVersion = fullVersion.split( "-" )[ 0 ];
@@ -105,8 +106,14 @@ module.exports = function( grunt ) {
 				}
 			}
 
+			if ( grunt.file.exists( options.changelogToInject ) ) {
+				grunt.log.writeln( "imput file not found" );
+				done();
+			}
+
 			// Add n8n log here!!!
 			const n8nChangelog = grunt.file.read( options.changelogToInject );
+
 
 			// If the current version is already in the changelog.
 			if ( containsCurrentVersion ) {
@@ -174,6 +181,7 @@ module.exports = function( grunt ) {
 				changelog = changelog.replace( options.matchChangelogHeader, newChangelog );
 				// Write changes to the file.
 				grunt.file.write( options.readmeFile, changelog );
+
 				done();
 			}
 
