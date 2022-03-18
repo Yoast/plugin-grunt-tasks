@@ -6,6 +6,7 @@ Bugfixes:
 Other:
 
 * Sets minimum required WordPress version to 5.8. 
+* Some wrong text here
 
 ### 15.9: February 23rd, 2021
 Enhancements:
