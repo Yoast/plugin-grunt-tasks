@@ -2469,7 +2469,7 @@ update-changelog-to-latest: {
             pluginSlug: "wordpress-seo",
             defaultChangelogEntries: "",
             useANewLineAfterHeader: true,
-            
+            changelogToInject: ".tmp/currentitems.txt"
             commitChangelog: false,
         },
     },
