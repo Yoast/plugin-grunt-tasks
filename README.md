@@ -2324,8 +2324,164 @@ get-latest-pr-texts: {
     },
 }
 ```
+### The `update-changelog-to-latest` task
+#### Using our configuration
+We implement the following configuration:
+- `options`
+    - The `options.pluginSlug` value is  from the Grunt configuration: `pluginSlug`.
+    - The `options.commitChangelog` value is set to `true`,
+    - The `options.useANewLineAfterHeader` value is set to `true`,
+	- The `options.defaultChangelogEntries` value is set to `""`,
+	- The `options.daysToAddForNextRelease` value is set to `14`,
+    - The `options.useTodayasReleaseDate` value is set to  `false`,
+    - The `options.changelogToInject`value is set to  `""`,
+
+#### Overview
+In your project's Gruntfile, add a section named `update-changelog-to-latest` to the data object passed into `grunt.initConfig()`.
+```js
+grunt.initConfig( {
+    update-changelog-to-latest: {
+        options: {},     // Global options.
+        taskName: {      // The name of your task.
+            options: {}, // Task-specific options.
+        }
+    }
+} )
+```
+
+#### Options
+##### pluginSlug
+Type: `String`  
+Default value: ``
+
+
+##### commitChangelog
+Type: `Boolean`  
+Default: `false`
+
+Setting this to `true` will commit the changes made to git.
+
+##### readmeFile
+Type: `String`  
+Default value: null
+
+The source and destination file to update the changelog section in.
+
+##### releaseInChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchChangelogHeader
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct the header.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### newHeadertemplate
+Type: `String`  
+Default value: null
+
+Template used to create a new changelog header.
+
+_Note: Both `VERSIONNUMBER` and `DATESTRING` will be replaced by dynamic values_
+
+##### matchCorrectHeader
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct header in the changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchCorrectLines
+Type: `String`  
+Default value: null
+
+Regular expression to match the correct lines in the changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### matchCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to match the cleaned (removed older entries) changelog section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### replaceCleanedChangelog
+Type: `String`  
+Default value: null
+
+Regular expression to replace the cleaned (removed older entries) changelog section with the new.
+
+##### defaultChangelogEntries
+Type: `String`  
+Default value: `""`
+
+Optional value to add default entries to a new created section.
+
+_Note: `VERSIONNUMBER` will be replaced by a dynamic value_
+
+##### useANewLineAfterHeader
+Type: `Boolean`  
+Default: `true`
+
+Setting this will effect the format of the resulting changelog.
+
+##### daysToAddForNextRelease
+Type: `Integer`
+Default: `14`
+
+Setting this will effect the release date guessing to pick the next tuesday after 7 days before 14 (if default is used).
+
+##### useTodayasReleaseDate:
+Type `Boolean`
+Default: `false`
+
+Setting this will set the release date (if not already set) to today
+
+##### changelogToInject
+Type: `String`  
+Default value: `""`
+
+Setting this will replace the items whith the file content in the changelog
+
+##### Usages Example
+```js
+update-changelog-to-latest: {
+    "wordpress-seo": {
+        options: {
+            readmeFile: "./readme.txt",
+            releaseInChangelog: /[=] \d+\.\d+(\.\d+)? =/g,
+            matchChangelogHeader:  /[=]= Changelog ==\n\n/ig,
+            newHeadertemplate: "== Changelog ==\n\n" +"= " + "VERSIONNUMBER" + " =\nRelease Date: " + "DATESTRING"  + "\n\n",
+            matchCorrectHeader: "= " + "VERSIONNUMBER" + "(.|\\n)*?\\n(?=(\\w\+?:\\n|= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCorrectLines: "= " + "VERSIONNUMBER" + "(.|\\n)*?(?=(= \\d+[\.\\d]+ =|= Earlier versions =))",
+            matchCleanedChangelog: "= " + "VERSIONNUMBER" + "(.|\\n)*= Earlier versions =",
+            replaceCleanedChangelog: "= Earlier versions =",
+            pluginSlug: "wordpress-seo",
+            defaultChangelogEntries: "",
+            useANewLineAfterHeader: true,
+            
+            commitChangelog: false,
+        },
+    },
+}
+```
+
+
 
 ## Release History
+
+### 2.3
+- Adds `update-changelog-to-latest` Grunt task & config.
 
 ### 2.2.1
 - FIXES a issue with `update-changelog-with-latest-pr-texts.js` selecting the todays date on a hotfix. 
