@@ -107,7 +107,7 @@ module.exports = function( grunt ) {
 			}
 
 			if ( grunt.file.exists( options.changelogToInject ) ) {
-				grunt.log.writeln( "imput file not found" );
+				grunt.log.writeln( "input file not found" );
 				done();
 			}
 
