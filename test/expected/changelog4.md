@@ -1,9 +1,13 @@
-### 16.0: April 5th, 2022
-Enhancements:
-* test left over entry.
+### 16.0: March 29th, 2022
+Bugfixes:
+
+* Fixes a bug where the word 'minute/minutes' would be in the user language, instead of the site language, for the estimated reading time block in the frontend.
 
 Other:
-* Includes every change in Yoast SEO core 16.0. See the [core changelog](https://wordpress.org/plugins/wordpress-seo/#developers).
+
+* Bumps the minimum required Yoast SEO version to 18.4.
+* Sets minimum required WordPress version to 5.8. 
+
 
 ### 15.9: February 23rd, 2021
 Enhancements:
