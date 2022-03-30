@@ -106,11 +106,6 @@ module.exports = function( grunt ) {
 				}
 			}
 
-			if ( grunt.file.exists( options.changelogToInject ) ) {
-				grunt.log.writeln( "input file not found" );
-				done();
-			}
-
 			// Add n8n log here!!!
 			const n8nChangelog = grunt.file.read( options.changelogToInject );
 
