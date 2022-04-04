@@ -2,7 +2,7 @@
 module.exports = {
 	artifact: {
 		options: {
-			archive: "artifact.zip",
+			archive: "<%= pluginSlug %>-<%= pluginVersion %>.zip",
 			level: 9,
 		},
 		files: [
