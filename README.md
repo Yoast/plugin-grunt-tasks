@@ -2480,6 +2480,9 @@ update-changelog-to-latest: {
 
 ## Release History
 
+### 2.4
+- breaking change, the date format used in `update-changelog-to-latest` and `update-changelog-with-latest-pr` is changed from `November 29th, 2022` to `2022-10-29`
+
 ### 2.3
 - Adds `update-changelog-to-latest` Grunt task & config.
 

@@ -1,4 +1,4 @@
-### 16.0: January 17th, 2023
+### 16.0: 2023-1-17
 Enhancements:
 * test left over entry.
 

@@ -181,9 +181,9 @@ module.exports = function( grunt ) {
 					d.setDate( d.getDate() + ( 2 + options.daysToAddForNextRelease - d.getDay() ) );
 				}
 				const ye = new Intl.DateTimeFormat( "en", { year: "numeric" } ).format( d );
-				const mo = new Intl.DateTimeFormat( "en", { month: "long" } ).format( d );
+				const mo = new Intl.DateTimeFormat( "en", { month: "numeric" } ).format( d );
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
-				const datestring = `${mo} ${format( da )}, ${ye}`;
+				const datestring = `${ye}-${mo}-${da}`;
 				// eslint-disable-next-line max-len
 				changelogBuilder.parseChancelogLines( options.defaultChangelogEntries.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber ) );
 
