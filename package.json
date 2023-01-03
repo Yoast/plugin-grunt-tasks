@@ -36,7 +36,7 @@
 		"grunt-contrib-uglify": "^4.0.1",
 		"grunt-contrib-watch": "^1.0.0",
 		"grunt-eslint": "^21.0.0",
-		"grunt-glotpress": "https://github.com/Yoast/grunt-glotpress.git#master",
+		"grunt-glotpress": "https://github.com/Yoast/grunt-glotpress.git#main",
 		"grunt-postcss": "^0.9.0",
 		"grunt-replace": "^1.0.1",
 		"grunt-rtlcss": "^2.0.2",
