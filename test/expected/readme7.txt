@@ -247,7 +247,7 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 = 19.12 =
 
-Release date: 2023-1-17
+Release date: 2023-01-17
 
 #### Bugfixes
 

@@ -1,4 +1,4 @@
-### 16.0: 2023-1-17
+### 16.0: 2023-01-17
 Bugfixes:
 
 * Fixes a bug where the word 'minute/minutes' would be in the user language, instead of the site language, for the estimated reading time block in the frontend.
