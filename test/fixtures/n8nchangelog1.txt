@@ -1,0 +1,10 @@
+
+#### Bugfixes
+
+* Fixes a bug where the word 'minute/minutes' would be in the user language, instead of the site language, for the estimated reading time block in the frontend.
+
+#### Other
+
+* Bumps the minimum required Yoast SEO version to 18.4.
+* Sets minimum required WordPress version to 5.8. 
+
