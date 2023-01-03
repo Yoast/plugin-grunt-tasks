@@ -171,7 +171,7 @@ module.exports = function( grunt ) {
 				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
 				const datestring = `${ye}-${mo}-${da}`;
 				// eslint-disable-next-line max-len
-
+				console.log( datestring );
 				var newChangelog = options.newHeadertemplate.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber );
 				newChangelog = newChangelog.replace( new RegExp( "DATESTRING" ), datestring ) + n8nChangelog;
 
