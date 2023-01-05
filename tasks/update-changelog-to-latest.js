@@ -106,11 +106,6 @@ module.exports = function( grunt ) {
 				}
 			}
 
-			if ( grunt.file.exists( options.changelogToInject ) ) {
-				grunt.log.writeln( "input file not found" );
-				done();
-			}
-
 			// Add n8n log here!!!
 			const n8nChangelog = grunt.file.read( options.changelogToInject );
 
@@ -167,11 +162,11 @@ module.exports = function( grunt ) {
 					d.setDate( d.getDate() + ( 2 + options.daysToAddForNextRelease - d.getDay() ) );
 				}
 				const ye = new Intl.DateTimeFormat( "en", { year: "numeric" } ).format( d );
-				const mo = new Intl.DateTimeFormat( "en", { month: "long" } ).format( d );
-				const da = new Intl.DateTimeFormat( "en", { day: "numeric" } ).format( d );
-				const datestring = `${mo} ${format( da )}, ${ye}`;
+				const mo = new Intl.DateTimeFormat( "en", { month: "2-digit" } ).format( d );
+				const da = new Intl.DateTimeFormat( "en", { day: "2-digit" } ).format( d );
+				const datestring = `${ye}-${mo}-${da}`;
 				// eslint-disable-next-line max-len
-
+				console.log( datestring );
 				var newChangelog = options.newHeadertemplate.replace( new RegExp( "VERSIONNUMBER" ), changelogVersionNumber );
 				newChangelog = newChangelog.replace( new RegExp( "DATESTRING" ), datestring ) + n8nChangelog;
 
