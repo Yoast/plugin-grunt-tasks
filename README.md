@@ -2480,6 +2480,10 @@ update-changelog-to-latest: {
 
 ## Release History
 
+### 2.5
+- Updates `grunt-contrib-compress` dependency to 2.0.0.
+- Updates `eslint-config-yoast` dependency to 6.0.0.
+
 ### 2.4
 - breaking change, the date format used in `update-changelog-to-latest` and `update-changelog-with-latest-pr` is changed from `November 29th, 2022` to `2022-10-29`
 
